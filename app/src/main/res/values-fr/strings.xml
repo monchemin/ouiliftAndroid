@@ -2,4 +2,9 @@
 <resources>
     <string name="btn_profile_member">Je suis membre</string>
     <string name="btn_profile_non_member">Je ne suis pas membre</string>
+    <string name="btn_login_text">Connexion</string>
+    <string name="password_hint">Mot de passe</string>
+    <string name="link_sign_up_text">Créer un nouveau compte</string>
+    <string name="title_dashboard">Tableau de bord</string>
+    <string name="title_search">Recherche</string>
 </resources>

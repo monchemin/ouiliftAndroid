@@ -1,8 +1,10 @@
-package com.ouilift;
+package com.ouilift.ui;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.ouilift.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -10,5 +12,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
     }
 }

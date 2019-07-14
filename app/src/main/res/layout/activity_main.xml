@@ -3,19 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_profile_member"
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_profile_member" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_profile_non_member"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_profile_non_member" />
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView android:src="@drawable/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/img_logo"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_profile_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_profile_member"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_profile_non_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_profile_non_member"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="8dp"
+                />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/img_auto"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>
