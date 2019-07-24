@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/route_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp">
+    <TextView
+        android:id="@+id/route_date"
+        android:layout_weight="1.5"
+       style="@style/route_item_view_style"/>
+    <TextView
+        android:id="@+id/route_hour"
+        android:layout_weight="1.5"
+        style="@style/route_item_view_style"/>
+    <TextView
+        android:id="@+id/route_from"
+        android:layout_weight="2.5"
+        style="@style/route_item_view_style" />
+    <TextView
+        android:id="@+id/route_to"
+        android:layout_weight="2.5"
+        style="@style/route_item_view_style"/>
+    <TextView
+        android:id="@+id/route_price"
+        android:layout_weight="1"
+        style="@style/route_item_view_style"/>
+    <TextView
+        android:id="@+id/route_place"
+        android:layout_weight="1"
+        style="@style/route_item_view_style"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

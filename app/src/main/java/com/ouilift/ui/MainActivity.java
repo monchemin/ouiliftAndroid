@@ -1,6 +1,10 @@
 package com.ouilift.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +12,16 @@ import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
 import com.ouilift.R;
+import com.ouilift.model.SearchViewModel;
+import com.ouilift.presenter.CarBrandPresenter;
+import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.ui.search.SearchActivity;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private MaterialButton btnMember, btnNonMember;
+    SearchViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
             }
         });
+        viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+        viewModel.getCarBrand().observe(this, new Observer<PresenterFactory<CarBrandPresenter>>() {
+            @Override
+            public void onChanged(PresenterFactory<CarBrandPresenter> carBrandPresenterPresenterFactory) {
+
+                System.out.println("nyemo changed " + carBrandPresenterPresenterFactory.response.get(0).brandName);
+            }
+        });
+
     }
 }

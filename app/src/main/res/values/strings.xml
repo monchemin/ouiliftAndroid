@@ -11,7 +11,15 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications" translatable="false">Notifications</string>
     <string name="title_search">Search</string>
+    <string name="date_format">yy-MM-dd</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="route_date">Date</string>
+    <string name="route_hour">Hour</string>
+    <string name="route_to">To</string>
+    <string name="route_from">From</string>
+    <string name="route_price">Price</string>
+    <string name="route_place">Place</string>
+    <string name="key_file" translatable="false">key_file</string>
 </resources>

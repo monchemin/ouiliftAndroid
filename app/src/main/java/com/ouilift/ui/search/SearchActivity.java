@@ -3,6 +3,7 @@ package com.ouilift.ui.search;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +14,14 @@ import com.ouilift.R;
 
 public class SearchActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener  {
 
-
+BottomNavigationView navView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-           return loadFragment(new ResultFragment());
+            navView.setVisibility(View.INVISIBLE);
+            return loadFragment(new SearchFragment());
         }
     };
 
@@ -27,12 +29,19 @@ public class SearchActivity extends AppCompatActivity implements SearchFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        loadFragment(new SearchFragment());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        navView.setVisibility(View.VISIBLE);
+        loadFragment(new ResultFragment());
     }
 
     private boolean loadFragment(Fragment fragment) {
