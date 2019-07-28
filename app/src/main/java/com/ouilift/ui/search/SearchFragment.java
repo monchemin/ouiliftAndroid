@@ -1,81 +1,159 @@
 package com.ouilift.ui.search;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ouilift.R;
+import com.ouilift.model.SearchViewModel;
+import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.presenter.RouteStation;
+import com.ouilift.utils.DateUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SearchFragment extends Fragment implements SearchFragmentListerner {
+
 
     private OnFragmentInteractionListener mListener;
+    private Spinner fromSpinner, toSpinner;
+    private TextInputEditText searchDateView;
+    int from, to;
+    private String searchDate;
+    private List<RouteStation> fromList = new ArrayList<>();
+    private List<RouteStation> toList = new ArrayList<>();
+    private Boolean fromInitial = true, toInitial = true;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        fromSpinner = view.findViewById(R.id.from_spinner);
+        toSpinner = view.findViewById(R.id.to_spinner);
+        toSpinner.setEnabled(false);
+        searchDateView = view.findViewById(R.id.search_date);
+        searchDateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        MaterialButton searchBtn = view.findViewById(R.id.search_btn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFragmentInteraction(searchDate, from, to);
+            }
+        });
+        fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onFromSpinnerItemSelected(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onToSpinnerItemSelected(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        loadSpinnerData();
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void loadSpinnerData() {
+    }
+
+    private void onFromSpinnerItemSelected(int position) {
+        if(fromInitial) {
+            fromInitial = false;
+        } else {
+            RouteStation station = fromList.get(position);
+            from = station.PK;
+            toList.clear();
+            RouteStation prompt = new RouteStation();
+            prompt.stationName = getString(R.string.route_to);
+            toList.add(prompt);
+            for (RouteStation presenter : fromList) {
+                if (presenter != station && presenter.PK != 0) {
+                    toList.add(presenter);
+                }
+            }
+            ArrayAdapter<RouteStation> adapter = new ArrayAdapter<RouteStation>(getContext(),
+                    R.layout.support_simple_spinner_dropdown_item,
+                    toList);
+            toSpinner.setEnabled(true);
+            toSpinner.setPromptId(R.string.route_to);
+            toSpinner.setAdapter(adapter);
+            toInitial = true;
         }
     }
+
+    private void onToSpinnerItemSelected(int position) {
+        if(toInitial) {
+            toInitial = false;
+        } else {
+            if(toList.get(position).PK != 0) {
+                to = toList.get(position).PK;
+            }
+        }
+    }
+
+    private void showDatePicker() {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        final int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        DatePickerDialog picker = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        int selectM = monthOfYear + 1;
+                        Date date = DateUtils.stringToDate(year + "-" + selectM + "-" + dayOfMonth);
+                        searchDate = DateUtils.dateToString(date, "yyyy-MM-dd");
+                        searchDateView.setText(DateUtils.dateToString(date, getString(R.string.date_format)));
+                    }
+                }, year, month, day);
+        picker.show();
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -94,18 +172,32 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void setViewModel(SearchViewModel viewModel) {
+        viewModel.getRouteStation().observe(this, new Observer<PresenterFactory<RouteStation>>() {
+            @Override
+            public void onChanged(PresenterFactory<RouteStation> routeStationPresenterFactory) {
+                fillSpinners(routeStationPresenterFactory.response);
+            }
+        });
+    }
+
+    private void fillSpinners(List<RouteStation> response) {
+        RouteStation prompt = new RouteStation();
+        fromList.clear();
+        prompt.stationName = getString(R.string.route_from);
+        fromList.add(prompt);
+        fromList.addAll(response);
+        ArrayAdapter<RouteStation> adapter = new ArrayAdapter<RouteStation>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item,
+                fromList);
+        fromSpinner.setAdapter(adapter);
+        fromSpinner.setPrompt(getString(R.string.route_from));
+        //fromSpinner.
+    }
+
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String date, int from, int to);
     }
 }

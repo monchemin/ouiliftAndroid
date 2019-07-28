@@ -2,29 +2,25 @@ package com.ouilift.ui.search;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
-import com.ouilift.presenter.CarBrandPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
 
 
-public class ResultFragment extends Fragment {
+public class ResultFragment extends Fragment implements SearchFragmentListerner {
 
     RouteDetailAdapter adapter;
-    SearchViewModel viewModel;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -50,15 +46,17 @@ public class ResultFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+
+        return view;
+    }
+
+    @Override
+    public void setViewModel(SearchViewModel viewModel) {
         viewModel.getInternalRoute().observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<RouteDetailPresenter> routeDetailPresenterPresenterFactory) {
                 adapter.setData(routeDetailPresenterPresenterFactory.response);
             }
         });
-
-        return view;
     }
-
 }

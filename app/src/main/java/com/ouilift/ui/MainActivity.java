@@ -21,7 +21,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private MaterialButton btnMember, btnNonMember;
-    SearchViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
             }
         });
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
-        viewModel.getCarBrand().observe(this, new Observer<PresenterFactory<CarBrandPresenter>>() {
-            @Override
-            public void onChanged(PresenterFactory<CarBrandPresenter> carBrandPresenterPresenterFactory) {
 
-                System.out.println("nyemo changed " + carBrandPresenterPresenterFactory.response.get(0).brandName);
-            }
-        });
 
     }
 }

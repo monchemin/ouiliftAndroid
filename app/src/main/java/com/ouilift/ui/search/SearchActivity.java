@@ -1,6 +1,5 @@
 package com.ouilift.ui.search;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,9 +7,13 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ouilift.R;
+import com.ouilift.model.SearchViewModel;
+
+import java.util.Date;
 
 public class SearchActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener  {
 
@@ -21,9 +24,12 @@ BottomNavigationView navView;
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             navView.setVisibility(View.INVISIBLE);
-            return loadFragment(new SearchFragment());
+            SearchFragment fragment = new SearchFragment();
+            fragment.setViewModel(viewModel);
+            return loadFragment(fragment);
         }
     };
+    private SearchViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ BottomNavigationView navView;
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
 
     }
 
@@ -41,7 +48,9 @@ BottomNavigationView navView;
     protected void onResume() {
         super.onResume();
         navView.setVisibility(View.VISIBLE);
-        loadFragment(new ResultFragment());
+        ResultFragment fragment = new ResultFragment();
+        fragment.setViewModel(viewModel);
+        loadFragment(fragment);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -56,7 +65,9 @@ BottomNavigationView navView;
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(String date, int from, int to) {
+        System.out.println("nyemo " + date);
     }
+
+
 }

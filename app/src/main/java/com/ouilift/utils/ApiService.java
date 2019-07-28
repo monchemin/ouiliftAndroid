@@ -3,11 +3,14 @@ package com.ouilift.utils;
 import com.ouilift.presenter.CarBrandPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.RouteDetailPresenter;
+import com.ouilift.presenter.RouteStation;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public class ApiService {
 
@@ -30,12 +33,19 @@ public class ApiService {
 
     public interface EndPoint {
 
-
         @GET("/internal-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute();
 
+        @POST("/internal-routes.php")
+        Call<PresenterFactory<RouteDetailPresenter>> postInternalRoute(@Field("startDate") String startDate,
+                                                                       @Field("fromStation") int fromStation,
+                                                                       @Field("toStation") int toStation);
+
         @GET("/car-brands.php")
         Call<PresenterFactory<CarBrandPresenter>> getCarBrand();
+
+        @GET("/route-station.php")
+        Call<PresenterFactory<RouteStation>> getRouteStation();
 
     }
 }
