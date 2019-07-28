@@ -9,7 +9,7 @@ import com.ouilift.presenter.RouteStation;
 
 import retrofit2.Call;
 
-public class SearchRepository extends repository {
+public class SearchRepository extends Repository {
 
 
     public MutableLiveData<PresenterFactory<RouteDetailPresenter>> getInternalRoute() {

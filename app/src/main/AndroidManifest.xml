@@ -18,6 +18,7 @@
             android:name=".ui.search.SearchActivity"
             android:label="@string/title_activity_search" />
         <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

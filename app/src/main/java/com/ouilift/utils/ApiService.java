@@ -47,5 +47,15 @@ public class ApiService {
         @GET("/route-station.php")
         Call<PresenterFactory<RouteStation>> getRouteStation();
 
+        @POST("/login.php")
+        Call<PresenterFactory<RouteStation>> performLogin(@Field("login") String login,
+                                                          @Field("password") String password);
+        @POST("/login.php")
+        Call<PresenterFactory<RouteStation>> performRegister(@Field("customerFistName") String firstName,
+                                                             @Field("customerLastName") String lastName,
+                                                             @Field("customerEMailAddress") String eMail,
+                                                             @Field("customerPhoneNumber") String phone,
+                                                             @Field("customerPassword") String password);
+
     }
 }

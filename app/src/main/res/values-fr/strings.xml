@@ -15,4 +15,8 @@
     <string name="route_price">Prix</string>
     <string name="route_to">Arrivee</string>
     <string name="find_route">Trouve ton intineraire</string>
+    <string name="phone_number">Numero de Tel</string>
+    <string name="create_account">Creer le compte</string>
+    <string name="last_name">Nom</string>
+    <string name="first_name">Prenom</string>
 </resources>

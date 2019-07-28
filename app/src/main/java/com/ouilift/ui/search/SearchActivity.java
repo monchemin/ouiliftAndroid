@@ -66,7 +66,7 @@ BottomNavigationView navView;
 
     @Override
     public void onFragmentInteraction(String date, int from, int to) {
-        System.out.println("nyemo " + date);
+        System.out.println("nyemo " + date + " " + from + " " + to);
     }
 
 

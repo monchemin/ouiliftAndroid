@@ -23,4 +23,15 @@
     <string name="route_place">Place</string>
     <string name="key_file" translatable="false">key_file</string>
     <string name="find_route">Find your route</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password_confirmation" translatable="false">Confirmation</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="create_account">Create Account</string>
+    <string name="last_name_error" translatable="false">at least 3 characters</string>
+    <string name="first_name_error" translatable="false">at least 3 characters</string>
+    <string name="email_error" translatable="false">enter a valid email address</string>
+    <string name="phone_error" translatable="false">enter a valid phone number</string>
+    <string name="password_error" translatable="false">enter a valid password</string>
+    <string name="confirmation_error" translatable="false">enter a valid password confirmation</string>
 </resources>
