@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SearchFragment extends Fragment implements SearchFragmentListerner {
+public class SearchFragment extends Fragment implements SearchFragmentListener {
 
 
     private OnFragmentInteractionListener mListener;
@@ -180,6 +180,11 @@ public class SearchFragment extends Fragment implements SearchFragmentListerner 
                 fillSpinners(routeStationPresenterFactory.response);
             }
         });
+    }
+
+    @Override
+    public void setData(String rDate, int from, int to) {
+
     }
 
     private void fillSpinners(List<RouteStation> response) {

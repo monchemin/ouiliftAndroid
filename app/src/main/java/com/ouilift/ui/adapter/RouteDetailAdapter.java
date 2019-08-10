@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
 import com.ouilift.presenter.RouteDetailPresenter;
-import com.ouilift.ui.LoginActivity;
+import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.utils.DateUtils;
-import com.ouilift.utils.Preference;
 
 import java.util.List;
 
@@ -49,12 +48,8 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
     }
 
     private void onItemSelected(RouteDetailPresenter presenter) {
-        Intent intent;
-        if(Preference.IsConnected(context)) {
-            intent = new Intent(context, LoginActivity.class);
-        } else {
-            intent = new Intent(context, LoginActivity.class);
-        }
+        Intent intent = new Intent(context, ReservationActivity.class);
+        intent.putExtra("idRoute", presenter.PK);
         context.startActivity(intent);
     }
 

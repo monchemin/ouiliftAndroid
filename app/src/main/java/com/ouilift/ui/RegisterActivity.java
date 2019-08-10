@@ -3,26 +3,31 @@ package com.ouilift.ui;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.model.LoginViewModel;
+import com.ouilift.presenter.PresenterFactory;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 
     TextInputEditText firstName, lastName, eMail, passwordText, confirmationText, phoneNumber;
     MaterialButton createButton;
+    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         bindView();
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
     }
 
@@ -75,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             eMail.setError(null);
         }
 
-        if (phone.isEmpty() || !Patterns.PHONE.matcher(email).matches()) {
+        if (phone.isEmpty() || !Patterns.PHONE.matcher(phone).matches()) {
             phoneNumber.setError(getString(R.string.phone_error));
             valid = false;
         } else {
@@ -99,5 +104,29 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void performRegister() {
+        viewModel.register(makeJson())
+                .observe(this, new Observer<PresenterFactory<Void>>() {
+                    @Override
+                    public void onChanged(PresenterFactory<Void> result) {
+                        if (result.status == 200 && result.lastIndex != 0) {
+                            displayMessage();
+                            finish();
+                        }
+                    }
+                });
+    }
+
+    private void displayMessage() {
+        Toast.makeText(this, "Register OK", Toast.LENGTH_LONG).show();
+    }
+
+    private JsonObject makeJson() {
+        JsonObject data = new JsonObject();
+        data.addProperty("customerFistName", firstName.getText().toString());
+        data.addProperty("customerLastName", lastName.getText().toString());
+        data.addProperty("customerEMailAddress", eMail.getText().toString());
+        data.addProperty("customerPhoneNumber", phoneNumber.getText().toString());
+        data.addProperty("customerPassword", passwordText.getText().toString());
+        return data;
     }
 }

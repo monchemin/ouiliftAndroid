@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.PresenterFactory;
@@ -18,9 +19,10 @@ import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
 
 
-public class ResultFragment extends Fragment implements SearchFragmentListerner {
+public class ResultFragment extends Fragment implements SearchFragmentListener {
 
     RouteDetailAdapter adapter;
+    private SearchViewModel viewModel;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -46,17 +48,30 @@ public class ResultFragment extends Fragment implements SearchFragmentListerner 
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-
         return view;
     }
 
     @Override
     public void setViewModel(SearchViewModel viewModel) {
-        viewModel.getInternalRoute().observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
+        this.viewModel = viewModel;
+    }
+
+    @Override
+    public void setData(String rDate, int from, int to) {
+
+        viewModel.getInternalRoute(makeJson(rDate, from, to)).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<RouteDetailPresenter> routeDetailPresenterPresenterFactory) {
                 adapter.setData(routeDetailPresenterPresenterFactory.response);
             }
         });
+    }
+
+    private JsonObject makeJson(String rDate, int from, int to) {
+        JsonObject data = new JsonObject();
+        data.addProperty("startDate", rDate);
+        data.addProperty("fromStation", from);
+        data.addProperty("toStation", to);
+        return data;
     }
 }

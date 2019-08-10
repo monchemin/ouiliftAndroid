@@ -19,4 +19,8 @@
     <string name="create_account">Creer le compte</string>
     <string name="last_name">Nom</string>
     <string name="first_name">Prenom</string>
+    <string name="available_place">Places disponibles</string>
+    <string name="reservation_place">Nombre de places</string>
+    <string name="reservation_btn">Reserver mes places</string>
+    <string name="reservation_title">Detail de l\'itineraitaire</string>
 </resources>

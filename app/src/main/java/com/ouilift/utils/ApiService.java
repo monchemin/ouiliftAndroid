@@ -1,5 +1,6 @@
 package com.ouilift.utils;
 
+import com.google.gson.JsonObject;
 import com.ouilift.presenter.CarBrandPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.RouteDetailPresenter;
@@ -8,7 +9,7 @@ import com.ouilift.presenter.RouteStation;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Field;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
@@ -33,13 +34,8 @@ public class ApiService {
 
     public interface EndPoint {
 
-        @GET("/internal-routes.php")
-        Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute();
-
         @POST("/internal-routes.php")
-        Call<PresenterFactory<RouteDetailPresenter>> postInternalRoute(@Field("startDate") String startDate,
-                                                                       @Field("fromStation") int fromStation,
-                                                                       @Field("toStation") int toStation);
+        Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute(@Body JsonObject data);
 
         @GET("/car-brands.php")
         Call<PresenterFactory<CarBrandPresenter>> getCarBrand();
@@ -48,14 +44,10 @@ public class ApiService {
         Call<PresenterFactory<RouteStation>> getRouteStation();
 
         @POST("/login.php")
-        Call<PresenterFactory<RouteStation>> performLogin(@Field("login") String login,
-                                                          @Field("password") String password);
-        @POST("/login.php")
-        Call<PresenterFactory<RouteStation>> performRegister(@Field("customerFistName") String firstName,
-                                                             @Field("customerLastName") String lastName,
-                                                             @Field("customerEMailAddress") String eMail,
-                                                             @Field("customerPhoneNumber") String phone,
-                                                             @Field("customerPassword") String password);
+        Call<PresenterFactory<Void>> performLogin(@Body JsonObject data);
+
+        @POST("/customer.php")
+        Call<PresenterFactory<Void>> performRegister(@Body JsonObject data);
 
     }
 }

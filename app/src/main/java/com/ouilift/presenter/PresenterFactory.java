@@ -12,6 +12,8 @@ public class PresenterFactory<T> {
      public int lastIndex;
      @SerializedName("errorMessage")
      public String errorMessage;
+     @SerializedName("isLog")
+     public Boolean isLog;
      @SerializedName("response")
      public List<T> response = new ArrayList<>();
 }

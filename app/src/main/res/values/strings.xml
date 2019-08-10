@@ -34,4 +34,8 @@
     <string name="phone_error" translatable="false">enter a valid phone number</string>
     <string name="password_error" translatable="false">enter a valid password</string>
     <string name="confirmation_error" translatable="false">enter a valid password confirmation</string>
+    <string name="available_place">Available Place</string>
+    <string name="reservation_place">Place number</string>
+    <string name="reservation_btn">Reserve my places</string>
+    <string name="reservation_title">Route detail</string>
 </resources>

@@ -5,17 +5,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
+import com.ouilift.ui.BaseActivity;
 
-import java.util.Date;
-
-public class SearchActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener  {
+public class SearchActivity extends BaseActivity implements SearchFragment.OnFragmentInteractionListener  {
 
 BottomNavigationView navView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -37,12 +35,10 @@ BottomNavigationView navView;
         setContentView(R.layout.activity_search);
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
 
     }
+
 
     @Override
     protected void onResume() {
@@ -50,6 +46,7 @@ BottomNavigationView navView;
         navView.setVisibility(View.VISIBLE);
         ResultFragment fragment = new ResultFragment();
         fragment.setViewModel(viewModel);
+        fragment.setData(null, 0, 0);
         loadFragment(fragment);
     }
 
@@ -65,8 +62,12 @@ BottomNavigationView navView;
     }
 
     @Override
-    public void onFragmentInteraction(String date, int from, int to) {
-        System.out.println("nyemo " + date + " " + from + " " + to);
+    public void onFragmentInteraction(String rDate, int from, int to) {
+        ResultFragment fragment = new ResultFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setData(rDate, from, to);
+        loadFragment(fragment);
+        navView.setVisibility(View.VISIBLE);
     }
 
 

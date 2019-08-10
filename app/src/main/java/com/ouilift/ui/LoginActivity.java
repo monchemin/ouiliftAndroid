@@ -6,16 +6,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.model.LoginViewModel;
+import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.ui.dashboard.DashboardActivity;
+import com.ouilift.ui.search.ReservationActivity;
+import com.ouilift.utils.Preference;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     TextInputEditText _emailText, _passwordText;
     MaterialButton loginButton;
     TextView signUp;
+    private LoginViewModel viewModel;
+    private boolean forRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         _emailText = findViewById(R.id.input_login_email);
         _passwordText = findViewById(R.id.input_login_password);
         signUp = findViewById(R.id.link_sign_up);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,12 +51,31 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
     }
 
 
     private void performLogin() {
+        JsonObject data = new JsonObject();
+        data.addProperty("login", _emailText.getText().toString());
+        data.addProperty("password", _passwordText.getText().toString());
+        viewModel.login(data).observe(this, new Observer<PresenterFactory<Void>>() {
+            @Override
+            public void onChanged(PresenterFactory<Void> result) {
+                if (result.status == 200 && result.isLog) {
+                    postLogin();
+                }
+            }
+        });
+    }
 
+    private void postLogin() {
+        Preference.makeConnect(this);
+        if(forRoute) {
+            startActivity(new Intent(this, ReservationActivity.class));
+        }
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 
     public boolean validate() {
