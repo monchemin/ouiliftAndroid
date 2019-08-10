@@ -28,6 +28,5 @@ public class SearchRepository extends Repository {
         return getData(call);
     }
 
-
 }
 

@@ -18,7 +18,6 @@ public class SearchViewModel extends ViewModel {
         return repository.getInternalRoute(data);
     }
 
-
     public MutableLiveData<PresenterFactory<CarBrandPresenter>> getCarBrand() {
         return repository.getCarBrand();
     }
@@ -26,5 +25,4 @@ public class SearchViewModel extends ViewModel {
     public MutableLiveData<PresenterFactory<RouteStation>> getRouteStation() {
         return repository.getRouteStation();
     }
-
 }

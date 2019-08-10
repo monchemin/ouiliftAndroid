@@ -8,11 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ouilift.R;
+import com.ouilift.model.ReservationViewModel;
+import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
 import com.ouilift.utils.Preference;
@@ -31,11 +36,34 @@ public class ReservationActivity extends BaseActivity {
     private MaterialButton reservationBtn;
     private TextInputEditText reservationPlace;
     private int routeId;
+    private ReservationViewModel viewModel;
+    private RouteDetailPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         viewBind();
+        routeId = getIntent().getIntExtra("idRoute", 0);
+        viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (routeId == 0 ) return;
+        viewModel.getRoute(routeId).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
+            @Override
+            public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
+                if (result.status == 200 && !result.response.isEmpty()) {
+                    presenter = result.response.get(0);
+                    updateFields();
+                }
+            }
+        });
+    }
+
+    private void updateFields() {
+        reservationPlace.setText(String.valueOf(presenter.remainingPlace));
     }
 
     private void viewBind() {
