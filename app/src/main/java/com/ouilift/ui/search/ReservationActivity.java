@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -35,15 +36,17 @@ public class ReservationActivity extends BaseActivity {
     };
     private MaterialButton reservationBtn;
     private TextInputEditText reservationPlace;
+    private TextView routeDate, routeHour, routeFrom, routeTo, routePrice, routePlace;
     private int routeId;
     private ReservationViewModel viewModel;
     private RouteDetailPresenter presenter;
+    private int place;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         viewBind();
-        routeId = getIntent().getIntExtra("idRoute", 0);
+        routeId = getIntent().getIntExtra("routeId", 0);
         viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
     }
 
@@ -63,13 +66,25 @@ public class ReservationActivity extends BaseActivity {
     }
 
     private void updateFields() {
-        reservationPlace.setText(String.valueOf(presenter.remainingPlace));
+        reservationPlace.setText("1");
+        routeFrom.setText(String.valueOf(presenter.fromStation));
+        routeTo.setText(String.valueOf(presenter.toStation));
+        routeDate.setText(String.valueOf(presenter.routeDate));
+        routeHour.setText(String.valueOf(presenter.hour));
+        routePlace.setText(String.valueOf(presenter.remainingPlace));
+        routePrice.setText(String.valueOf(presenter.routePrice));
     }
 
     private void viewBind() {
         navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         reservationPlace = findViewById(R.id.input_reservation);
+        routeDate = findViewById(R.id.route_date);
+        routeHour = findViewById(R.id.route_hour);
+        routeFrom = findViewById(R.id.route_from);
+        routeTo = findViewById(R.id.route_to);
+        routePrice = findViewById(R.id.route_price);
+        routePlace = findViewById(R.id.route_place);
         reservationBtn = findViewById(R.id.reservation_button);
         reservationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +114,8 @@ public class ReservationActivity extends BaseActivity {
 
     private void onPlaceChange() {
         try {
-            int place = Integer.parseInt(reservationPlace.getText().toString());
-            if(place > 0) {
+            place = Integer.parseInt(reservationPlace.getText().toString());
+            if(place > 0 && place <= presenter.remainingPlace) {
                 reservationBtn.setEnabled(true);
             }
 
@@ -113,7 +128,11 @@ public class ReservationActivity extends BaseActivity {
         if(Preference.IsConnected(this)) {
             performReservation();
         } else {
-           startActivity(new Intent(this, LoginActivity.class));
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("routeId", routeId);
+            intent.putExtra("place", place);
+            intent.putExtra("forRoute", true);
+           startActivity(intent);
         }
     }
 

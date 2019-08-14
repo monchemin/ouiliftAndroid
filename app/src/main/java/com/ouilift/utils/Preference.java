@@ -17,5 +17,6 @@ public class Preference {
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("IS_CONNECTED", true);
+        editor.apply();
     }
 }

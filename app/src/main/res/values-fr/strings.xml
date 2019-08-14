@@ -22,5 +22,8 @@
     <string name="available_place">Places disponibles</string>
     <string name="reservation_place">Nombre de places</string>
     <string name="reservation_btn">Reserver mes places</string>
-    <string name="reservation_title">Detail de l\'itineraitaire</string>
+    <string name="route_detail">Detail de l\'itineraitaire</string>
+    <string name="menu_setting">Mon compte</string>
+    <string name="menu_reservation">Reservations</string>
+    <string name="menu_search">Recharche</string>
 </resources>

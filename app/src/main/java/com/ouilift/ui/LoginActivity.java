@@ -26,6 +26,7 @@ public class LoginActivity extends BaseActivity {
     TextView signUp;
     private LoginViewModel viewModel;
     private boolean forRoute;
+    private int routeId, place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class LoginActivity extends BaseActivity {
             }
         });
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        routeId = getIntent().getIntExtra("routeId", 0);
+        place = getIntent().getIntExtra("routePlace", 0);
+        forRoute = getIntent().getBooleanExtra("forRoute", false);
 
     }
 
@@ -73,9 +77,13 @@ public class LoginActivity extends BaseActivity {
     private void postLogin() {
         Preference.makeConnect(this);
         if(forRoute) {
-            startActivity(new Intent(this, ReservationActivity.class));
+            Intent intent = new Intent(this, ReservationActivity.class);
+            intent.putExtra("routeId", routeId);
+            intent.putExtra("place", place);
+            startActivity(intent);
+        } else {
+            startActivity(new Intent(this, DashboardActivity.class));
         }
-        startActivity(new Intent(this, DashboardActivity.class));
     }
 
     public boolean validate() {
@@ -91,7 +99,7 @@ public class LoginActivity extends BaseActivity {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty() || password.length() < 3 || password.length() > 10) {
             _passwordText.setError(getString(R.string.last_name_error));
             valid = false;
         } else {

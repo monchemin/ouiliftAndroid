@@ -37,5 +37,8 @@
     <string name="available_place">Available Place</string>
     <string name="reservation_place">Place number</string>
     <string name="reservation_btn">Reserve my places</string>
-    <string name="reservation_title">Route detail</string>
+    <string name="route_detail">Route detail</string>
+    <string name="menu_setting">My Account</string>
+    <string name="menu_reservation">Reservations</string>
+    <string name="menu_search">Search</string>
 </resources>

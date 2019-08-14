@@ -28,7 +28,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_date"/>
         </LinearLayout>
         <LinearLayout
             style="@style/reservation_item_view_style">
@@ -40,7 +41,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_hour"/>
         </LinearLayout>
         <LinearLayout
             style="@style/reservation_item_view_style">
@@ -52,7 +54,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_from"/>
         </LinearLayout>
         <LinearLayout
             style="@style/reservation_item_view_style">
@@ -64,7 +67,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_to"/>
         </LinearLayout>
         <LinearLayout
             style="@style/reservation_item_view_style">
@@ -76,7 +80,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_price"/>
         </LinearLayout>
         <LinearLayout
             style="@style/reservation_item_view_style">
@@ -88,8 +93,10 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                android:id="@+id/route_place"/>
         </LinearLayout>
+
         <LinearLayout
             style="@style/reservation_item_view_style">
             <TextView
@@ -102,7 +109,8 @@
                 android:id="@+id/input_reservation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.7"
+                />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
