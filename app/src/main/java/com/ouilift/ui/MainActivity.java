@@ -7,6 +7,7 @@ import android.view.View;
 import com.google.android.material.button.MaterialButton;
 import com.ouilift.R;
 import com.ouilift.ui.search.SearchActivity;
+import com.ouilift.utils.Preference;
 
 public class MainActivity extends BaseActivity {
     private MaterialButton btnMember, btnNonMember;
@@ -36,6 +37,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
+        Preference.disConnected(this);
     }
 }

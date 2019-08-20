@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -15,8 +14,8 @@ import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.LoginViewModel;
 import com.ouilift.presenter.PresenterFactory;
-import com.ouilift.ui.dashboard.DashboardActivity;
 import com.ouilift.ui.search.ReservationActivity;
+import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
 
 public class LoginActivity extends BaseActivity {
@@ -82,7 +81,7 @@ public class LoginActivity extends BaseActivity {
             intent.putExtra("place", place);
             startActivity(intent);
         } else {
-            startActivity(new Intent(this, DashboardActivity.class));
+            startActivity(new Intent(this, SearchActivity.class));
         }
     }
 

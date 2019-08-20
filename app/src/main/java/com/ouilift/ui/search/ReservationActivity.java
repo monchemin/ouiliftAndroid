@@ -21,6 +21,7 @@ import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
+import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
 public class ReservationActivity extends BaseActivity {
@@ -53,6 +54,10 @@ public class ReservationActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(!Preference.IsConnected(this)) {
+            findViewById(R.id.navigation_setting).setVisibility(View.INVISIBLE);
+            findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
+        }
         if (routeId == 0 ) return;
         viewModel.getRoute(routeId).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
@@ -69,14 +74,14 @@ public class ReservationActivity extends BaseActivity {
         reservationPlace.setText("1");
         routeFrom.setText(String.valueOf(presenter.fromStation));
         routeTo.setText(String.valueOf(presenter.toStation));
-        routeDate.setText(String.valueOf(presenter.routeDate));
+        routeDate.setText(DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format)));
         routeHour.setText(String.valueOf(presenter.hour));
         routePlace.setText(String.valueOf(presenter.remainingPlace));
         routePrice.setText(String.valueOf(presenter.routePrice));
     }
 
     private void viewBind() {
-        navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         reservationPlace = findViewById(R.id.input_reservation);
         routeDate = findViewById(R.id.route_date);

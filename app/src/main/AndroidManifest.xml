@@ -14,10 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.account.ReservationListActivity"></activity>
+        <activity android:name=".ui.account.SettingsActivity" />
         <activity
             android:name=".ui.BaseActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.dashboard.DashboardActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.search.ReservationActivity" />
         <activity
             android:name=".ui.search.SearchActivity"
