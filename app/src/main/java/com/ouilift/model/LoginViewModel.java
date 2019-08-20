@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.repository.LoginRepository;
 
@@ -14,7 +15,7 @@ public class LoginViewModel extends ViewModel {
         return repository.register(data);
     }
 
-    public MutableLiveData<PresenterFactory<Void>> login(JsonObject data) {
+    public MutableLiveData<PresenterFactory<CustomerPresenter>> login(JsonObject data) {
         return repository.login(data);
     }
 }

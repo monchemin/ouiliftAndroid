@@ -15,9 +15,11 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.ReservationViewModel;
 import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
@@ -142,5 +144,18 @@ public class ReservationActivity extends BaseActivity {
     }
 
     private void performReservation() {
+        JsonObject data = new JsonObject();
+        data.addProperty("FK_Customer", "");
+        data.addProperty("FK_Route", routeId);
+        data.addProperty("place", place);
+
+        viewModel.makeResevation(data).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
+            @Override
+            public void onChanged(PresenterFactory<ReservationPresenter> result) {
+                if (result.status == 200 && !result.response.isEmpty()) {
+                    updateFields();
+                }
+            }
+        });
     }
 }

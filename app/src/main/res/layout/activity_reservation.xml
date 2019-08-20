@@ -8,16 +8,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/menu_reservation"
+            android:layout_margin="0dp"
+            android:background="@color/colorAccent"
+           android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/activity_vertical_margin">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/menu_reservation"
-            android:layout_margin="@dimen/activity_vertical_margin" />
+
         <LinearLayout
             style="@style/reservation_item_view_style">
             <TextView
@@ -119,9 +129,10 @@
             android:layout_height="match_parent"
             android:text="@string/reservation_btn"
             android:layout_margin="@dimen/activity_vertical_margin"
-
+            android:backgroundTint="@android:color/tertiary_text_light"
             />
 
+    </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/navigation_layout"/>

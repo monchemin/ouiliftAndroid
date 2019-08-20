@@ -3,6 +3,7 @@ package com.ouilift.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
 
 import retrofit2.Call;
@@ -14,8 +15,8 @@ public class LoginRepository extends Repository {
         return getData(call);
     }
 
-    public MutableLiveData<PresenterFactory<Void>> login(JsonObject data) {
-        Call<PresenterFactory<Void>> call = api.performLogin(data);
+    public MutableLiveData<PresenterFactory<CustomerPresenter>> login(JsonObject data) {
+        Call<PresenterFactory<CustomerPresenter>> call = api.performLogin(data);
         return getData(call);
     }
 }

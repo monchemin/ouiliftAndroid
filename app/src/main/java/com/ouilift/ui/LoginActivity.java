@@ -13,10 +13,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.LoginViewModel;
+import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
+
+import java.util.List;
 
 public class LoginActivity extends BaseActivity {
 
@@ -63,18 +66,19 @@ public class LoginActivity extends BaseActivity {
         JsonObject data = new JsonObject();
         data.addProperty("login", _emailText.getText().toString());
         data.addProperty("password", _passwordText.getText().toString());
-        viewModel.login(data).observe(this, new Observer<PresenterFactory<Void>>() {
+        viewModel.login(data).observe(this, new Observer<PresenterFactory<CustomerPresenter>>() {
             @Override
-            public void onChanged(PresenterFactory<Void> result) {
+            public void onChanged(PresenterFactory<CustomerPresenter> result) {
                 if (result.status == 200 && result.isLog) {
-                    postLogin();
+                    postLogin(result.response.get(0));
                 }
             }
         });
     }
 
-    private void postLogin() {
-        Preference.makeConnect(this);
+    private void postLogin(CustomerPresenter customer) {
+        Preference.makeConnect(this, customer);
+        System.out.println("nyemo " + customer.eMail);
         if(forRoute) {
             Intent intent = new Intent(this, ReservationActivity.class);
             intent.putExtra("routeId", routeId);

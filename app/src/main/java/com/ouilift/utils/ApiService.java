@@ -2,7 +2,9 @@ package com.ouilift.utils;
 
 import com.google.gson.JsonObject;
 import com.ouilift.presenter.CarBrandPresenter;
+import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.presenter.RouteStation;
 
@@ -46,13 +48,16 @@ public class ApiService {
         Call<PresenterFactory<RouteStation>> getRouteStation();
 
         @POST("/login.php")
-        Call<PresenterFactory<Void>> performLogin(@Body JsonObject data);
+        Call<PresenterFactory<CustomerPresenter>> performLogin(@Body JsonObject data);
 
         @POST("/customer.php")
         Call<PresenterFactory<Void>> performRegister(@Body JsonObject data);
 
         @POST("/route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);
+
+        @POST("/customer.php")
+        Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
 
     }
 }
