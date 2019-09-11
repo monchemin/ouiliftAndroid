@@ -62,5 +62,8 @@ public class ApiService {
         @GET("/reservations.php/{PK}")
         Call<PresenterFactory<ReservationPresenter>> getReservation(@Path("PK") int pk);
 
+        @GET("/reservation-list.php/{PK}")
+        Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
+
     }
 }

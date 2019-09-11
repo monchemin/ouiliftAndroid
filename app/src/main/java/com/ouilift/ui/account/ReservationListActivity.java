@@ -3,13 +3,25 @@ package com.ouilift.ui.account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ouilift.R;
+import com.ouilift.model.ReservationViewModel;
+import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.ui.BaseActivity;
+import com.ouilift.ui.adapter.ReservationAdapter;
+import com.ouilift.ui.adapter.RouteDetailAdapter;
 import com.ouilift.ui.search.SearchActivity;
+import com.ouilift.utils.Preference;
 
 public class ReservationListActivity extends BaseActivity {
 
@@ -33,12 +45,37 @@ public class ReservationListActivity extends BaseActivity {
 
 
     };
-
+    private ReservationViewModel viewModel;
+    TextView noReservation;
+    ReservationAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_list);
         BottomNavigationView navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        noReservation = findViewById(R.id.no_reservation);
+        RecyclerView recyclerView = findViewById(R.id.route_detail_recycler_view);
+        adapter = new ReservationAdapter();
+        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int userId = Preference.getConnection(this).PK;
+        viewModel.getReservationList(userId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
+            @Override
+            public void onChanged(PresenterFactory<ReservationPresenter> result) {
+                if (result.status == 200 && !result.response.isEmpty()) {
+                    adapter.setData(result.response);
+                    noReservation.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 }

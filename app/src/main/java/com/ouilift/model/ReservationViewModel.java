@@ -24,4 +24,8 @@ public class ReservationViewModel extends ViewModel {
         return repository.getReservation(pk);
     }
 
+    public MutableLiveData<PresenterFactory<ReservationPresenter>> getReservationList(int pk) {
+        return repository.getReservationList(pk);
+    }
+
 }

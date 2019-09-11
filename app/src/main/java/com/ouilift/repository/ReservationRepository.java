@@ -26,5 +26,10 @@ public class ReservationRepository extends Repository {
         return getData(call);
     }
 
+    public MutableLiveData<PresenterFactory<ReservationPresenter>> getReservationList(int pk) {
+        Call<PresenterFactory<ReservationPresenter>> call = api.getReservationList(pk);
+        return getData(call);
+    }
+
 }
 

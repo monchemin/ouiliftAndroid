@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="@string/menu_reservation"
+            android:text="Reservation Detail"
             android:layout_margin="0dp"
             android:background="@color/colorAccent"
             android:textColor="@android:color/white"

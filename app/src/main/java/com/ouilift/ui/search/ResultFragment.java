@@ -61,8 +61,8 @@ public class ResultFragment extends Fragment implements SearchFragmentListener {
 
         viewModel.getInternalRoute(makeJson(rDate, from, to)).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
-            public void onChanged(PresenterFactory<RouteDetailPresenter> routeDetailPresenterPresenterFactory) {
-                adapter.setData(routeDetailPresenterPresenterFactory.response);
+            public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
+                adapter.setData(result.response);
             }
         });
     }
