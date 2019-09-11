@@ -23,6 +23,8 @@ import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
+import com.ouilift.ui.account.ReservationListActivity;
+import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
@@ -33,9 +35,21 @@ public class ReservationActivity extends BaseActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-            return false;
+            switch (item.getItemId()) {
+
+                case R.id.navigation_setting:
+                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                    break;
+                case R.id.navigation_search:
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    break;
+                case R.id.navigation_reservation:
+                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                    break;
+            }
+            return true;
         }
+
     };
     private MaterialButton reservationBtn;
     private TextInputEditText reservationPlace;

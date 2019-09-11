@@ -16,6 +16,9 @@ import com.ouilift.model.ReservationViewModel;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.ui.BaseActivity;
+import com.ouilift.ui.account.ReservationListActivity;
+import com.ouilift.ui.account.SettingsActivity;
+import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
 public class ReservationResultActivity extends BaseActivity {
@@ -30,8 +33,19 @@ public class ReservationResultActivity extends BaseActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-            return false;
+            switch (item.getItemId()) {
+
+                case R.id.navigation_setting:
+                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                    break;
+                case R.id.navigation_search:
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    break;
+                case R.id.navigation_reservation:
+                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                    break;
+            }
+            return true;
         }
     };
 
@@ -78,7 +92,7 @@ public class ReservationResultActivity extends BaseActivity {
     private void updateFields() {
         String to = presenter.toStation + "\n" + presenter.toZone + "\n" + presenter.toStationDetail ;
         String from = presenter.fromStation + "\n" + presenter.fromromZone + "\n" + presenter.fromStationDetail;
-        String timer = presenter.routeDate + "\n" + presenter.hour;
+        String timer = DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format)) + "\n" + presenter.hour;
         String driver = presenter.customerLastName + "\n" + presenter.customerFistName;
         String car = presenter.brandName + "\n" + presenter.modelName + "\n" + presenter.carYear + "\n" +
                 presenter.carRegistrationNumber;

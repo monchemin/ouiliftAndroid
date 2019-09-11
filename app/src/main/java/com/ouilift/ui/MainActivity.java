@@ -24,8 +24,11 @@ public class MainActivity extends BaseActivity {
         btnMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                if(Preference.IsConnected(getApplicationContext())) {
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }
 
             }
         });
