@@ -145,17 +145,23 @@ public class ReservationActivity extends BaseActivity {
 
     private void performReservation() {
         JsonObject data = new JsonObject();
-        data.addProperty("FK_Customer", "");
+        data.addProperty("FK_Customer", Preference.getConnection(this).PK);
         data.addProperty("FK_Route", routeId);
         data.addProperty("place", place);
 
-        viewModel.makeResevation(data).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
+        viewModel.makeReservation(data).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<ReservationPresenter> result) {
                 if (result.status == 200 && !result.response.isEmpty()) {
-                    updateFields();
+                   DisplayReservation(result.response.get(0).reservation);
                 }
             }
         });
+    }
+
+    private void DisplayReservation(int pk) {
+        Intent intent = new Intent(this, ReservationResultActivity.class);
+        intent.putExtra("reservationId", pk);
+        startActivity(intent);
     }
 }

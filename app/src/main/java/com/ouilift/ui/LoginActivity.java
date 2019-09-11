@@ -78,7 +78,6 @@ public class LoginActivity extends BaseActivity {
 
     private void postLogin(CustomerPresenter customer) {
         Preference.makeConnect(this, customer);
-        System.out.println("nyemo " + customer.eMail);
         if(forRoute) {
             Intent intent = new Intent(this, ReservationActivity.class);
             intent.putExtra("routeId", routeId);

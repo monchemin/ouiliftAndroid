@@ -32,4 +32,16 @@ public class Preference {
         editor.putString("EMAIL", customer.eMail);
         editor.apply();
     }
+
+    public static CustomerPresenter getConnection(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.key_file), Context.MODE_PRIVATE);
+        CustomerPresenter customer = new CustomerPresenter();
+        customer.firstName = sharedPref.getString("FiRST_NAME", customer.firstName);
+        customer.lastName = sharedPref.getString("LAST_NAME", customer.lastName);
+        customer.PK = sharedPref.getInt("PK", customer.PK);
+        customer.eMail = sharedPref.getString("EMAIL", customer.eMail);
+
+        return customer;
+    }
 }

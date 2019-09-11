@@ -16,8 +16,12 @@ public class ReservationViewModel extends ViewModel {
         return repository.getRoute(pk);
     }
 
-    public MutableLiveData<PresenterFactory<ReservationPresenter>> makeResevation(JsonObject data) {
+    public MutableLiveData<PresenterFactory<ReservationPresenter>> makeReservation(JsonObject data) {
         return repository.makeReservation(data);
+    }
+
+    public MutableLiveData<PresenterFactory<ReservationPresenter>> getReservation(int pk) {
+        return repository.getReservation(pk);
     }
 
 }

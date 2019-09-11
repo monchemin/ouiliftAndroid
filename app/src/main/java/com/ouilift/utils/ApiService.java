@@ -53,11 +53,14 @@ public class ApiService {
         @POST("/customer.php")
         Call<PresenterFactory<Void>> performRegister(@Body JsonObject data);
 
-        @POST("/route-details.php/{PK}")
+        @GET("/route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);
 
-        @POST("/customer.php")
+        @POST("/reservations.php")
         Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
+
+        @GET("/reservations.php/{PK}")
+        Call<PresenterFactory<ReservationPresenter>> getReservation(@Path("PK") int pk);
 
     }
 }
