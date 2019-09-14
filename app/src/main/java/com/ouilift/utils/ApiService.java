@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -64,6 +65,9 @@ public class ApiService {
 
         @GET("/reservation-list.php/{PK}")
         Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
+
+        @DELETE("/reservations.php/{PK}")
+        Call<PresenterFactory<Void>> deleteReservation(@Path("PK") int pk);
 
     }
 }

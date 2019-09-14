@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
@@ -59,8 +62,10 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
         String date_format;
         RouteDetailPresenter presenter;
 
+
         RouteDetailViewHolder(@NonNull View itemView, String date_format) {
             super(itemView);
+            //context = context;
             routeDate = itemView.findViewById(R.id.route_date);
             hour = itemView.findViewById(R.id.route_hour);
             price = itemView.findViewById(R.id.route_price);
@@ -82,9 +87,10 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
             routeDate.setText(DateUtils.dateToString(presenter.routeDate, date_format));
             hour.setText(presenter.hour);
             price.setText(String.valueOf(presenter.routePrice));
-            to.setText(presenter.toStation);
-            from.setText(presenter.fromStation);
-           place.setText(String.valueOf(presenter.remainingPlace));
+            to.setText(context.getString(R.string.route_to) + ": " + presenter.toStation);
+            from.setText(context.getString(R.string.route_from) + ": " + presenter.fromStation);
+            String strPlace = presenter.remainingPlace <= 1 ? context.getString(R.string.place_singular) : context.getString(R.string.place_plural);
+            place.setText(presenter.remainingPlace + " " + strPlace);
         }
     }
 }

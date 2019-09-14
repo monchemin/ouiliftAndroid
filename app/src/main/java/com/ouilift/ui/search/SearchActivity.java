@@ -71,6 +71,7 @@ public class SearchActivity extends BaseActivity implements SearchFragment.OnFra
         ResultFragment fragment = new ResultFragment();
         fragment.setViewModel(viewModel);
         fragment.setData(null, 0, 0);
+        loadFragment(fragment);
     }
 
     private boolean loadFragment(Fragment fragment) {

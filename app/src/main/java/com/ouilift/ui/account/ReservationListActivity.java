@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,7 @@ public class ReservationListActivity extends BaseActivity {
 
     };
     private ReservationViewModel viewModel;
-    TextView noReservation;
+    RelativeLayout noReservation;
     ReservationAdapter adapter;
     ContentLoadingProgressBar loadingIndicator;
     @Override
@@ -75,9 +76,12 @@ public class ReservationListActivity extends BaseActivity {
             @Override
             public void onChanged(PresenterFactory<ReservationPresenter> result) {
                 loadingIndicator.hide();
-                if (result.status == 200 && !result.response.isEmpty()) {
+                if (result != null & result.status == 200 && !result.response.isEmpty()) {
                     adapter.setData(result.response);
                     noReservation.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    noReservation.setVisibility(View.VISIBLE);
                 }
             }
         });

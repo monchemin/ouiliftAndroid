@@ -31,5 +31,10 @@ public class ReservationRepository extends Repository {
         return getData(call);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> deleteReservation(int pk) {
+        Call<PresenterFactory<Void>> call = api.deleteReservation(pk);
+        return getData(call);
+    }
+
 }
 

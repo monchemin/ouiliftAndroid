@@ -126,10 +126,10 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/reservation_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/reservation_btn"
             android:layout_margin="@dimen/activity_vertical_margin"
-            android:backgroundTint="@android:color/tertiary_text_light"
+            android:backgroundTint="@color/colorPrimary"
             />
 
     </LinearLayout>

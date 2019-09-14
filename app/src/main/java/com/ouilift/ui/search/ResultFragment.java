@@ -65,7 +65,9 @@ public class ResultFragment extends Fragment implements SearchFragmentListener {
             @Override
             public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
                 loadingIndicator.show();
-                adapter.setData(result.response);
+                if (result != null) {
+                    adapter.setData(result.response);
+                }
                 loadingIndicator.hide();
             }
         });

@@ -26,4 +26,5 @@
     <string name="menu_setting">Mon compte</string>
     <string name="menu_reservation">Reservations</string>
     <string name="menu_search">Recharche</string>
+    <string name="cancel_reservation">Annuler la Reservation</string>
 </resources>

@@ -123,7 +123,16 @@
             </LinearLayout>
 
         </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_reservation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_reservation"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:backgroundTint="@color/colorPrimary"
+            />
     </LinearLayout>
+
 
     <include layout="@layout/view_loading"/>
 

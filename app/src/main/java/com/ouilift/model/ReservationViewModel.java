@@ -28,4 +28,8 @@ public class ReservationViewModel extends ViewModel {
         return repository.getReservationList(pk);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> deleteReservation(int pk) {
+        return repository.deleteReservation(pk);
+    }
+
 }

@@ -1,43 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/route_item_container"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/route_item_container">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dp">
-    <TextView
-        android:id="@+id/route_date"
-        android:layout_weight="1.5"
-       style="@style/route_item_view_style"/>
-    <TextView
-        android:id="@+id/route_hour"
-        android:layout_weight="1.5"
-        style="@style/route_item_view_style"/>
-    <TextView
-        android:id="@+id/route_from"
-        android:layout_weight="2.5"
-        style="@style/route_item_view_style" />
-    <TextView
-        android:id="@+id/route_to"
-        android:layout_weight="2.5"
-        style="@style/route_item_view_style"/>
-    <TextView
-        android:id="@+id/route_price"
-        android:layout_weight="1"
-        style="@style/route_item_view_style"/>
-    <TextView
-        android:id="@+id/route_place"
-        android:layout_weight="1"
-        style="@style/route_item_view_style"/>
-    </LinearLayout>
-    <TextView
+        android:background="#CCCC"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/route_date"
+            style="@style/route_item_view_style"
+            android:text="2019/01/01"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/route_hour"
+            style="@style/route_item_view_style"
+            android:text="00h00"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+             />
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"
-        />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/route_from"
+                    style="@style/route_item_view_style"
+                    android:layout_gravity="start"
+                    android:text="De rond point"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:id="@+id/route_price"
+                    style="@style/route_item_view_style"
+                    android:text="150"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/route_to"
+                    style="@style/route_item_view_style"
+                    android:text="To Nombakele"
+                    android:layout_alignParentStart="true"
+
+                     />
+
+                <TextView
+                    android:id="@+id/route_place"
+                    style="@style/route_item_view_style"
+                    android:text="3 places"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/right_arrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:src="@drawable/right_arrow"
+           android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+</LinearLayout>
