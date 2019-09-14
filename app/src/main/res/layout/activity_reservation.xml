@@ -135,5 +135,7 @@
     </LinearLayout>
     </LinearLayout>
 
+    <include layout="@layout/view_loading"/>
+
     <include layout="@layout/navigation_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

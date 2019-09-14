@@ -20,6 +20,8 @@
         tools:ignore="MissingConstraints">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <include layout="@layout/view_loading"/>
+
     <include layout="@layout/navigation_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

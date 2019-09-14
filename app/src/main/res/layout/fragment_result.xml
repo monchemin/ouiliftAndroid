@@ -47,4 +47,6 @@
         android:layout_below="@id/route_detail_title_container">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <include layout="@layout/view_loading"/>
+
 </RelativeLayout>

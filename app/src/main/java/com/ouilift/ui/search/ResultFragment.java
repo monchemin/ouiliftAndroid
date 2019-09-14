@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ public class ResultFragment extends Fragment implements SearchFragmentListener {
 
     RouteDetailAdapter adapter;
     private SearchViewModel viewModel;
+    private ContentLoadingProgressBar loadingIndicator;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -40,7 +42,7 @@ public class ResultFragment extends Fragment implements SearchFragmentListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result, container, false);
-
+        loadingIndicator = view.findViewById(R.id.loading_indicator);
         RecyclerView recyclerView = view.findViewById(R.id.route_detail_recycler_view);
         adapter = new RouteDetailAdapter();
         LinearLayoutManager  manager  = new LinearLayoutManager(getContext());
@@ -62,9 +64,12 @@ public class ResultFragment extends Fragment implements SearchFragmentListener {
         viewModel.getInternalRoute(makeJson(rDate, from, to)).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
+                loadingIndicator.show();
                 adapter.setData(result.response);
+                loadingIndicator.hide();
             }
         });
+
     }
 
     private JsonObject makeJson(String rDate, int from, int to) {

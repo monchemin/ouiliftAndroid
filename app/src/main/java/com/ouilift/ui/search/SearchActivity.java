@@ -17,9 +17,9 @@ import com.ouilift.ui.account.ReservationListActivity;
 import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.utils.Preference;
 
-public class SearchActivity extends BaseActivity implements SearchFragment.OnFragmentInteractionListener  {
+public class SearchActivity extends BaseActivity implements SearchFragment.OnFragmentInteractionListener {
 
-BottomNavigationView navView;
+    BottomNavigationView navView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -30,7 +30,7 @@ BottomNavigationView navView;
             switch (item.getItemId()) {
 
                 case R.id.navigation_reservation:
-                   startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
                     break;
                 case R.id.navigation_search:
                     SearchFragment fragment = new SearchFragment();
@@ -64,14 +64,13 @@ BottomNavigationView navView;
     protected void onResume() {
         super.onResume();
         navView.setVisibility(View.VISIBLE);
-        if(!Preference.IsConnected(this)) {
+        if (!Preference.IsConnected(this)) {
             findViewById(R.id.navigation_setting).setVisibility(View.INVISIBLE);
             findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
         }
         ResultFragment fragment = new ResultFragment();
         fragment.setViewModel(viewModel);
         fragment.setData(null, 0, 0);
-        loadFragment(fragment);
     }
 
     private boolean loadFragment(Fragment fragment) {

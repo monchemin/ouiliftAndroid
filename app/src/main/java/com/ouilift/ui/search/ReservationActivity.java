@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -58,6 +59,7 @@ public class ReservationActivity extends BaseActivity {
     private ReservationViewModel viewModel;
     private RouteDetailPresenter presenter;
     private int place;
+    private ContentLoadingProgressBar loadingIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +77,11 @@ public class ReservationActivity extends BaseActivity {
             findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
         }
         if (routeId == 0 ) return;
+        loadingIndicator.show();
         viewModel.getRoute(routeId).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
+                loadingIndicator.hide();
                 if (result.status == 200 && !result.response.isEmpty()) {
                     presenter = result.response.get(0);
                     updateFields();
@@ -97,6 +101,7 @@ public class ReservationActivity extends BaseActivity {
     }
 
     private void viewBind() {
+        loadingIndicator = findViewById(R.id.loading_indicator);
         navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         reservationPlace = findViewById(R.id.input_reservation);
@@ -162,10 +167,11 @@ public class ReservationActivity extends BaseActivity {
         data.addProperty("FK_Customer", Preference.getConnection(this).PK);
         data.addProperty("FK_Route", routeId);
         data.addProperty("place", place);
-
+        loadingIndicator.show();
         viewModel.makeReservation(data).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
             @Override
             public void onChanged(PresenterFactory<ReservationPresenter> result) {
+                loadingIndicator.hide();
                 if (result.status == 200 && !result.response.isEmpty()) {
                    DisplayReservation(result.response.get(0).reservation);
                 }
