@@ -40,6 +40,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        //Preference.disConnected(this);
+        Preference.disConnected(this);
     }
 }
