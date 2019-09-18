@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/route_detail_recycler_view"
+        android:layout_marginEnd="20dp">
+
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/route_detail_recycler_view"
