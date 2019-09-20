@@ -1,19 +1,24 @@
 package com.ouilift.ui.search;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
@@ -23,7 +28,11 @@ import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.account.ReservationListActivity;
 import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
+import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class SearchActivity extends BaseActivity {
 
@@ -57,7 +66,9 @@ public class SearchActivity extends BaseActivity {
     private SearchViewModel viewModel;
     private RouteDetailAdapter adapter;
     private ContentLoadingProgressBar loadingIndicator;
-    LinearLayout container;
+    private LinearLayout container;
+    private TextInputEditText searchDateView, searchFrom, searchTo;
+    String searchDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +85,21 @@ public class SearchActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
         loadingIndicator = findViewById(R.id.loading_indicator);
         container = findViewById(R.id.container);
+        searchDateView = findViewById(R.id.search_date);
+        searchDateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        searchFrom = findViewById(R.id.search_from);
+        searchFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+
 
     }
 
@@ -110,6 +136,32 @@ public class SearchActivity extends BaseActivity {
         data.addProperty("fromStation", from);
         data.addProperty("toStation", to);
         return data;
+    }
+
+    private void showDatePicker() {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        final int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        DatePickerDialog picker = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        int selectM = monthOfYear + 1;
+                        Date date = DateUtils.stringToDate(year + "-" + selectM + "-" + dayOfMonth);
+                        searchDate = DateUtils.dateToString(date, "yyyy-MM-dd");
+                        searchDateView.setText(DateUtils.dateToString(date, getString(R.string.date_format)));
+                    }
+                }, year, month, day);
+        picker.show();
+    }
+
+    private void showDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        RouteSearchDialog newFragment = new RouteSearchDialog();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
     }
 
 }
