@@ -195,6 +195,7 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
     }
 
     private void showDialog() {
+        System.out.println("nyemo activity " + stations.size());
         FragmentManager fragmentManager = getSupportFragmentManager();
         RouteSearchDialog newFragment = new RouteSearchDialog(stations);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
