@@ -44,4 +44,8 @@
     <string name="place_singular" translatable="false">Place</string>
     <string name="place_plural" translatable="false">Places</string>
     <string name="cancel_reservation">Cancel Reservation</string>
+    <string name="book_route">Book your trip</string>
+    <string name="departure_on">Departure on </string>
+    <string name="departure_at">at </string>
+    <string name="place_to_book">Number of places to book </string>
 </resources>

@@ -11,12 +11,12 @@
     <string name="route_date">Date</string>
     <string name="route_hour">Heure</string>
     <string name="route_place">Place</string>
-    <string name="route_from">Depart</string>
+    <string name="route_from">Départ</string>
     <string name="route_price">Prix</string>
-    <string name="route_to">Arrivee</string>
+    <string name="route_to">Arrivée</string>
     <string name="find_route">Trouve ton intineraire</string>
-    <string name="phone_number">Numero de Tel</string>
-    <string name="create_account">Creer le compte</string>
+    <string name="phone_number">Numéro de Tel</string>
+    <string name="create_account">Créer le compte</string>
     <string name="last_name">Nom</string>
     <string name="first_name">Prenom</string>
     <string name="available_place">Places disponibles</string>
@@ -27,4 +27,8 @@
     <string name="menu_reservation">Reservations</string>
     <string name="menu_search">Recharche</string>
     <string name="cancel_reservation">Annuler la Reservation</string>
+    <string name="book_route">Réservez trajet trajet</string>
+    <string name="departure_on">Départ le </string>
+    <string name="departure_at">A </string>
+    <string name="place_to_book">Nombre de places à réserver </string>
 </resources>

@@ -54,7 +54,7 @@ public class ReservationActivity extends BaseActivity {
     };
     private MaterialButton reservationBtn;
     private TextInputEditText reservationPlace;
-    private TextView routeDate, routeHour, routeFrom, routeTo, routePrice, routePlace;
+    private TextView fromHour, routeHour, routeFrom, routeTo, routePrice, routePlace, routeFromDetail, routeToDetail;
     private int routeId;
     private ReservationViewModel viewModel;
     private RouteDetailPresenter presenter;
@@ -92,11 +92,16 @@ public class ReservationActivity extends BaseActivity {
 
     private void updateFields() {
         reservationPlace.setText("1");
-        routeFrom.setText(String.valueOf(presenter.fromStation));
-        routeTo.setText(String.valueOf(presenter.toStation));
-        routeDate.setText(DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format)));
-        routeHour.setText(String.valueOf(presenter.hour));
-        routePlace.setText(String.valueOf(presenter.remainingPlace));
+        routeFrom.setText(getString(R.string.route_from) + ": " + String.valueOf(presenter.fromStation));
+        routeFromDetail.setText(String.valueOf(presenter.fromStationDetail));
+        routeTo.setText(getString(R.string.route_to)+ ": " + String.valueOf(presenter.toStation));
+        routeToDetail.setText(String.valueOf(presenter.toStationDetail));
+        String fromHourStr = getString(R.string.departure_on) + " " + DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format))
+                            + " " + getString(R.string.departure_at) + " " + presenter.hour;
+
+        fromHour.setText(fromHourStr);
+        String strPlace = presenter.remainingPlace + " " + (presenter.remainingPlace <= 1 ? getString(R.string.place_singular) : getString(R.string.place_plural));
+        routePlace.setText( strPlace);
         routePrice.setText(String.valueOf(presenter.routePrice));
     }
 
@@ -105,10 +110,11 @@ public class ReservationActivity extends BaseActivity {
         navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         reservationPlace = findViewById(R.id.input_reservation);
-        routeDate = findViewById(R.id.route_date);
-        routeHour = findViewById(R.id.route_hour);
+        fromHour = findViewById(R.id.from_hour);
         routeFrom = findViewById(R.id.route_from);
         routeTo = findViewById(R.id.route_to);
+        routeFromDetail = findViewById(R.id.route_from_detail);
+        routeToDetail = findViewById(R.id.route_to_detail);
         routePrice = findViewById(R.id.route_price);
         routePlace = findViewById(R.id.route_place);
         reservationBtn = findViewById(R.id.reservation_button);
