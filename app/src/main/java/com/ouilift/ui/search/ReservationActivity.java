@@ -92,10 +92,10 @@ public class ReservationActivity extends BaseActivity {
 
     private void updateFields() {
         reservationPlace.setText("1");
-        routeFrom.setText(getString(R.string.route_from) + ": " + String.valueOf(presenter.fromStation));
-        routeFromDetail.setText(String.valueOf(presenter.fromStationDetail));
-        routeTo.setText(getString(R.string.route_to)+ ": " + String.valueOf(presenter.toStation));
-        routeToDetail.setText(String.valueOf(presenter.toStationDetail));
+        routeFrom.setText(getString(R.string.route_from) + ": " + presenter.fromStation);
+        routeFromDetail.setText(presenter.fromStationDetail);
+        routeTo.setText(getString(R.string.route_to)+ ": " + presenter.toStation);
+        routeToDetail.setText(presenter.toStationDetail);
         String fromHourStr = getString(R.string.departure_on) + " " + DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format))
                             + " " + getString(R.string.departure_at) + " " + presenter.hour;
 
