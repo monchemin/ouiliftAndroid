@@ -72,6 +72,9 @@ public class LoginActivity extends BaseActivity {
                 if (result.status == 200 && result.isLog) {
                     postLogin(result.response.get(0));
                 }
+                else {
+                    _emailText.setError(getString(R.string.login_error));
+                }
             }
         });
     }

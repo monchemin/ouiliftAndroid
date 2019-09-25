@@ -49,4 +49,6 @@
     <string name="departure_at">at </string>
     <string name="place_to_book">Number of places to book </string>
     <string name="reset">Reset </string>
+    <string name="no_route">Sorry, I don\'t have a route for you </string>
+    <string name="login_error">Sorry, I am not able to recognize you </string>
 </resources>

@@ -32,4 +32,6 @@
     <string name="departure_at">A </string>
     <string name="place_to_book">Nombre de places à réserver </string>
     <string name="reset">Annuler</string>
+    <string name="no_route">Désolé, je n\'ai pas de route pour toi </string>
+    <string name="login_error">Désolé, je n\'arrive pas à te reconnaitre </string>
 </resources>

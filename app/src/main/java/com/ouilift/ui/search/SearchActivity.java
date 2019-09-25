@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -150,12 +151,12 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
     }
 
     private void setData() {
-
         loadingIndicator.show();
         viewModel.getInternalRoute(makeJson(searchDate, fromPK, toPK)).observe(this, result -> {
-
-            if (result != null) {
+            if (result != null && result.status == 200 && !result.response.isEmpty()) {
                 adapter.setData(result.response);
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.no_route, Toast.LENGTH_LONG).show();
             }
 
         });
