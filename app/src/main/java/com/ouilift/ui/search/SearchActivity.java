@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +21,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
-import com.ouilift.presenter.PresenterFactory;
-import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.presenter.RouteStation;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.account.ReservationListActivity;
@@ -74,7 +70,7 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
     private TextInputEditText searchDateView, searchFrom, searchTo;
     String searchDate;
     private List<RouteStation> stations = new ArrayList<>();
-    boolean from;
+    boolean from, fromFocusDisable, toFocusDisable;
     int fromPK, toPK;
 
     @Override
@@ -82,48 +78,63 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         navView = findViewById(R.id.dashboard_nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.route_detail_recycler_view);
         adapter = new RouteDetailAdapter();
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         loadingIndicator = findViewById(R.id.loading_indicator);
         container = findViewById(R.id.container);
         searchDateView = findViewById(R.id.search_date);
-        searchDateView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePicker();
-            }
-        });
         searchFrom = findViewById(R.id.search_from);
-        searchFrom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        searchTo = findViewById(R.id.search_to);
+
+        MaterialButton searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener(v -> setData());
+        MaterialButton resetButton = findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(v -> setEmptyResearch());
+        setViewListeners();
+
+    }
+
+    private void setEmptyResearch() {
+        searchDate = "";
+        fromPK = 0;
+        toPK = 0;
+        searchDateView.setText("");
+        searchFrom.setText("");
+        searchTo.setText("");
+        setData();
+    }
+
+    private void setViewListeners() {
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        searchDateView.setOnClickListener(v -> showDatePicker());
+        searchDateView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) showDatePicker();
+        });
+        searchFrom.setOnClickListener(v -> {
+            from = true;
+            showDialog();
+        });
+        searchFrom.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && !fromFocusDisable) {
                 from = true;
                 showDialog();
             }
         });
-        searchTo = findViewById(R.id.search_to);
-        searchTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        searchTo.setOnClickListener(v -> {
+            from = false;
+            showDialog();
+        });
+        searchTo.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && !toFocusDisable) {
                 from = false;
                 showDialog();
             }
         });
-
-        MaterialButton searchButton = findViewById(R.id.search_button);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setData();
-            }
-        });
-
     }
 
     @Override
@@ -141,26 +152,20 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
     private void setData() {
 
         loadingIndicator.show();
-        viewModel.getInternalRoute(makeJson(searchDate, fromPK, toPK)).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
-            @Override
-            public void onChanged(PresenterFactory<RouteDetailPresenter> result) {
+        viewModel.getInternalRoute(makeJson(searchDate, fromPK, toPK)).observe(this, result -> {
 
-                if (result != null) {
-                    adapter.setData(result.response);
-                }
-
+            if (result != null) {
+                adapter.setData(result.response);
             }
+
         });
 
         if (stations.isEmpty()) {
-            viewModel.getRouteStation().observe(this, new Observer<PresenterFactory<RouteStation>>() {
-                @Override
-                public void onChanged(PresenterFactory<RouteStation> result) {
-                    if (result != null && result.status == 200 && !result.response.isEmpty()) {
-                        stations = result.response;
-                    }
-                    loadingIndicator.hide();
+            viewModel.getRouteStation().observe(this, result -> {
+                if (result != null && result.status == 200 && !result.response.isEmpty()) {
+                    stations = result.response;
                 }
+                loadingIndicator.hide();
             });
         } else {
             loadingIndicator.hide();
@@ -182,14 +187,11 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
         final int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
         DatePickerDialog picker = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        int selectM = monthOfYear + 1;
-                        Date date = DateUtils.stringToDate(year + "-" + selectM + "-" + dayOfMonth);
-                        searchDate = DateUtils.dateToString(date, "yyyy-MM-dd");
-                        searchDateView.setText(DateUtils.dateToString(date, getString(R.string.date_format)));
-                    }
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    int selectM = monthOfYear + 1;
+                    Date date = DateUtils.stringToDate(year1 + "-" + selectM + "-" + dayOfMonth);
+                    searchDate = DateUtils.dateToString(date, "yyyy-MM-dd");
+                    searchDateView.setText(DateUtils.dateToString(date, getString(R.string.date_format)));
                 }, year, month, day);
         picker.show();
     }
@@ -205,12 +207,15 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
 
     @Override
     public void sendInput(int input) {
+
         for (RouteStation station : stations) {
-            if(station.PK == input) {
+            if (station.PK == input) {
                 if (from) {
+                    fromFocusDisable = true;
                     searchFrom.setText(station.stationName);
                     fromPK = input;
                 } else {
+                    toFocusDisable = true;
                     searchTo.setText(station.stationName);
                     toPK = input;
                 }

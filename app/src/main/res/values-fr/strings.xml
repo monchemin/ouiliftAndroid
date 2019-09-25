@@ -31,4 +31,5 @@
     <string name="departure_on">Départ le </string>
     <string name="departure_at">A </string>
     <string name="place_to_book">Nombre de places à réserver </string>
+    <string name="reset">Annuler</string>
 </resources>

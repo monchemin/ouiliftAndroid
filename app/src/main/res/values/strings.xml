@@ -48,4 +48,5 @@
     <string name="departure_on">Departure on </string>
     <string name="departure_at">at </string>
     <string name="place_to_book">Number of places to book </string>
+    <string name="reset">Reset </string>
 </resources>

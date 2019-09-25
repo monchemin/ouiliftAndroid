@@ -112,49 +112,44 @@
                     android:text="A: Station essence"
                     android:textColor="@android:color/darker_gray" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:hint="@string/place_to_book">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_reservation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/route_from"
-                        android:textSize="12sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                 />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/place_to_book"
+            android:layout_gravity="center_vertical">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_reservation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/route_from"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/reservation_button"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:gravity="center_vertical"
                 android:backgroundTint="@color/colorAccent"
                 android:layout_marginEnd="25dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/reservation_btn"
                 android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
 
                 />
         </LinearLayout>
-    </LinearLayout>
+
 
     <include layout="@layout/view_loading" />
 

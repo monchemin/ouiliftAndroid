@@ -25,18 +25,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RouteSearchDialog extends DialogFragment {
 
-    private SearchView searchView;
     private List<RouteStation> stations;
     private RouteStationAdapter adapter = new RouteStationAdapter();
-    private OnInputListener callBack;
 
-    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+    private View.OnClickListener onItemClickListener = view -> {
 
-            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
-            loadItem( viewHolder.getAdapterPosition());
-        }
+        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+        loadItem( viewHolder.getAdapterPosition());
     };
     private OnInputListener onInputListener;
 
@@ -47,13 +42,8 @@ public class RouteSearchDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.route_select_dialog, container, false);
-        (rootView.findViewById(R.id.button_close)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-        searchView = rootView.findViewById(R.id.route_search_view);
+        (rootView.findViewById(R.id.button_close)).setOnClickListener(v -> dismiss());
+        SearchView searchView = rootView.findViewById(R.id.route_search_view);
         searchView.onActionViewExpanded();
         RecyclerView recyclerView = rootView.findViewById(R.id.route_station_recycler_view);
         LinearLayoutManager manager  = new LinearLayoutManager(getContext());
