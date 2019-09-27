@@ -2,12 +2,51 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+
+    def code = 10001
+    def name = "01.00.01"
+    def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+         Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+        String[] names = versionProps['VERSION_NAME'].split(".")
+        if(names != null) {
+            Integer maj = names[0].toInteger()
+            Integer min = name[1].toInteger()
+            Integer patch = name[2].toInteger()
+            if(patch == 20) {
+                min += 1
+                patch = 0
+            }
+            if(min == 20) {
+                maj += 1
+                min = 0
+            }
+            code = maj*10000 + min*1000 + patch*100
+
+            String nameMaj = maj < 10 ? "0"+maj : maj.toString()
+            String nameMin = min < 10 ? "0"+min : min.toString()
+            String nameP = patch < 10 ? "0"+patch : patch.toString()
+            name = nameMaj + nameMin + nameP
+
+
+        }
+
+        versionProps['VERSION_CODE'] = code.toString()
+        versionProps['VERSION_NAME'] = name
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+
+    }
+
     defaultConfig {
         applicationId "com.ouilift"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode code
+        versionName name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,6 +60,8 @@ android {
         targetCompatibility = '1.8'
     }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
