@@ -34,4 +34,5 @@
     <string name="reset">Annuler</string>
     <string name="no_route">Désolé, je n\'ai pas de route pour toi </string>
     <string name="login_error">Désolé, je n\'arrive pas à te reconnaitre </string>
+    <string name="in_connexion">Je cherche tes informations… </string>
 </resources>

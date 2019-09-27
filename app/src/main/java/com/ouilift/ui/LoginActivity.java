@@ -2,10 +2,8 @@ package com.ouilift.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
@@ -14,12 +12,9 @@ import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.LoginViewModel;
 import com.ouilift.presenter.CustomerPresenter;
-import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
-
-import java.util.List;
 
 public class LoginActivity extends BaseActivity {
 
@@ -40,20 +35,12 @@ public class LoginActivity extends BaseActivity {
         signUp = findViewById(R.id.link_sign_up);
 
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(validate()) {
-                    performLogin();
-                }
+        loginButton.setOnClickListener(v -> {
+            if(validate()) {
+                performLogin();
             }
         });
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-            }
-        });
+        signUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         routeId = getIntent().getIntExtra("routeId", 0);
         place = getIntent().getIntExtra("routePlace", 0);
@@ -66,15 +53,17 @@ public class LoginActivity extends BaseActivity {
         JsonObject data = new JsonObject();
         data.addProperty("login", _emailText.getText().toString());
         data.addProperty("password", _passwordText.getText().toString());
-        viewModel.login(data).observe(this, new Observer<PresenterFactory<CustomerPresenter>>() {
-            @Override
-            public void onChanged(PresenterFactory<CustomerPresenter> result) {
-                if (result.status == 200 && result.isLog) {
-                    postLogin(result.response.get(0));
-                }
-                else {
-                    _emailText.setError(getString(R.string.login_error));
-                }
+        loginButton.setEnabled(false);
+        loginButton.setText(R.string.in_connexion);
+        viewModel.login(data).observe(this, result -> {
+            loginButton.setEnabled(true);
+            loginButton.setText(R.string.btn_login_text);
+            if (result.status == 200 && result.isLog) {
+                postLogin(result.response.get(0));
+            }
+            else {
+                _emailText.setError(getString(R.string.login_error));
+                _emailText.setFocusable(true);
             }
         });
     }
@@ -99,6 +88,7 @@ public class LoginActivity extends BaseActivity {
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError(getString(R.string.email_error));
+            _emailText.setFocusable(true);
             valid = false;
         } else {
             _emailText.setError(null);
@@ -106,6 +96,7 @@ public class LoginActivity extends BaseActivity {
 
         if (password.isEmpty() || password.length() < 3 || password.length() > 10) {
             _passwordText.setError(getString(R.string.last_name_error));
+            _passwordText.setFocusable(true);
             valid = false;
         } else {
             _passwordText.setError(null);

@@ -8,12 +8,14 @@ import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.presenter.RouteStation;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -25,10 +27,16 @@ public class ApiService {
 
     public static EndPoint getApiService() {
 
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS);
+
         if (retrofit == null) {
             retrofit = new Retrofit
                     .Builder()
                     .baseUrl(BASE_API)
+                    .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
