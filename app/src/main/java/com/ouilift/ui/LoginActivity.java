@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity {
         viewModel.login(data).observe(this, result -> {
             loginButton.setEnabled(true);
             loginButton.setText(R.string.btn_login_text);
-            if (result.status == 200 && result.isLog) {
+            if (result.status == 200 && result.isLog && !result.response.isEmpty()) {
                 postLogin(result.response.get(0));
             }
             else {

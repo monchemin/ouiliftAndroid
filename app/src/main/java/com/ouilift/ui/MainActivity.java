@@ -2,7 +2,6 @@ package com.ouilift.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
 import com.ouilift.R;
@@ -16,30 +15,24 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Preference.IsConnected(this)) {
+            startActivity(new Intent(this, SearchActivity.class));
+        }
         setContentView(R.layout.activity_main);
 
         btnMember = findViewById(R.id.btn_profile_member);
         btnNonMember = findViewById(R.id.btn_profile_non_member);
 
-        btnMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Preference.IsConnected(getApplicationContext())) {
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                }
-
-            }
-        });
-
-        btnNonMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnMember.setOnClickListener(v -> {
+            if(Preference.IsConnected(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+            } else {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
+
         });
 
-        Preference.disConnected(this);
+        btnNonMember.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
+
     }
 }
