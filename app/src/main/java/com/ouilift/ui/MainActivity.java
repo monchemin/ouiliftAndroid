@@ -15,24 +15,16 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Preference.IsConnected(this)) {
-            startActivity(new Intent(this, SearchActivity.class));
-        }
+
         setContentView(R.layout.activity_main);
 
         btnMember = findViewById(R.id.btn_profile_member);
         btnNonMember = findViewById(R.id.btn_profile_non_member);
 
-        btnMember.setOnClickListener(v -> {
-            if(Preference.IsConnected(getApplicationContext())) {
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-            } else {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            }
-
-        });
-
+        btnMember.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
         btnNonMember.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
+
+        Preference.disConnected(this);
 
     }
 }

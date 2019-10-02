@@ -5,17 +5,24 @@ android {
 
     def code = 10001
     def name = "01.00.01"
+    logger.info("jesuis")
+
     def versionPropsFile = file('version.properties')
 
     if (versionPropsFile.canRead()) {
          Properties versionProps = new Properties()
 
         versionProps.load(new FileInputStream(versionPropsFile))
-        String[] names = versionProps['VERSION_NAME'].split(".")
-        if(names != null) {
-            Integer maj = names[0].toInteger()
-            Integer min = name[1].toInteger()
-            Integer patch = name[2].toInteger()
+        println "jesuis"
+        println versionProps['VERSION_NAME']
+        println versionProps['VERSION_CODE']
+
+        def names = versionProps['VERSION_NAME']
+        if(names.empty) {
+            println names[0]
+           def  maj = names.getAt(0)
+            def min = name[1].toInteger()
+            def patch = name[2].toInteger()
             if(patch == 20) {
                 min += 1
                 patch = 0
@@ -31,7 +38,6 @@ android {
             String nameP = patch < 10 ? "0"+patch : patch.toString()
             name = nameMaj + nameMin + nameP
 
-
         }
 
         versionProps['VERSION_CODE'] = code.toString()
@@ -39,7 +45,7 @@ android {
         versionProps.store(versionPropsFile.newWriter(), null)
 
 
-    }
+    } else { throw new GradleException("Could not read version.properties!")}
 
     defaultConfig {
         applicationId "com.ouilift"
