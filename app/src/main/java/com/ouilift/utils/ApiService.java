@@ -18,6 +18,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ApiService {
@@ -61,6 +62,12 @@ public class ApiService {
 
         @POST("/customer.php")
         Call<PresenterFactory<Void>> performRegister(@Body JsonObject data);
+
+        @PUT("/customer.php")
+        Call<PresenterFactory<Void>> performChange(@Body JsonObject data);
+
+        @POST("/change-password.php")
+        Call<PresenterFactory<Void>> changePassoword(@Body JsonObject data);
 
         @GET("/route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);

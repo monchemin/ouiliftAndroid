@@ -2,7 +2,6 @@ package com.ouilift.ui;
 
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
@@ -38,12 +37,9 @@ public class RegisterActivity extends BaseActivity {
         confirmationText = findViewById(R.id.input_login_confirmation);
         phoneNumber = findViewById(R.id.input_phone);
         createButton = findViewById(R.id.btn_create);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validate()) {
-                    performRegister();
-                }
+        createButton.setOnClickListener(v -> {
+            if (validate()) {
+                performRegister();
             }
         });
     }
@@ -104,13 +100,10 @@ public class RegisterActivity extends BaseActivity {
 
     private void performRegister() {
         viewModel.register(makeJson())
-                .observe(this, new Observer<PresenterFactory<Void>>() {
-                    @Override
-                    public void onChanged(PresenterFactory<Void> result) {
-                        if (result.status == 200 && result.lastIndex != 0) {
-                            displayMessage();
-                            finish();
-                        }
+                .observe(this, result -> {
+                    if (result.status == 200 && result.lastIndex != 0) {
+                        displayMessage();
+                        finish();
                     }
                 });
     }

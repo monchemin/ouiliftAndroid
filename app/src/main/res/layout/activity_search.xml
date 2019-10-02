@@ -37,7 +37,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/route_from"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:cursorVisible="false" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +51,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/route_to"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:cursorVisible="false" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -63,8 +65,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/route_date"
-                        android:inputType="text"
-                        android:textSize="12sp" />
+                        android:inputType="date"
+                        android:textSize="12sp"
+                        android:cursorVisible="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 

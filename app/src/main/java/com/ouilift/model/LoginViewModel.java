@@ -18,4 +18,12 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<PresenterFactory<CustomerPresenter>> login(JsonObject data) {
         return repository.login(data);
     }
+
+    public MutableLiveData<PresenterFactory<Void>> change(JsonObject data) {
+        return repository.change(data);
+    }
+
+    public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
+        return repository.changePassword(data);
+    }
 }

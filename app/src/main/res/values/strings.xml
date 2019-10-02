@@ -52,4 +52,9 @@
     <string name="no_route">Sorry, I don\'t have a route for you </string>
     <string name="login_error">Sorry, I am not able to recognize you </string>
     <string name="in_connexion">I\'m searching your information… </string>
+    <string name="disconnection">Disconnection… </string>
+    <string name="btn_my_routes">My routes</string>
+    <string name="btn_change_settings">Change information</string>
+    <string name="old_pass_hint">Old Password</string>
+    <string name="btn_change_pass">Change Password</string>
 </resources>

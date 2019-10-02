@@ -19,4 +19,14 @@ public class LoginRepository extends Repository {
         Call<PresenterFactory<CustomerPresenter>> call = api.performLogin(data);
         return getData(call);
     }
+
+    public MutableLiveData<PresenterFactory<Void>> change(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.performChange(data);
+        return getData(call);
+    }
+
+    public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.changePassoword(data);
+        return getData(call);
+    }
 }

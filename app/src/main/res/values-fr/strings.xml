@@ -35,4 +35,9 @@
     <string name="no_route">Désolé, je n\'ai pas de route pour toi </string>
     <string name="login_error">Désolé, je n\'arrive pas à te reconnaitre </string>
     <string name="in_connexion">Je cherche tes informations… </string>
+    <string name="disconnection">Déconnexion… </string>
+    <string name="btn_my_routes">Mes itinéraires</string>
+    <string name="btn_change_settings">Changer les informations</string>
+    <string name="old_pass_hint">Ancien mot de passe</string>
+    <string name="btn_change_pass">Changer Mot de passe</string>
 </resources>

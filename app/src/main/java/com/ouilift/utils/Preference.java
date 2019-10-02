@@ -30,6 +30,7 @@ public class Preference {
         editor.putString("LAST_NAME", customer.lastName);
         editor.putInt("PK", customer.PK);
         editor.putString("EMAIL", customer.eMail);
+        editor.putString("PHONE", customer.phone);
         editor.apply();
     }
 
@@ -41,6 +42,7 @@ public class Preference {
         customer.lastName = sharedPref.getString("LAST_NAME", customer.lastName);
         customer.PK = sharedPref.getInt("PK", customer.PK);
         customer.eMail = sharedPref.getString("EMAIL", customer.eMail);
+        customer.phone = sharedPref.getString("PHONE", customer.phone);
 
         return customer;
     }

@@ -42,7 +42,7 @@ public class RouteSearchDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.route_select_dialog, container, false);
-        (rootView.findViewById(R.id.button_close)).setOnClickListener(v -> dismiss());
+        (rootView.findViewById(R.id.button_close)).setOnClickListener(v -> loadItem(0));
         SearchView searchView = rootView.findViewById(R.id.route_search_view);
         searchView.onActionViewExpanded();
         RecyclerView recyclerView = rootView.findViewById(R.id.route_station_recycler_view);
@@ -95,8 +95,10 @@ public class RouteSearchDialog extends DialogFragment {
         RouteStation item = adapter.getItem(position);
         if(item != null) {
             onInputListener.sendInput(item.PK);
-            dismiss();
+        } else {
+            onInputListener.sendInput(item.PK);
         }
+        dismiss();
     }
 
 

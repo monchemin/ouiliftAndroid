@@ -21,8 +21,14 @@ public class MainActivity extends BaseActivity {
         btnMember = findViewById(R.id.btn_profile_member);
         btnNonMember = findViewById(R.id.btn_profile_non_member);
 
-        btnMember.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
-        btnNonMember.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
+        btnMember.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                   // finish();
+                });
+        btnNonMember.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+           // finish();
+        });
 
         Preference.disConnected(this);
 
