@@ -13,11 +13,17 @@ public class Preference {
         return sharedPref.getBoolean("IS_CONNECTED", false);
     }
 
+    public static boolean IsDriver(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.key_file), Context.MODE_PRIVATE);
+        return sharedPref.getBoolean("IS_DRIVER", false);
+    }
+
     public static void disConnected(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("IS_CONNECTED", false);
+        editor.clear();
         editor.apply();
     }
 
@@ -31,6 +37,7 @@ public class Preference {
         editor.putInt("PK", customer.PK);
         editor.putString("EMAIL", customer.eMail);
         editor.putString("PHONE", customer.phone);
+        editor.putBoolean("IS_DRIVER", true);
         editor.apply();
     }
 

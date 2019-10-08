@@ -35,9 +35,11 @@ public class ReservationListActivity extends BaseActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_setting:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                     break;
                 case R.id.navigation_search:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                     break;
             }

@@ -40,4 +40,5 @@
     <string name="btn_change_settings">Changer les informations</string>
     <string name="old_pass_hint">Ancien mot de passe</string>
     <string name="btn_change_pass">Changer Mot de passe</string>
+    <string name="menu_departure">Départ</string>
 </resources>

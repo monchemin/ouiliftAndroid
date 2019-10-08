@@ -74,21 +74,18 @@ public class ReservationResultActivity extends BaseActivity {
         routeDriver = findViewById(R.id.route_driver);
         loadingIndicator = findViewById(R.id.loading_indicator);
         cancelReservation = findViewById(R.id.cancel_reservation_button);
-        cancelReservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelAction();
-            }
-        });
+        cancelReservation.setOnClickListener(v -> cancelAction());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if(!Preference.IsConnected(this)) {
-            findViewById(R.id.navigation_setting).setVisibility(View.INVISIBLE);
-            findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
+            findViewById(R.id.navigation_setting).setEnabled(false);
+            findViewById(R.id.navigation_reservation).setEnabled(false);
+            findViewById(R.id.navigation_route).setEnabled(false);
         }
+
         if (reservationId == 0 ) return;
         loadingIndicator.show();
         viewModel.getReservation(reservationId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {

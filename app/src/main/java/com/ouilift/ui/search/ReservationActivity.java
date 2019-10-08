@@ -36,15 +36,19 @@ public class ReservationActivity extends BaseActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            setMenuEnable();
             switch (item.getItemId()) {
 
                 case R.id.navigation_setting:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                     break;
                 case R.id.navigation_search:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                     break;
                 case R.id.navigation_reservation:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
                     break;
             }
@@ -72,10 +76,7 @@ public class ReservationActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!Preference.IsConnected(this)) {
-            findViewById(R.id.navigation_setting).setVisibility(View.INVISIBLE);
-            findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
-        }
+       setMenuEnable();
         if (routeId == 0 ) return;
         loadingIndicator.show();
         viewModel.getRoute(routeId).observe(this, new Observer<PresenterFactory<RouteDetailPresenter>>() {
@@ -88,6 +89,14 @@ public class ReservationActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void setMenuEnable() {
+        if (!Preference.IsConnected(this)) {
+            findViewById(R.id.navigation_setting).setEnabled(false);
+            findViewById(R.id.navigation_reservation).setEnabled(false);
+            findViewById(R.id.navigation_route).setEnabled(false);
+        }
     }
 
     private void updateFields() {

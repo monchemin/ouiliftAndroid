@@ -28,9 +28,11 @@ public class SettingsActivity extends BaseActivity {
                 switch (item.getItemId()) {
 
                     case R.id.navigation_reservation:
+                        finish();
                         startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
                         break;
                     case R.id.navigation_search:
+                        finish();
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         break;
                 }

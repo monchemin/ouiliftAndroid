@@ -43,17 +43,18 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            navView.setVisibility(View.INVISIBLE);
-
+            setMenuEnable();
             switch (item.getItemId()) {
 
                 case R.id.navigation_reservation:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
                     break;
                 case R.id.navigation_search:
                     container.setVisibility(View.VISIBLE);
                     break;
                 case R.id.navigation_setting:
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                     break;
 
@@ -141,13 +142,17 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
     @Override
     protected void onResume() {
         super.onResume();
-        navView.setVisibility(View.VISIBLE);
-        if (!Preference.IsConnected(this)) {
-            findViewById(R.id.navigation_setting).setVisibility(View.INVISIBLE);
-            findViewById(R.id.navigation_reservation).setVisibility(View.INVISIBLE);
-        }
+       setMenuEnable();
         setData();
 
+    }
+
+    private void setMenuEnable() {
+        if (!Preference.IsConnected(this)) {
+            findViewById(R.id.navigation_setting).setEnabled(false);
+            findViewById(R.id.navigation_reservation).setEnabled(false);
+            findViewById(R.id.navigation_route).setEnabled(false);
+        }
     }
 
     private void setData() {
