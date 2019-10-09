@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity {
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError(getString(R.string.email_error));
-            _emailText.setFocusable(true);
+            _emailText.requestFocus();
             valid = false;
         } else {
             _emailText.setError(null);
@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity {
 
         if (password.isEmpty() || password.length() < 3 || password.length() > 10) {
             _passwordText.setError(getString(R.string.last_name_error));
-            _passwordText.setFocusable(true);
+            _passwordText.requestFocus();
             valid = false;
         } else {
             _passwordText.setError(null);

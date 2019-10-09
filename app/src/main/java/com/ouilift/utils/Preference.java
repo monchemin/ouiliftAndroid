@@ -16,7 +16,7 @@ public class Preference {
     public static boolean IsDriver(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
-        return sharedPref.getBoolean("IS_DRIVER", false);
+        return !sharedPref.getString("DRIVING_NUMBER", "").isEmpty();
     }
 
     public static void disConnected(Context context) {
@@ -32,12 +32,12 @@ public class Preference {
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("IS_CONNECTED", true);
-        editor.putString("FiRST_NAME", customer.firstName);
+        editor.putString("FIRST_NAME", customer.firstName);
         editor.putString("LAST_NAME", customer.lastName);
         editor.putInt("PK", customer.PK);
         editor.putString("EMAIL", customer.eMail);
         editor.putString("PHONE", customer.phone);
-        editor.putBoolean("IS_DRIVER", true);
+        editor.putString("DRIVING_NUMBER", customer.drivingNumber);
         editor.apply();
     }
 
@@ -45,11 +45,12 @@ public class Preference {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         CustomerPresenter customer = new CustomerPresenter();
-        customer.firstName = sharedPref.getString("FiRST_NAME", customer.firstName);
+        customer.firstName = sharedPref.getString("FIRST_NAME", customer.firstName);
         customer.lastName = sharedPref.getString("LAST_NAME", customer.lastName);
         customer.PK = sharedPref.getInt("PK", customer.PK);
         customer.eMail = sharedPref.getString("EMAIL", customer.eMail);
         customer.phone = sharedPref.getString("PHONE", customer.phone);
+        customer.drivingNumber = sharedPref.getString("DRIVING_NUMBER", customer.drivingNumber);
 
         return customer;
     }

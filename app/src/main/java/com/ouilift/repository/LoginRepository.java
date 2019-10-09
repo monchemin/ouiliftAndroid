@@ -25,6 +25,11 @@ public class LoginRepository extends Repository {
         return getData(call);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> driver(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.performDriver(data);
+        return getData(call);
+    }
+
     public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
         Call<PresenterFactory<Void>> call = api.changePassoword(data);
         return getData(call);

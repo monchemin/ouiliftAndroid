@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
 
-    def code = 10004
-    def name = "01.00.04"
+    def code = 10005
+    def name = "01.00.05"
     logger.info("jesuis")
 
     def versionPropsFile = file('version.properties')

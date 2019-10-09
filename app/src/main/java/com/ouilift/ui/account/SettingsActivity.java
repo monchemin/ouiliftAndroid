@@ -25,21 +25,21 @@ public class SettingsActivity extends BaseActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
 
-                switch (item.getItemId()) {
+        switch (item.getItemId()) {
 
-                    case R.id.navigation_reservation:
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                        break;
-                    case R.id.navigation_search:
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        break;
-                }
-                return true;
-            };
+            case R.id.navigation_reservation:
+                finish();
+                startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                break;
+            case R.id.navigation_search:
+                finish();
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                break;
+        }
+        return true;
+    };
 
-    TextInputEditText firstName, lastName, passwordText, confirmationText, phoneNumber, oldPasswordText, eMail;
+    TextInputEditText firstName, lastName, passwordText, newPasswordText, confirmationText, phoneNumber, oldPasswordText, eMail, rNumber;
     private LoginViewModel viewModel;
     private CustomerPresenter customer;
 
@@ -59,6 +59,8 @@ public class SettingsActivity extends BaseActivity {
         lastName = findViewById(R.id.input_last_name);
         oldPasswordText = findViewById(R.id.input_login_old_pass);
         passwordText = findViewById(R.id.input_login_password);
+        newPasswordText = findViewById(R.id.input_new_password);
+        rNumber = findViewById(R.id.input_driving_number);
         confirmationText = findViewById(R.id.input_login_confirmation);
         phoneNumber = findViewById(R.id.input_phone);
         eMail = findViewById(R.id.input_login_email);
@@ -76,6 +78,11 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
+        MaterialButton driver = findViewById(R.id.btn_diver);
+        driver.setOnClickListener(v -> {
+                driverChange();
+        });
+
         MaterialButton disconnection = findViewById(R.id.btn_disconnection);
         disconnection.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
@@ -91,6 +98,7 @@ public class SettingsActivity extends BaseActivity {
         lastName.setText(customer.lastName);
         phoneNumber.setText(customer.phone);
         eMail.setText(customer.eMail);
+        rNumber.setText(customer.drivingNumber);
 
     }
 
@@ -100,11 +108,11 @@ public class SettingsActivity extends BaseActivity {
         String fName = firstName.getText().toString();
         String lName = lastName.getText().toString();
         String old = oldPasswordText.getText().toString();
-        String password = passwordText.getText().toString();
+        String password = newPasswordText.getText().toString();
         String confirmation = confirmationText.getText().toString();
         String phone = phoneNumber.getText().toString();
 
-        if(!isPass) {
+        if (!isPass) {
 
 
             if (lName.isEmpty() || lName.length() < 3) {
@@ -132,19 +140,22 @@ public class SettingsActivity extends BaseActivity {
 
             if (old.isEmpty()) {
                 oldPasswordText.setError(getString(R.string.password_error));
+                oldPasswordText.requestFocus();
                 valid = false;
             } else {
                 oldPasswordText.setError(null);
             }
 
             if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-                passwordText.setError(getString(R.string.password_error));
+                newPasswordText.setError(getString(R.string.password_error));
+                newPasswordText.requestFocus();
                 valid = false;
             } else {
-                passwordText.setError(null);
+                newPasswordText.setError(null);
             }
             if (!password.equals(confirmation)) {
                 confirmationText.setError(getString(R.string.confirmation_error));
+                confirmationText.requestFocus();
                 valid = false;
             } else {
                 confirmationText.setError(null);
@@ -156,6 +167,29 @@ public class SettingsActivity extends BaseActivity {
 
     private void performChange() {
         viewModel.change(makeJson())
+                .observe(this, result -> {
+                    if (result.status == 200) {
+                        displayMessage(getString(R.string.btn_change_settings));
+
+                    } else {
+                        displayMessage(result.errorMessage);
+                    }
+                });
+    }
+
+    private void driverChange() {
+        String password = passwordText.getText().toString();
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            passwordText.setError(getString(R.string.password_error));
+            passwordText.requestFocus();
+            return;
+        }
+        if (rNumber.getText().toString().isEmpty()) {
+            rNumber.setError(getString(R.string.password_error));
+            rNumber.requestFocus();
+            return;
+        }
+        viewModel.driver(makeJson())
                 .observe(this, result -> {
                     if (result.status == 200) {
                         displayMessage(getString(R.string.btn_change_settings));
@@ -185,10 +219,12 @@ public class SettingsActivity extends BaseActivity {
         data.addProperty("firstName", firstName.getText().toString());
         data.addProperty("lastName", lastName.getText().toString());
         data.addProperty("phoneNumber", phoneNumber.getText().toString());
-        data.addProperty("newPassword", passwordText.getText().toString());
+        data.addProperty("newPassword", newPasswordText.getText().toString());
         data.addProperty("oldPassword", oldPasswordText.getText().toString());
+        data.addProperty("password", passwordText.getText().toString());
         data.addProperty("email", eMail.getText().toString());
         data.addProperty("PK", customer.PK);
+        data.addProperty("drivingNumber", rNumber.getText().toString());
         return data;
     }
 

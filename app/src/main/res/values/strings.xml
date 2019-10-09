@@ -58,4 +58,5 @@
     <string name="old_pass_hint">Old Password</string>
     <string name="btn_change_pass">Change Password</string>
     <string name="menu_departure">Departure</string>
+    <string name="driver_number">Driver Number</string>
 </resources>

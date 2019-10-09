@@ -66,6 +66,9 @@ public class ApiService {
         @PUT("/customer.php")
         Call<PresenterFactory<Void>> performChange(@Body JsonObject data);
 
+        @POST("/driver.php")
+        Call<PresenterFactory<Void>> performDriver(@Body JsonObject data);
+
         @POST("/change-password.php")
         Call<PresenterFactory<Void>> changePassoword(@Body JsonObject data);
 

@@ -6,16 +6,19 @@ public class CustomerPresenter {
     @SerializedName("PK")
     public int PK;
 
-    @SerializedName("customerFistName")
+    @SerializedName("firstName")
     public String firstName;
 
-    @SerializedName("customerLastName")
+    @SerializedName("lastName")
     public String lastName;
 
-    @SerializedName("customerEMailAddress")
+    @SerializedName("eMail")
     public String eMail;
 
-    @SerializedName("customerPhoneNumber")
+    @SerializedName("phoneNumber")
     public String phone;
+
+    @SerializedName("drivingNumber")
+    public String drivingNumber;
 
 }

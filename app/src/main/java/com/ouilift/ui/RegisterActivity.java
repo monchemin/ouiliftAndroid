@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Toast;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
@@ -12,7 +11,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.LoginViewModel;
-import com.ouilift.presenter.PresenterFactory;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -114,11 +112,11 @@ public class RegisterActivity extends BaseActivity {
 
     private JsonObject makeJson() {
         JsonObject data = new JsonObject();
-        data.addProperty("customerFistName", firstName.getText().toString());
-        data.addProperty("customerLastName", lastName.getText().toString());
-        data.addProperty("customerEMailAddress", eMail.getText().toString());
-        data.addProperty("customerPhoneNumber", phoneNumber.getText().toString());
-        data.addProperty("customerPassword", passwordText.getText().toString());
+        data.addProperty("firstName", firstName.getText().toString());
+        data.addProperty("lastName", lastName.getText().toString());
+        data.addProperty("Email", eMail.getText().toString());
+        data.addProperty("phoneNumber", phoneNumber.getText().toString());
+        data.addProperty("password", passwordText.getText().toString());
         return data;
     }
 }

@@ -23,6 +23,10 @@ public class LoginViewModel extends ViewModel {
         return repository.change(data);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> driver(JsonObject data) {
+        return repository.driver(data);
+    }
+
     public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
         return repository.changePassword(data);
     }
