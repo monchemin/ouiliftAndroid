@@ -24,6 +24,7 @@ import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
+import com.ouilift.ui.account.DriverActivity;
 import com.ouilift.ui.account.ReservationListActivity;
 import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.utils.DateUtils;
@@ -50,6 +51,10 @@ public class ReservationActivity extends BaseActivity {
                 case R.id.navigation_reservation:
                     finish();
                     startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                    break;
+                case R.id.navigation_route:
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), DriverActivity.class));
                     break;
             }
             return true;

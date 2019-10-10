@@ -10,20 +10,20 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
-import com.ouilift.model.LoginViewModel;
+import com.ouilift.model.CustomerViewModel;
 
 public class RegisterActivity extends BaseActivity {
 
     TextInputEditText firstName, lastName, eMail, passwordText, confirmationText, phoneNumber;
     MaterialButton createButton;
-    private LoginViewModel viewModel;
+    private CustomerViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         bindView();
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
 
     }
 

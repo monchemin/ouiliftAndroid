@@ -2,6 +2,7 @@ package com.ouilift.utils;
 
 import com.google.gson.JsonObject;
 import com.ouilift.presenter.CarBrandPresenter;
+import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
@@ -24,7 +25,7 @@ import retrofit2.http.Path;
 public class ApiService {
 
     private static Retrofit retrofit = null;
-    private static String BASE_API = "http://api-test.toncopilote.com";
+    private static String BASE_API = Config.apiHost();
 
     public static EndPoint getApiService() {
 
@@ -70,7 +71,7 @@ public class ApiService {
         Call<PresenterFactory<Void>> performDriver(@Body JsonObject data);
 
         @POST("/change-password.php")
-        Call<PresenterFactory<Void>> changePassoword(@Body JsonObject data);
+        Call<PresenterFactory<Void>> changePassword(@Body JsonObject data);
 
         @GET("/route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);
@@ -86,6 +87,9 @@ public class ApiService {
 
         @DELETE("/reservations.php/{PK}")
         Call<PresenterFactory<Void>> deleteReservation(@Path("PK") int pk);
+
+        @POST("/car.php")
+        Call<PresenterFactory<CarPresenter>> registeredCar(@Body JsonObject data);
 
     }
 }

@@ -27,27 +27,25 @@ import com.ouilift.utils.Preference;
 public class ReservationListActivity extends BaseActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
 
-            switch (item.getItemId()) {
-
-                case R.id.navigation_setting:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    break;
-                case R.id.navigation_search:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    break;
-            }
-            return true;
-        }
-
-
-    };
+                    case R.id.navigation_setting:
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                        break;
+                    case R.id.navigation_search:
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                        break;
+                    case R.id.navigation_route:
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), DriverActivity.class));
+                        break;
+                }
+                return true;
+            };
     private ReservationViewModel viewModel;
     RelativeLayout noReservation;
     ReservationAdapter adapter;

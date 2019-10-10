@@ -1,37 +1,33 @@
-package com.ouilift.repository;
+package com.ouilift.model;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
+import com.ouilift.repository.CustomerRepository;
 
-import retrofit2.Call;
-
-public class LoginRepository extends Repository {
+public class CustomerViewModel extends ViewModel {
+    private CustomerRepository repository = new CustomerRepository();
 
     public MutableLiveData<PresenterFactory<Void>> register(JsonObject data) {
-        Call<PresenterFactory<Void>> call = api.performRegister(data);
-        return getData(call);
+        return repository.register(data);
     }
 
     public MutableLiveData<PresenterFactory<CustomerPresenter>> login(JsonObject data) {
-        Call<PresenterFactory<CustomerPresenter>> call = api.performLogin(data);
-        return getData(call);
+        return repository.login(data);
     }
 
     public MutableLiveData<PresenterFactory<Void>> change(JsonObject data) {
-        Call<PresenterFactory<Void>> call = api.performChange(data);
-        return getData(call);
+        return repository.change(data);
     }
 
     public MutableLiveData<PresenterFactory<Void>> driver(JsonObject data) {
-        Call<PresenterFactory<Void>> call = api.performDriver(data);
-        return getData(call);
+        return repository.driver(data);
     }
 
     public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
-        Call<PresenterFactory<Void>> call = api.changePassoword(data);
-        return getData(call);
+        return repository.changePassword(data);
     }
 }

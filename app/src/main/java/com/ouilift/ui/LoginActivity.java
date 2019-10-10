@@ -10,7 +10,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
-import com.ouilift.model.LoginViewModel;
+import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.ui.search.SearchActivity;
@@ -21,7 +21,7 @@ public class LoginActivity extends BaseActivity {
     TextInputEditText _emailText, _passwordText;
     MaterialButton loginButton;
     TextView signUp;
-    private LoginViewModel viewModel;
+    private CustomerViewModel viewModel;
     private boolean forRoute;
     private int routeId, place;
 
@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         signUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
         routeId = getIntent().getIntExtra("routeId", 0);
         place = getIntent().getIntExtra("routePlace", 0);
         forRoute = getIntent().getBooleanExtra("forRoute", false);

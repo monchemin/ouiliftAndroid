@@ -3,6 +3,7 @@ package com.ouilift.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
@@ -33,6 +34,11 @@ public class ReservationRepository extends Repository {
 
     public MutableLiveData<PresenterFactory<Void>> deleteReservation(int pk) {
         Call<PresenterFactory<Void>> call = api.deleteReservation(pk);
+        return getData(call);
+    }
+
+    public MutableLiveData<PresenterFactory<CarPresenter>> registeredCar(JsonObject data) {
+        Call<PresenterFactory<CarPresenter>> call = api.registeredCar(data);
         return getData(call);
     }
 

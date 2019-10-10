@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
@@ -30,6 +31,10 @@ public class ReservationViewModel extends ViewModel {
 
     public MutableLiveData<PresenterFactory<Void>> deleteReservation(int pk) {
         return repository.deleteReservation(pk);
+    }
+
+    public MutableLiveData<PresenterFactory<CarPresenter>> registeredCar(JsonObject data) {
+        return repository.registeredCar(data);
     }
 
 }

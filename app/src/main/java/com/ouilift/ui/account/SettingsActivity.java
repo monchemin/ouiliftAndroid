@@ -12,7 +12,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
-import com.ouilift.model.LoginViewModel;
+import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
@@ -35,12 +35,16 @@ public class SettingsActivity extends BaseActivity {
                 finish();
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
+            case R.id.navigation_route:
+                finish();
+                startActivity(new Intent(getApplicationContext(), DriverActivity.class));
+                break;
         }
         return true;
     };
 
     TextInputEditText firstName, lastName, passwordText, newPasswordText, confirmationText, phoneNumber, oldPasswordText, eMail, rNumber;
-    private LoginViewModel viewModel;
+    private CustomerViewModel viewModel;
     private CustomerPresenter customer;
 
     @Override
@@ -50,7 +54,7 @@ public class SettingsActivity extends BaseActivity {
         BottomNavigationView navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bindView();
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
 
     }
 

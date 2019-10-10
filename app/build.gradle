@@ -3,56 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
 
-    def code = 10005
-    def name = "01.00.05"
-    logger.info("jesuis")
-
-    def versionPropsFile = file('version.properties')
-
-    if (versionPropsFile.canRead()) {
-         Properties versionProps = new Properties()
-
-        versionProps.load(new FileInputStream(versionPropsFile))
-        println "jesuis"
-        println versionProps['VERSION_NAME']
-        println versionProps['VERSION_CODE']
-
-        def names = versionProps['VERSION_NAME']
-        if(names.empty) {
-            println names[0]
-           def  maj = names.getAt(0)
-            def min = name[1].toInteger()
-            def patch = name[2].toInteger()
-            if(patch == 20) {
-                min += 1
-                patch = 0
-            }
-            if(min == 20) {
-                maj += 1
-                min = 0
-            }
-            code = maj*10000 + min*1000 + patch*100
-
-            String nameMaj = maj < 10 ? "0"+maj : maj.toString()
-            String nameMin = min < 10 ? "0"+min : min.toString()
-            String nameP = patch < 10 ? "0"+patch : patch.toString()
-            name = nameMaj + nameMin + nameP
-
-        }
-
-        versionProps['VERSION_CODE'] = code.toString()
-        versionProps['VERSION_NAME'] = name
-        versionProps.store(versionPropsFile.newWriter(), null)
-
-
-    } else { throw new GradleException("Could not read version.properties!")}
-
     defaultConfig {
         applicationId "com.ouilift"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode code
-        versionName name
+        versionCode 10105
+        versionName "01.01.05"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -61,12 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "stack"
+    productFlavors {
+        qa {
+            dimension "stack"
+            applicationId "com.ouilift.test"
+            versionNameSuffix "-test"
+        }
+        beta {
+            dimension "stack"
+            applicationId "com.ouilift.beta"
+            versionNameSuffix "-beta"
+        }
+
+    }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
 }
-
 
 
 dependencies {
