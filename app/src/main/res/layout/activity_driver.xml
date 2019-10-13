@@ -3,7 +3,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.account.DriverActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_your_car_label"
+            android:textAlignment="center"
+           android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/text"
+            android:background="#CCCC"
+            android:paddingBottom="5dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+        <LinearLayout
+            android:layout_below="@id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/car_container"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/car_recyclerView"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_car"
+                    android:layout_marginEnd="5dp"
+                    app:icon="@drawable/ic_directions_car_24px"
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    android:layout_gravity="center_vertical"
+                    />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/add_car_container"
+            android:layout_below="@id/car_container"
+            android:visibility="gone"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_car_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="@string/phone_number" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_car_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="@string/phone_number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
     <include layout="@layout/navigation_layout"/>

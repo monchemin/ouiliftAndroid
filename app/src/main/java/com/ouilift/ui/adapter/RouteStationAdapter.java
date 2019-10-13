@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapter.RouteStationViewHolder> {
 
-    private List<RouteStation> dataSet, unMutableDate;
+    private List<RouteStation> dataSet, unMutableDataSet;
     private View.OnClickListener mOnItemClickListener;
 
     @NonNull
@@ -40,7 +40,7 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
 
     public void setData(List<RouteStation> presenters) {
         dataSet = presenters;
-        unMutableDate = presenters;
+        unMutableDataSet = presenters;
       notifyDataSetChanged();
     }
 
@@ -51,7 +51,7 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
     }
 
     public void filter(String text) {
-        dataSet  = unMutableDate
+        dataSet  = unMutableDataSet
                 .stream()
                 .filter(c -> c.stationName.toLowerCase().contains(text.toLowerCase())
                         || c.StationAddress.toLowerCase().contains(text.toLowerCase()))
@@ -83,12 +83,7 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
             stationAddress = itemView.findViewById(R.id.route_station_address);
 
             LinearLayout container = itemView.findViewById(R.id.route_item_container);
-            container.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemSelected(presenter);
-                }
-            });
+            container.setOnClickListener(v -> onItemSelected(presenter));
             itemView.setTag(this);
             itemView.setOnClickListener(mOnItemClickListener);
         }

@@ -24,6 +24,7 @@ import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.RouteStation;
 import com.ouilift.ui.BaseActivity;
+import com.ouilift.ui.account.DriverActivity;
 import com.ouilift.ui.account.ReservationListActivity;
 import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
@@ -56,6 +57,10 @@ public class SearchActivity extends BaseActivity implements RouteSearchDialog.On
                 case R.id.navigation_setting:
                     finish();
                     startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                    break;
+                case R.id.navigation_route:
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), DriverActivity.class));
                     break;
 
             }

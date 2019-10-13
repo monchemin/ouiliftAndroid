@@ -59,4 +59,6 @@
     <string name="btn_change_pass">Change Password</string>
     <string name="menu_departure">Departure</string>
     <string name="driver_number">Driver Number</string>
+    <string name="btn_add_car">New</string>
+    <string name="choose_your_car_label">Choose you car</string>
 </resources>

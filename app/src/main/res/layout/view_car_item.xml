@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/car_item_container">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/car_detail"
+            android:text="00h00"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:layout_weight="0.8"
+            android:layout_gravity="center_vertical"
+             />
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/car_toggle"
+            android:layout_weight="0.2">
+
+        </androidx.appcompat.widget.SwitchCompat>
+
+
+
+</LinearLayout>

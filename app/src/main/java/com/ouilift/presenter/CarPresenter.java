@@ -21,4 +21,6 @@ public class CarPresenter {
     @SerializedName("year")
     public int year;
 
+    public boolean checked;
+
 }

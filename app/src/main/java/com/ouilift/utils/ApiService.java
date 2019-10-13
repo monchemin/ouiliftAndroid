@@ -91,5 +91,8 @@ public class ApiService {
         @POST("/car.php")
         Call<PresenterFactory<CarPresenter>> registeredCar(@Body JsonObject data);
 
+        @POST("/car-create.php")
+        Call<PresenterFactory<CarPresenter>> carCreate(@Body JsonObject data);
+
     }
 }

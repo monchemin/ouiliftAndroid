@@ -37,4 +37,8 @@ public class ReservationViewModel extends ViewModel {
         return repository.registeredCar(data);
     }
 
+    public MutableLiveData<PresenterFactory<CarPresenter>> carCreate(JsonObject data) {
+        return repository.carCreate(data);
+    }
+
 }

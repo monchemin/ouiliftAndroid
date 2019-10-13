@@ -42,4 +42,6 @@
     <string name="btn_change_pass">Changer Mot de passe</string>
     <string name="menu_departure">Départ</string>
     <string name="driver_number">N° permis de conduire</string>
+    <string name="btn_add_car">Nouveau</string>
+    <string name="choose_your_car_label">Choisir la voiture</string>
 </resources>
