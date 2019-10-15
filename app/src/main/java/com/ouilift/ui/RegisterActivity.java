@@ -114,7 +114,7 @@ public class RegisterActivity extends BaseActivity {
         JsonObject data = new JsonObject();
         data.addProperty("firstName", firstName.getText().toString());
         data.addProperty("lastName", lastName.getText().toString());
-        data.addProperty("Email", eMail.getText().toString());
+        data.addProperty("eMail", eMail.getText().toString());
         data.addProperty("phoneNumber", phoneNumber.getText().toString());
         data.addProperty("password", passwordText.getText().toString());
         return data;

@@ -44,4 +44,8 @@
     <string name="driver_number">N° permis de conduire</string>
     <string name="btn_add_car">Nouveau</string>
     <string name="choose_your_car_label">Choisir la voiture</string>
+    <string name="car_color">Couleur</string>
+    <string name="car_model">Marque / Modèle</string>
+    <string name="car_number">Immatriculation</string>
+    <string name="car_year">Année</string>
 </resources>

@@ -3,6 +3,7 @@ package com.ouilift.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CarColorModelPresenter;
 import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
@@ -44,6 +45,17 @@ public class ReservationRepository extends Repository {
 
     public MutableLiveData<PresenterFactory<CarPresenter>> carCreate(JsonObject data) {
         Call<PresenterFactory<CarPresenter>> call = api.carCreate(data);
+        return getData(call);
+    }
+
+
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> carColor() {
+        Call<PresenterFactory<CarColorModelPresenter>> call = api.carColor();
+        return getData(call);
+    }
+
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> carModel() {
+        Call<PresenterFactory<CarColorModelPresenter>> call = api.carModel();
         return getData(call);
     }
 

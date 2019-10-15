@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
+import com.ouilift.presenter.CarColorModelPresenter;
 import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
@@ -39,6 +40,14 @@ public class ReservationViewModel extends ViewModel {
 
     public MutableLiveData<PresenterFactory<CarPresenter>> carCreate(JsonObject data) {
         return repository.carCreate(data);
+    }
+
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> getCarColor() {
+        return repository.carColor();
+    }
+
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> getCarModel() {
+        return repository.carModel();
     }
 
 }

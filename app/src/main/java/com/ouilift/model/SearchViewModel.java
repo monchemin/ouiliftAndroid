@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
-import com.ouilift.presenter.CarBrandPresenter;
+import com.ouilift.presenter.CarModelPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.presenter.RouteStation;
@@ -18,7 +18,7 @@ public class SearchViewModel extends ViewModel {
         return repository.getInternalRoute(data);
     }
 
-    public MutableLiveData<PresenterFactory<CarBrandPresenter>> getCarBrand() {
+    public MutableLiveData<PresenterFactory<CarModelPresenter>> getCarBrand() {
         return repository.getCarBrand();
     }
 

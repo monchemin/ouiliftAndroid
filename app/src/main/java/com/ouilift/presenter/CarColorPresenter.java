@@ -2,10 +2,10 @@ package com.ouilift.presenter;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CarBrandPresenter {
+public class CarColorPresenter {
     @SerializedName("PK")
     public int PK;
-    @SerializedName("brandName")
-    public String brandName;
+    @SerializedName("colorName")
+    public String colorName;
 
 }

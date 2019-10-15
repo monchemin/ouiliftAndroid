@@ -61,4 +61,8 @@
     <string name="driver_number">Driver Number</string>
     <string name="btn_add_car">New</string>
     <string name="choose_your_car_label">Choose you car</string>
+    <string name="car_model">Brand / model</string>
+    <string name="car_color">Color</string>
+    <string name="car_number">Registration</string>
+    <string name="car_year">Year</string>
 </resources>

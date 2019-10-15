@@ -58,33 +58,90 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:id="@+id/add_car_container"
             android:layout_below="@id/car_container"
-            android:visibility="gone"
+            android:visibility="invisible"
             >
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_car_number"
+                android:layout_weight="0.8"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="@string/phone_number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_car_year"
+                    android:layout_marginTop="6dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_car_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="@string/car_number" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="@string/phone_number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="6dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_car_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="@string/car_year" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_car_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="@string/car_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_car_model"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="@string/car_model" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_valid_car"
+                android:layout_marginEnd="5dp"
+                app:icon="@drawable/ic_done_24px"
+                android:padding="5dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:layout_gravity="center_vertical"
+                />
+            </LinearLayout>
 
         </LinearLayout>
 
