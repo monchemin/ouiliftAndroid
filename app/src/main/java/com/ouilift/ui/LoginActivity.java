@@ -2,6 +2,7 @@ package com.ouilift.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -20,7 +21,7 @@ public class LoginActivity extends BaseActivity {
 
     TextInputEditText _emailText, _passwordText;
     MaterialButton loginButton;
-    TextView signUp;
+    TextView signUp, afterRegistration;
     private CustomerViewModel viewModel;
     private boolean forRoute;
     private int routeId, place;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
         _emailText = findViewById(R.id.input_login_email);
         _passwordText = findViewById(R.id.input_login_password);
         signUp = findViewById(R.id.link_sign_up);
+        afterRegistration = findViewById(R.id.registration_message);
 
 
         loginButton.setOnClickListener(v -> {
@@ -45,6 +47,9 @@ public class LoginActivity extends BaseActivity {
         routeId = getIntent().getIntExtra("routeId", 0);
         place = getIntent().getIntExtra("routePlace", 0);
         forRoute = getIntent().getBooleanExtra("forRoute", false);
+        if(getIntent().getBooleanExtra("afterRegistration", false)) {
+            afterRegistration.setVisibility(View.VISIBLE);
+        }
 
     }
 

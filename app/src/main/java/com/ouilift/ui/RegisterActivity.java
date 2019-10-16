@@ -1,5 +1,6 @@
 package com.ouilift.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Toast;
@@ -101,13 +102,17 @@ public class RegisterActivity extends BaseActivity {
                 .observe(this, result -> {
                     if (result.status == 200 && result.lastIndex != 0) {
                         displayMessage();
-                        finish();
+
                     }
                 });
     }
 
     private void displayMessage() {
         Toast.makeText(this, "Register OK", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("afterRegistration", true);
+        startActivity(intent);
+        finish();
     }
 
     private JsonObject makeJson() {

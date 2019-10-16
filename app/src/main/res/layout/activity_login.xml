@@ -3,90 +3,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginActivity"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:paddingTop="56dp"
     android:paddingLeft="24dp"
-    android:paddingRight="24dp">
+    android:paddingTop="56dp"
+    android:paddingRight="24dp"
+    tools:context=".ui.LoginActivity">
 
-    <ImageView android:src="@drawable/img_logo"
+    <ImageView
+        android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/img_logo"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="30dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/img_logo" />
+
+    <TextView
+        android:id="@+id/registration_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_logo"
+        android:layout_centerHorizontal="true"
+        android:background="#4b9265"
+        android:drawableStart="@drawable/ic_done_24px"
+        android:drawablePadding="5dp"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/after_registration_message"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:id="@+id/login_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/img_logo"
+        android:layout_below="@id/registration_message"
         android:layout_centerInParent="true"
-        >
+        android:orientation="vertical">
 
 
-    <!-- Email Label -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_login_email"
+        <!-- Email Label -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="@string/email_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <!-- Password Label -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_login_password"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="@string/password_hint"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:padding="12dp"
-        android:text="@string/btn_login_text"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="@string/btn_login_text" />
 
 
     </LinearLayout>
 
-    <TextView android:id="@+id/link_sign_up"
+    <TextView
+        android:id="@+id/link_sign_up"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/login_container"
         android:layout_marginBottom="24dp"
-        android:text="@string/link_sign_up_text"
         android:gravity="center"
-        android:textSize="16sp"
-        android:layout_below="@id/login_container"/>
+        android:text="@string/link_sign_up_text"
+        android:textSize="16sp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/link_sign_up"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/img_auto"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/link_sign_up"/>
+        android:src="@drawable/img_auto" />
 
 
 </RelativeLayout>

@@ -48,4 +48,5 @@
     <string name="car_model">Marque / Modèle</string>
     <string name="car_number">Immatriculation</string>
     <string name="car_year">Année</string>
+    <string name="after_registration_message">Ton compte a été créé avec succés. Connecte toi pour continuer</string>
 </resources>

@@ -65,4 +65,5 @@
     <string name="car_color">Color</string>
     <string name="car_number">Registration</string>
     <string name="car_year">Year</string>
+    <string name="after_registration_message">Your account have been created successfully. Log in to continue</string>
 </resources>
