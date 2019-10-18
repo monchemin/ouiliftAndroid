@@ -60,10 +60,13 @@
     <string name="menu_departure">Departure</string>
     <string name="driver_number">Driver Number</string>
     <string name="btn_add_car">New</string>
-    <string name="choose_your_car_label">Choose you car</string>
+    <string name="choose_your_car_label">Choose your car</string>
     <string name="car_model">Brand / model</string>
     <string name="car_color">Color</string>
     <string name="car_number">Registration</string>
     <string name="car_year">Year</string>
     <string name="after_registration_message">Your account have been created successfully. Log in to continue</string>
+    <string name="error_label">error</string>
+    <string name="car_hint">Car</string>
+    <string name="create_route">Ready to announce route ?</string>
 </resources>

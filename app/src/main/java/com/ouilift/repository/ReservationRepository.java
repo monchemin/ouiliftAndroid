@@ -59,5 +59,15 @@ public class ReservationRepository extends Repository {
         return getData(call);
     }
 
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> hours() {
+        Call<PresenterFactory<CarColorModelPresenter>> call = api.hours();
+        return getData(call);
+    }
+
+    public MutableLiveData<PresenterFactory<RouteDetailPresenter>> createRoute(JsonObject data) {
+        Call<PresenterFactory<RouteDetailPresenter>> call = api.createRoute(data);
+        return getData(call);
+    }
+
 }
 

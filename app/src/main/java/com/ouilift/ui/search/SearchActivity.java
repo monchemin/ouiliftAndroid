@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.RouteStation;
+import com.ouilift.ui.ActionChoosListener;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.account.DriverActivity;
 import com.ouilift.ui.account.ReservationListActivity;
@@ -36,7 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SearchActivity extends BaseActivity implements RouteSearchDialog.OnInputListener {
+public class SearchActivity extends BaseActivity implements ActionChoosListener {
 
     BottomNavigationView navView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

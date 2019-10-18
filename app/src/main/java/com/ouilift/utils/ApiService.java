@@ -2,7 +2,6 @@ package com.ouilift.utils;
 
 import com.google.gson.JsonObject;
 import com.ouilift.presenter.CarColorModelPresenter;
-import com.ouilift.presenter.CarModelPresenter;
 import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
@@ -53,9 +52,6 @@ public class ApiService {
         @POST("/internal-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute(@Body JsonObject data);
 
-        @GET("/car-brands.php")
-        Call<PresenterFactory<CarModelPresenter>> getCarBrand();
-
         @GET("/route-station.php")
         Call<PresenterFactory<RouteStation>> getRouteStation();
 
@@ -100,6 +96,12 @@ public class ApiService {
 
         @GET("/car-brand-model.php")
         Call<PresenterFactory<CarColorModelPresenter>> carModel();
+
+        @GET("/pickup-hour.php")
+        Call<PresenterFactory<CarColorModelPresenter>> hours();
+
+        @POST("/routes.php")
+        Call<PresenterFactory<RouteDetailPresenter>> createRoute(@Body JsonObject data);
 
     }
 }

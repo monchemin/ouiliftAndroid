@@ -49,4 +49,7 @@
     <string name="car_number">Immatriculation</string>
     <string name="car_year">Année</string>
     <string name="after_registration_message">Ton compte a été créé avec succés. Connecte toi pour continuer</string>
+    <string name="error_label">erreur</string>
+    <string name="car_hint">Voiture</string>
+    <string name="create_route">Prêt pour annoncer un départ ?</string>
 </resources>

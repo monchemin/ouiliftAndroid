@@ -11,4 +11,11 @@ public class CarColorModelPresenter {
 
     @SerializedName("model")
     public String model;
+
+    @SerializedName("hour")
+    public String hour;
+
+    public String customOne;
+
+    public String customTwo;
 }

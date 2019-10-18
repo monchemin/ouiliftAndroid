@@ -50,4 +50,12 @@ public class ReservationViewModel extends ViewModel {
         return repository.carModel();
     }
 
+    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> gethour() {
+        return repository.hours();
+    }
+
+    public MutableLiveData<PresenterFactory<RouteDetailPresenter>> createRoute(JsonObject data) {
+        return repository.createRoute(data);
+    }
+
 }

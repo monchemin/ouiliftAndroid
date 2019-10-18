@@ -19,6 +19,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
     private List<CarPresenter> dataSet;
     private View.OnClickListener mOnItemClickListener;
+    private CarSelectCallBack selectCallBack;
 
     @NonNull
     @Override
@@ -44,11 +45,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     }
 
     private void onItemSelected(CarPresenter presenter) {
-       // Intent intent = new Intent(context, ReservationActivity.class);
-        //intent.putExtra("routeId", presenter.PK);
-        //context.startActivity(intent);
+      selectCallBack.onCarSelect(presenter.PK, false);
     }
-
 
 
     public CarPresenter getItem(int position) {
@@ -56,8 +54,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
     }
 
-    public void setOnItemClickListener(View.OnClickListener itemClickListener) {
-        mOnItemClickListener = itemClickListener;
+    public void setOnItemClickListener(CarSelectCallBack itemClickListener) {
+        selectCallBack = itemClickListener;
     }
 
 
@@ -92,5 +90,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
                     carDetail.setText(text);
             carToggle.setChecked(presenter.checked);
         }
+    }
+
+    public interface CarSelectCallBack {
+        void onCarSelect(int carId, boolean selected);
     }
 }

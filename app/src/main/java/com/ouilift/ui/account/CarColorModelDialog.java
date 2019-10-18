@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
 import com.ouilift.presenter.CarColorModelPresenter;
+import com.ouilift.ui.ActionChoosListener;
+import com.ouilift.ui.ActionEnum;
 import com.ouilift.ui.adapter.CarColorModelAdapter;
 
 import java.util.List;
@@ -26,17 +28,20 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class CarColorModelDialog extends DialogFragment {
 
     private List<CarColorModelPresenter> stations;
-    private CarColorModelAdapter adapter = new CarColorModelAdapter();
+    private CarColorModelAdapter adapter;
+    private ActionEnum action;
 
     private View.OnClickListener onItemClickListener = view -> {
 
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
         loadItem( viewHolder.getAdapterPosition());
     };
-    private OnInputListener onInputListener;
+    private ActionChoosListener onInputListener;
 
-    public CarColorModelDialog(List<CarColorModelPresenter> stations) {
+    public CarColorModelDialog(List<CarColorModelPresenter> stations, ActionEnum action) {
+
         this.stations = stations;
+        this.action = action;
     }
 
     @Override
@@ -49,6 +54,7 @@ public class CarColorModelDialog extends DialogFragment {
         LinearLayoutManager manager  = new LinearLayoutManager(getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
+        adapter = new CarColorModelAdapter(action);
         recyclerView.setAdapter(adapter);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,7 +84,7 @@ public class CarColorModelDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            onInputListener = (OnInputListener) getActivity();
+            onInputListener = (ActionChoosListener) getActivity();
         } catch (ClassCastException e) {
             Log.e(TAG, "onAttach: " + e.getMessage());
         }
@@ -95,14 +101,8 @@ public class CarColorModelDialog extends DialogFragment {
         CarColorModelPresenter item = adapter.getItem(position);
         if(item != null) {
             onInputListener.sendInput(item.PK);
-        } else {
-            onInputListener.sendInput(item.PK);
         }
         dismiss();
     }
 
-
-    public interface OnInputListener {
-        void sendInput(int input);
-    }
 }

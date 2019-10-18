@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
 import com.ouilift.presenter.RouteStation;
+import com.ouilift.ui.ActionChoosListener;
+import com.ouilift.ui.ActionEnum;
 import com.ouilift.ui.adapter.RouteStationAdapter;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class RouteSearchDialog extends DialogFragment {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
         loadItem( viewHolder.getAdapterPosition());
     };
-    private OnInputListener onInputListener;
+    private ActionChoosListener onInputListener;
 
     public RouteSearchDialog(List<RouteStation> stations) {
         this.stations = stations;
@@ -78,7 +80,7 @@ public class RouteSearchDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            onInputListener = (OnInputListener) getActivity();
+            onInputListener = (ActionChoosListener) getActivity();
         } catch (ClassCastException e) {
             Log.e(TAG, "onAttach: " + e.getMessage());
         }
@@ -96,13 +98,9 @@ public class RouteSearchDialog extends DialogFragment {
         if(item != null) {
             onInputListener.sendInput(item.PK);
         } else {
-            onInputListener.sendInput(item.PK);
+            onInputListener.sendInput(0);
         }
         dismiss();
     }
 
-
-    public interface OnInputListener {
-        void sendInput(int input);
-    }
 }

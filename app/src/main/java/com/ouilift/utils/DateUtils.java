@@ -19,4 +19,13 @@ public class DateUtils {
         }
         return new Date();
     }
+
+    public static boolean isNumeric(String strNum) {
+        try {
+            Integer.parseInt(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
+    }
 }

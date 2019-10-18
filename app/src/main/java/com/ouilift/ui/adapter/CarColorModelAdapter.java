@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
 import com.ouilift.presenter.CarColorModelPresenter;
+import com.ouilift.ui.ActionEnum;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,11 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
 
     private List<CarColorModelPresenter> dataSet, unMutableDataSet;
     private View.OnClickListener mOnItemClickListener;
+    private ActionEnum action;
+
+    public CarColorModelAdapter(ActionEnum action) {
+        this.action = action;
+    }
 
     @NonNull
     @Override
@@ -41,19 +47,31 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
     public void setData(List<CarColorModelPresenter> presenters) {
         dataSet = presenters;
         unMutableDataSet = presenters;
-      notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     private void onItemSelected(CarColorModelPresenter presenter) {
-       // Intent intent = new Intent(context, ReservationActivity.class);
+        // Intent intent = new Intent(context, ReservationActivity.class);
         //intent.putExtra("routeId", presenter.PK);
         //context.startActivity(intent);
     }
 
     public void filter(String text) {
-        dataSet  = unMutableDataSet
+        dataSet = unMutableDataSet
                 .stream()
-                .filter(c -> (c.colorName != null ? c.colorName : c.model).toLowerCase().contains(text.toLowerCase()))
+                .filter(c -> {
+                    switch (action) {
+                        case MODEL:
+                            return c.model.toLowerCase().contains(text.toLowerCase());
+                        case COLOR:
+                            return c.colorName.toLowerCase().contains(text.toLowerCase());
+                        case HOUR:
+                            return c.hour.toLowerCase().contains(text.toLowerCase());
+                        default:
+                            return c.customOne.toLowerCase().contains(text.toLowerCase());
+                    }
+
+                })
                 .collect(Collectors.toList());
         notifyDataSetChanged();
 
@@ -89,8 +107,24 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
 
         void displayItem(CarColorModelPresenter presenter) {
             this.presenter = presenter;
-            routeStation.setText(presenter.colorName != null ? presenter.colorName : presenter.model);
-            stationAddress.setText("");
+            String strStation = "", strAddress = "";
+            switch (action) {
+                case MODEL:
+                    strStation = presenter.model;
+                    break;
+                case COLOR:
+                    strStation = presenter.colorName;
+                    break;
+                case HOUR:
+                    strStation = presenter.hour;
+                    break;
+                case CAR:
+                    strStation = presenter.customOne;
+                    strAddress = presenter.customTwo;
+            }
+
+            routeStation.setText(strStation);
+            stationAddress.setText(strAddress);
         }
     }
 }
