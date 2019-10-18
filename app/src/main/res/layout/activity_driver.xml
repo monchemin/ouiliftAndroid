@@ -246,6 +246,38 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/add_route_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/car_container"
+            android:layout_marginTop="20dp"
+            >
+            <include layout='@layout/route_search_view'/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/search_button"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    app:icon="@drawable/ic_done_24px"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
 
 
 
