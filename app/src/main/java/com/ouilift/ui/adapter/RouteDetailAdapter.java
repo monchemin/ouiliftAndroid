@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -61,6 +62,7 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
         TextView routeDate, hour, price, from, to, place;
         String date_format;
         RouteDetailPresenter presenter;
+        RatingBar ratingBar;
 
 
         RouteDetailViewHolder(@NonNull View itemView, String date_format) {
@@ -72,6 +74,7 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
             from = itemView.findViewById(R.id.route_from);
             to = itemView.findViewById(R.id.route_to);
             place = itemView.findViewById(R.id.route_place);
+            ratingBar = itemView.findViewById(R.id.route_rating_bar);
             this.date_format = date_format;
             LinearLayout container = itemView.findViewById(R.id.route_item_container);
             container.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +94,8 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
             from.setText(context.getString(R.string.route_from) + ": " + presenter.fromStation);
             String strPlace = presenter.remainingPlace <= 1 ? context.getString(R.string.place_singular) : context.getString(R.string.place_plural);
             place.setText(presenter.remainingPlace + " " + strPlace);
+            ratingBar.setNumStars(presenter.routePlace);
+            ratingBar.setRating(presenter.routePlace - presenter.remainingPlace);
         }
     }
 }

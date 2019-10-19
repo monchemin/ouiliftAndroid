@@ -27,4 +27,6 @@ public class RouteDetailPresenter {
     public String toStationDetail;
     @SerializedName("tZone")
     public String toZone;
+    @SerializedName("routePlace")
+    public int routePlace;
 }

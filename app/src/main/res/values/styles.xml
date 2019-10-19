@@ -52,5 +52,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="GlassRating" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">24dp</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:progressDrawable">@drawable/rating_bar_bg</item>
+    </style>
+
 
 </resources>
