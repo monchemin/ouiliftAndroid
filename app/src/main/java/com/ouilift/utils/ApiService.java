@@ -103,5 +103,8 @@ public class ApiService {
         @POST("/routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> createRoute(@Body JsonObject data);
 
+        @POST("/published-routes.php")
+        Call<PresenterFactory<RouteDetailPresenter>> ownerRoutes(@Body JsonObject data);
+
     }
 }

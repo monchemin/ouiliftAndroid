@@ -58,4 +58,8 @@ public class ReservationViewModel extends ViewModel {
         return repository.createRoute(data);
     }
 
+    public MutableLiveData<PresenterFactory<RouteDetailPresenter>> getOwnerRoutes(JsonObject data) {
+        return repository.ownerRoutes(data);
+    }
+
 }

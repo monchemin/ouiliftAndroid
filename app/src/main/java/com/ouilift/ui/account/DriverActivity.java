@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
@@ -20,13 +22,11 @@ import com.ouilift.model.ReservationViewModel;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.CarColorModelPresenter;
 import com.ouilift.presenter.CarPresenter;
-import com.ouilift.presenter.PresenterFactory;
-import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.presenter.RouteStation;
 import com.ouilift.ui.ActionChoosListener;
 import com.ouilift.ui.ActionEnum;
 import com.ouilift.ui.BaseActivity;
-import com.ouilift.ui.adapter.CarAdapter;
+import com.ouilift.ui.adapter.RouteDetailAdapter;
 import com.ouilift.ui.search.RouteSearchDialog;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.DateUtils;
@@ -61,7 +61,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     };
     MaterialButton btnAddCar, btnValidCar, btnRouteAdd;
     LinearLayout addCarContainer, addRouteContainer;
-    CarAdapter carAdapter;
+    RouteDetailAdapter adapter = new RouteDetailAdapter();
     int color, model, fromPK, toPK, hourPK, carPK;
     boolean colorFocusDisable, modelFocusDisable, fromFocusDisable, toFocusDisable,
             addCarOn, hourFocusDisable, carFocusDisable;
@@ -81,7 +81,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
         viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
         searchViewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
-        carAdapter = new CarAdapter();
+
         bindView();
     }
 
@@ -92,11 +92,11 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         btnValidCar = findViewById(R.id.btn_valid_car);
         addCarContainer = findViewById(R.id.add_car_container);
         addRouteContainer = findViewById(R.id.add_route_container);
-        //RecyclerView carRecycler = findViewById(R.id.car_recyclerView);
-        // LinearLayoutManager manager = new LinearLayoutManager(this);
-        // manager.setOrientation(RecyclerView.VERTICAL);
-        // carRecycler.setLayoutManager(manager);
-        // carRecycler.setAdapter(carAdapter);
+        RecyclerView recyclerView = findViewById(R.id.route_detail_recycler_view);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
         registrationInput = findViewById(R.id.input_car_number);
         yearInput = findViewById(R.id.input_car_year);
         colorInput = findViewById(R.id.input_car_color);
@@ -209,7 +209,6 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
         viewModel.registeredCar(makeJson(true)).observe(this, result -> {
             if (result.status == 200 && result.response != null) {
-                carAdapter.setData(result.response);
                 makeCarPresenter(result.response);
             }
         });
@@ -228,6 +227,12 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         viewModel.gethour().observe(this, result -> {
             if (result.status == 200 && result.response != null) {
                 hourPresenters = result.response;
+            }
+        });
+        
+        viewModel.getOwnerRoutes(makeJson(true)).observe(this, result -> {
+            if (result.status == 200 && result.response != null) {
+                adapter.setData(result.response);
             }
         });
 
@@ -313,7 +318,6 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         if (validate()) {
             viewModel.carCreate(makeJson(false)).observe(this, result -> {
                 if (result.status == 200 && result.response != null) {
-                    carAdapter.setData(result.response);
                     makeCarPresenter(result.response);
                     addCarContainer.setVisibility(View.GONE);
                     addRouteContainer.setVisibility(View.VISIBLE);
@@ -490,8 +494,8 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         data.addProperty("car", carPK);
 
         viewModel.createRoute(data).observe(this, result -> {
-            if (result.status == 200) {
-                Toast.makeText(this,"ok", Toast.LENGTH_LONG).show();
+            if (result.status == 200 && result.response != null) {
+               adapter.setData(result.response);
             }
         });
 
