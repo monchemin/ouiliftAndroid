@@ -68,7 +68,7 @@ public class LoginActivity extends BaseActivity {
             }
             else {
                 _emailText.setError(getString(R.string.login_error));
-                _emailText.setFocusable(true);
+                _emailText.requestFocus();
             }
         });
     }
