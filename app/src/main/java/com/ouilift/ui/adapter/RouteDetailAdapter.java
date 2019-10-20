@@ -95,7 +95,8 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
             String strPlace = presenter.remainingPlace <= 1 ? context.getString(R.string.place_singular) : context.getString(R.string.place_plural);
             place.setText(presenter.remainingPlace + " " + strPlace);
             ratingBar.setNumStars(presenter.routePlace);
-            ratingBar.setRating(presenter.routePlace - presenter.remainingPlace);
+            int rating = presenter.routePlace - presenter.remainingPlace;
+            ratingBar.setRating(rating);
         }
     }
 }

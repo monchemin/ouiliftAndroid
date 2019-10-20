@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -229,7 +228,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
                 hourPresenters = result.response;
             }
         });
-        
+
         viewModel.getOwnerRoutes(makeJson(true)).observe(this, result -> {
             if (result.status == 200 && result.response != null) {
                 adapter.setData(result.response);
@@ -341,9 +340,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     @Override
     public void sendInput(int input) {
-        if(input == 0) {
-            return;
-        }
+
         switch (action) {
             case TO:
                 onToSelect(input);
@@ -365,12 +362,11 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void onColorSelect(int input) {
-
+        colorFocusDisable = true;
         for (CarColorModelPresenter presenter : colorPresenters) {
             if (presenter.PK == input) {
                 color = input;
                 colorInput.setText(presenter.colorName);
-                colorFocusDisable = true;
                 break;
             }
 
@@ -378,45 +374,42 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void onModelSelect(int input) {
-
+        modelFocusDisable = true;
         for (CarColorModelPresenter presenter : modelPresenters) {
             if (presenter.PK == input) {
                 model = input;
                 modelInput.setText(presenter.model);
-                modelFocusDisable = true;
                 break;
             }
         }
     }
 
     private void onHourSelect(int input) {
-
+        hourFocusDisable = true;
         for (CarColorModelPresenter presenter : hourPresenters) {
             if (presenter.PK == input) {
                 hourPK = input;
                 hour.setText(presenter.hour);
-                hourFocusDisable = true;
                 break;
             }
         }
     }
 
     private void onCarSelect(int input) {
+        carFocusDisable = true;
         for (CarColorModelPresenter presenter : carPresenters) {
             if (presenter.PK == input) {
                 carPK = input;
                 carInput.setText(presenter.customOne);
-                carFocusDisable = true;
                 break;
             }
         }
     }
 
     private void onToSelect(int input) {
+        toFocusDisable = true;
         for (RouteStation station : stations) {
             if (station.PK == input) {
-
-                toFocusDisable = true;
                 searchTo.setText(station.stationName);
                 toPK = input;
                 break;
@@ -426,9 +419,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void onFromSelect(int input) {
+        fromFocusDisable = true;
         for (RouteStation station : stations) {
             if (station.PK == input) {
-                fromFocusDisable = true;
                 searchFrom.setText(station.stationName);
                 fromPK = input;
                 break;
@@ -471,7 +464,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
             hour.setError(error);
         }
 
-        if (!DateUtils.isNumeric(placeInput.getText().toString())) {
+        if (!DateUtils.isNumeric(placeInput.getText().toString()) && Integer.parseInt(placeInput.getText().toString()) > 3) {
             placeInput.setError(error);
             placeInput.requestFocus();
             return;
@@ -495,7 +488,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
         viewModel.createRoute(data).observe(this, result -> {
             if (result.status == 200 && result.response != null) {
-               adapter.setData(result.response);
+                adapter.setData(result.response);
             }
         });
 

@@ -78,7 +78,7 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
     }
 
     public CarColorModelPresenter getItem(int position) {
-        return dataSet != null ? dataSet.get(position) : null;
+        return dataSet != null && !dataSet.isEmpty() ? dataSet.get(position) : null;
 
     }
 

@@ -157,6 +157,9 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
         if (!Preference.IsConnected(this)) {
             findViewById(R.id.navigation_setting).setEnabled(false);
             findViewById(R.id.navigation_reservation).setEnabled(false);
+
+        }
+        if(!Preference.IsDriver(this)) {
             findViewById(R.id.navigation_route).setEnabled(false);
         }
     }

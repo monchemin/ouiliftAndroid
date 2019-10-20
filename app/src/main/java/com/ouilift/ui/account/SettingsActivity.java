@@ -104,6 +104,10 @@ public class SettingsActivity extends BaseActivity {
         eMail.setText(customer.eMail);
         rNumber.setText(customer.drivingNumber);
 
+        if(!Preference.IsDriver(this)) {
+            findViewById(R.id.navigation_route).setEnabled(false);
+        }
+
     }
 
     private boolean validate(boolean isPass) {

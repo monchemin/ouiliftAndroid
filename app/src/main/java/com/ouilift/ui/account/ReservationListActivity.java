@@ -2,12 +2,9 @@ package com.ouilift.ui.account;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -70,6 +67,9 @@ public class ReservationListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(!Preference.IsDriver(this)) {
+            findViewById(R.id.navigation_route).setEnabled(false);
+        }
         int userId = Preference.getConnection(this).PK;
         loadingIndicator.show();
         viewModel.getReservationList(userId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {

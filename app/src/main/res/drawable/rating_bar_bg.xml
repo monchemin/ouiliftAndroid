@@ -6,7 +6,7 @@
         />
     <item
         android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/icons8_passenger_active"
+        android:drawable="@drawable/icons_passenger_bg"
        />
     <item
         android:id="@android:id/progress"
