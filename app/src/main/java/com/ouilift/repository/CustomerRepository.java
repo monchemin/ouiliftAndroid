@@ -34,4 +34,14 @@ public class CustomerRepository extends Repository {
         Call<PresenterFactory<Void>> call = api.changePassword(data);
         return getData(call);
     }
+
+    public MutableLiveData<PresenterFactory<Void>> changeMail(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.changeMail(data);
+        return getData(call);
+    }
+
+    public MutableLiveData<PresenterFactory<Void>> activateAccount(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.activateAccount(data);
+        return getData(call);
+    }
 }

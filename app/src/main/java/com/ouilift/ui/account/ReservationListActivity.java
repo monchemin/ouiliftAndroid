@@ -67,10 +67,10 @@ public class ReservationListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!Preference.IsDriver(this)) {
+        if(!Preference.IsDriver(this) || !Preference.IsActive(this)) {
             findViewById(R.id.navigation_route).setEnabled(false);
         }
-        int userId = Preference.getConnection(this).PK;
+        int userId = Preference.getConnection(this).Id;
         loadingIndicator.show();
         viewModel.getReservationList(userId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
             @Override

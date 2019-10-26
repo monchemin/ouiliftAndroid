@@ -69,4 +69,9 @@
     <string name="error_label">error</string>
     <string name="car_hint">Car</string>
     <string name="create_route">Ready to announce route ?</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_mail">Change Email</string>
+    <string name="set_registration">Set Registration N°</string>
+    <string name="activate_account">Activate Account</string>
+    <string name="activation_code">Activation Code</string>
 </resources>

@@ -30,4 +30,12 @@ public class CustomerViewModel extends ViewModel {
     public MutableLiveData<PresenterFactory<Void>> changePassword(JsonObject data) {
         return repository.changePassword(data);
     }
+
+    public MutableLiveData<PresenterFactory<Void>> activateAccount(JsonObject data) {
+        return repository.activateAccount(data);
+    }
+
+    public MutableLiveData<PresenterFactory<Void>> changeMail(JsonObject data) {
+        return repository.changeMail(data);
+    }
 }

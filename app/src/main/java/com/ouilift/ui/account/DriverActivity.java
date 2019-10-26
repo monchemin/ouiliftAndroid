@@ -327,7 +327,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     private JsonObject makeJson(boolean get) {
         JsonObject data = new JsonObject();
-        data.addProperty("PK", Preference.getConnection(this).PK);
+        data.addProperty("PK", Preference.getConnection(this).Id);
         if (!get) {
             data.addProperty("year", yearInput.getText().toString());
             data.addProperty("model", model);
@@ -477,7 +477,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         }
 
         JsonObject data = new JsonObject();
-        data.addProperty("PK", Preference.getConnection(this).PK);
+        data.addProperty("PK", Preference.getConnection(this).Id);
         data.addProperty("departure", fromPK);
         data.addProperty("arrival", toPK);
         data.addProperty("date", searchDate);

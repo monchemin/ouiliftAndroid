@@ -159,7 +159,7 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
             findViewById(R.id.navigation_reservation).setEnabled(false);
 
         }
-        if(!Preference.IsDriver(this)) {
+        if(!Preference.IsDriver(this) || !Preference.IsActive(this)) {
             findViewById(R.id.navigation_route).setEnabled(false);
         }
     }

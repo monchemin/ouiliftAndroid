@@ -49,12 +49,7 @@ public class ApiService {
 
     public interface EndPoint {
 
-        @POST("/internal-routes.php")
-        Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute(@Body JsonObject data);
-
-        @GET("/route-station.php")
-        Call<PresenterFactory<RouteStation>> getRouteStation();
-
+        //customer
         @POST("/login.php")
         Call<PresenterFactory<CustomerPresenter>> performLogin(@Body JsonObject data);
 
@@ -70,20 +65,21 @@ public class ApiService {
         @POST("/change-password.php")
         Call<PresenterFactory<Void>> changePassword(@Body JsonObject data);
 
+        @POST("/change-mail.php")
+        Call<PresenterFactory<Void>> changeMail(@Body JsonObject data);
+
+        @POST("/active-activate.php")
+        Call<PresenterFactory<Void>> activateAccount(@Body JsonObject data);
+
+//route
+        @POST("/internal-routes.php")
+        Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute(@Body JsonObject data);
+
+        @GET("/route-station.php")
+        Call<PresenterFactory<RouteStation>> getRouteStation();
+
         @GET("/route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);
-
-        @POST("/reservations.php")
-        Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
-
-        @GET("/reservations.php/{PK}")
-        Call<PresenterFactory<ReservationPresenter>> getReservation(@Path("PK") int pk);
-
-        @GET("/reservation-list.php/{PK}")
-        Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
-
-        @DELETE("/reservations.php/{PK}")
-        Call<PresenterFactory<Void>> deleteReservation(@Path("PK") int pk);
 
         @POST("/car.php")
         Call<PresenterFactory<CarPresenter>> registeredCar(@Body JsonObject data);
@@ -105,6 +101,19 @@ public class ApiService {
 
         @POST("/published-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> ownerRoutes(@Body JsonObject data);
+
+// reservation
+        @POST("/reservations.php")
+        Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
+
+        @GET("/reservations.php/{PK}")
+        Call<PresenterFactory<ReservationPresenter>> getReservation(@Path("PK") int pk);
+
+        @GET("/reservation-list.php/{PK}")
+        Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
+
+        @DELETE("/reservations.php/{PK}")
+        Call<PresenterFactory<Void>> deleteReservation(@Path("PK") int pk);
 
     }
 }

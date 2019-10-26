@@ -101,7 +101,7 @@ public class ReservationActivity extends BaseActivity {
             findViewById(R.id.navigation_setting).setEnabled(false);
             findViewById(R.id.navigation_reservation).setEnabled(false);
         }
-        if(!Preference.IsDriver(this)) {
+        if(!Preference.IsDriver(this) || !Preference.IsActive(this)) {
             findViewById(R.id.navigation_route).setEnabled(false);
         }
     }
@@ -186,7 +186,7 @@ public class ReservationActivity extends BaseActivity {
 
     private void performReservation() {
         JsonObject data = new JsonObject();
-        data.addProperty("FK_Customer", Preference.getConnection(this).PK);
+        data.addProperty("FK_Customer", Preference.getConnection(this).Id);
         data.addProperty("FK_Route", routeId);
         data.addProperty("place", place);
         loadingIndicator.show();

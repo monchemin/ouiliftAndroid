@@ -52,4 +52,9 @@
     <string name="error_label">erreur</string>
     <string name="car_hint">Voiture</string>
     <string name="create_route">Prêt pour annoncer un départ ?</string>
+    <string name="change_password">Modifier mot de passe</string>
+    <string name="change_mail">Modifier le mail</string>
+    <string name="set_registration">N° de permis</string>
+    <string name="activate_account">Activer le compte</string>
+    <string name="activation_code">Code d\'activation</string>
 </resources>

@@ -3,8 +3,8 @@ package com.ouilift.presenter;
 import com.google.gson.annotations.SerializedName;
 
 public class CustomerPresenter {
-    @SerializedName("PK")
-    public int PK;
+    @SerializedName("Id")
+    public int Id;
 
     @SerializedName("firstName")
     public String firstName;
@@ -20,5 +20,8 @@ public class CustomerPresenter {
 
     @SerializedName("drivingNumber")
     public String drivingNumber;
+
+    @SerializedName("active")
+    public boolean active;
 
 }
