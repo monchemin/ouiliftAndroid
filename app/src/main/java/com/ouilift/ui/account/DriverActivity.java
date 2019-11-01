@@ -3,9 +3,13 @@ package com.ouilift.ui.account;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -71,6 +75,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private String searchDate;
     private List<RouteStation> stations = new ArrayList<>();
     private SearchViewModel searchViewModel;
+    private ContentLoadingProgressBar loadingIndicator;
 
 
     @Override
@@ -109,6 +114,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         placeInput = findViewById(R.id.route_place);
         priceInput = findViewById(R.id.route_price);
         carInput = findViewById(R.id.input_car);
+        loadingIndicator = findViewById(R.id.loading_indicator);
 
         clickListeners();
 
@@ -121,9 +127,28 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
             showDialog(new CarColorModelDialog(carPresenters, action));
         });
         carInput.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus && !carFocusDisable) {
-                action = ActionEnum.CAR;
-                showDialog(new CarColorModelDialog(carPresenters, action));
+            if (hasFocus && !carFocusDisable && !carPresenters.isEmpty()) {
+
+            }
+        });
+        carInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!carFocusDisable && !carPresenters.isEmpty()) {
+                    action = ActionEnum.CAR;
+                    showDialog(new CarColorModelDialog(carPresenters, action));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -205,8 +230,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     @Override
     protected void onResume() {
         super.onResume();
-
+        loadingIndicator.show();
         viewModel.registeredCar(makeJson(true)).observe(this, result -> {
+            loadingIndicator.hide();
             if (result.status == 200 && result.response != null) {
                 makeCarPresenter(result.response);
             }
@@ -242,6 +268,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
                 }
             });
         }
+
     }
 
     private void makeCarPresenter(List<CarPresenter> response) {
@@ -251,9 +278,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         carPresenters.clear();
         for (CarPresenter car : response) {
             CarColorModelPresenter presenter = new CarColorModelPresenter();
-            presenter.PK = car.PK;
+            presenter.Id = car.Id;
             presenter.customOne = car.brand + " " + car.model + " " + car.year;
-            presenter.customTwo = car.number + " " + car.number;
+            presenter.customTwo = car.number + " " + car.color;
             carPresenters.add(presenter);
         }
     }
@@ -315,7 +342,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void performAddCar() {
 
         if (validate()) {
+            loadingIndicator.show();
             viewModel.carCreate(makeJson(false)).observe(this, result -> {
+                loadingIndicator.hide();
                 if (result.status == 200 && result.response != null) {
                     makeCarPresenter(result.response);
                     addCarContainer.setVisibility(View.GONE);
@@ -327,7 +356,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     private JsonObject makeJson(boolean get) {
         JsonObject data = new JsonObject();
-        data.addProperty("PK", Preference.getConnection(this).Id);
+        data.addProperty("customerId", Preference.getConnection(this).Id);
         if (!get) {
             data.addProperty("year", yearInput.getText().toString());
             data.addProperty("model", model);
@@ -340,7 +369,6 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     @Override
     public void sendInput(int input) {
-
         switch (action) {
             case TO:
                 onToSelect(input);
@@ -362,9 +390,10 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void onColorSelect(int input) {
+        System.out.println("nyemo color " + input);
         colorFocusDisable = true;
         for (CarColorModelPresenter presenter : colorPresenters) {
-            if (presenter.PK == input) {
+            if (presenter.Id == input) {
                 color = input;
                 colorInput.setText(presenter.colorName);
                 break;
@@ -376,7 +405,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void onModelSelect(int input) {
         modelFocusDisable = true;
         for (CarColorModelPresenter presenter : modelPresenters) {
-            if (presenter.PK == input) {
+            if (presenter.Id == input) {
                 model = input;
                 modelInput.setText(presenter.model);
                 break;
@@ -387,7 +416,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void onHourSelect(int input) {
         hourFocusDisable = true;
         for (CarColorModelPresenter presenter : hourPresenters) {
-            if (presenter.PK == input) {
+            if (presenter.Id == input) {
                 hourPK = input;
                 hour.setText(presenter.hour);
                 break;
@@ -398,7 +427,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void onCarSelect(int input) {
         carFocusDisable = true;
         for (CarColorModelPresenter presenter : carPresenters) {
-            if (presenter.PK == input) {
+            if (presenter.Id == input) {
                 carPK = input;
                 carInput.setText(presenter.customOne);
                 break;
@@ -409,7 +438,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void onToSelect(int input) {
         toFocusDisable = true;
         for (RouteStation station : stations) {
-            if (station.PK == input) {
+            if (station.stationId == input) {
                 searchTo.setText(station.stationName);
                 toPK = input;
                 break;
@@ -421,7 +450,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     private void onFromSelect(int input) {
         fromFocusDisable = true;
         for (RouteStation station : stations) {
-            if (station.PK == input) {
+            if (station.stationId == input) {
                 searchFrom.setText(station.stationName);
                 fromPK = input;
                 break;
@@ -448,6 +477,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     private void performRouteAdd() {
         String error = getString(R.string.error_label);
+        if (carPK == 0) {
+            carInput.setError(error);
+        }
         if (fromPK == 0) {
             searchFrom.setError(error);
             return;
@@ -477,7 +509,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         }
 
         JsonObject data = new JsonObject();
-        data.addProperty("PK", Preference.getConnection(this).Id);
+        data.addProperty("customerId", Preference.getConnection(this).Id);
         data.addProperty("departure", fromPK);
         data.addProperty("arrival", toPK);
         data.addProperty("date", searchDate);
@@ -485,10 +517,13 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         data.addProperty("place", placeInput.getText().toString());
         data.addProperty("hour", hourPK);
         data.addProperty("car", carPK);
-
+        loadingIndicator.show();
         viewModel.createRoute(data).observe(this, result -> {
+            loadingIndicator.hide();
             if (result.status == 200 && result.response != null) {
                 adapter.setData(result.response);
+            } else {
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
             }
         });
 

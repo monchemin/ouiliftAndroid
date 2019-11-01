@@ -68,7 +68,7 @@ public class ApiService {
         @POST("/change-mail.php")
         Call<PresenterFactory<Void>> changeMail(@Body JsonObject data);
 
-        @POST("/active-activate.php")
+        @POST("/activate-account.php")
         Call<PresenterFactory<Void>> activateAccount(@Body JsonObject data);
 
 //route

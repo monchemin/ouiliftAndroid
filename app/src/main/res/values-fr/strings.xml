@@ -48,7 +48,7 @@
     <string name="car_model">Marque / Modèle</string>
     <string name="car_number">Immatriculation</string>
     <string name="car_year">Année</string>
-    <string name="after_registration_message">Ton compte a été créé avec succés. Connecte toi pour continuer</string>
+    <string name="after_registration_message">Ton compte a été créé avec succés. Un code d\'activation a été envoyé à ton adresse mail. Connecte toi pour continuer</string>
     <string name="error_label">erreur</string>
     <string name="car_hint">Voiture</string>
     <string name="create_route">Prêt pour annoncer un départ ?</string>
@@ -57,4 +57,6 @@
     <string name="set_registration">N° de permis</string>
     <string name="activate_account">Activer le compte</string>
     <string name="activation_code">Code d\'activation</string>
+    <string name="account_in_progress">Creation en cours&#8230;</string>
+    <string name="in_progress">En cours &#8230;</string>
 </resources>

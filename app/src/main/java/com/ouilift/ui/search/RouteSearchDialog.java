@@ -96,7 +96,7 @@ public class RouteSearchDialog extends DialogFragment {
     private void loadItem(int position) {
         RouteStation item = adapter.getItem(position);
         if(item != null) {
-            onInputListener.sendInput(item.PK);
+            onInputListener.sendInput(item.stationId);
         } else {
             onInputListener.sendInput(0);
         }

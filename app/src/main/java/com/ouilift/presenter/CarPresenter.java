@@ -3,8 +3,8 @@ package com.ouilift.presenter;
 import com.google.gson.annotations.SerializedName;
 
 public class CarPresenter {
-    @SerializedName("PK")
-    public int PK;
+    @SerializedName("Id")
+    public int Id;
 
     @SerializedName("number")
     public String number;

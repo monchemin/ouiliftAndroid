@@ -22,6 +22,6 @@ public class CustomerPresenter {
     public String drivingNumber;
 
     @SerializedName("active")
-    public boolean active;
+    public int active;
 
 }

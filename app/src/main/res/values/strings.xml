@@ -65,7 +65,7 @@
     <string name="car_color">Color</string>
     <string name="car_number">Registration</string>
     <string name="car_year">Year</string>
-    <string name="after_registration_message">Your account have been created successfully. Log in to continue</string>
+    <string name="after_registration_message">Your account have been created successfully. An activation code has been sent to your email address. Please check the code to activate your account. Log in to continue </string>
     <string name="error_label">error</string>
     <string name="car_hint">Car</string>
     <string name="create_route">Ready to announce route ?</string>
@@ -74,4 +74,6 @@
     <string name="set_registration">Set Registration N°</string>
     <string name="activate_account">Activate Account</string>
     <string name="activation_code">Activation Code</string>
+    <string name="account_in_progress">Creation in progress &#8230;</string>
+    <string name="in_progress">In progress &#8230;</string>
 </resources>

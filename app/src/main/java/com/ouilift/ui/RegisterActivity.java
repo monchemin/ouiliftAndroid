@@ -98,21 +98,26 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void performRegister() {
+        createButton.setText(R.string.account_in_progress);
         viewModel.register(makeJson())
                 .observe(this, result -> {
                     if (result.status == 200 && result.lastIndex != 0) {
-                        displayMessage();
+                        displayMessage(true, "Register OK");
 
+                    } else {
+                        displayMessage(false, "Register error");
                     }
                 });
     }
 
-    private void displayMessage() {
-        Toast.makeText(this, "Register OK", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("afterRegistration", true);
-        startActivity(intent);
-        finish();
+    private void displayMessage(boolean ok, String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if(ok) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("afterRegistration", true);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private JsonObject makeJson() {

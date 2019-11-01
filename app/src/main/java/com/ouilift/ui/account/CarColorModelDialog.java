@@ -100,9 +100,7 @@ public class CarColorModelDialog extends DialogFragment {
     private void loadItem(int position) {
         CarColorModelPresenter item = adapter.getItem(position);
         if(item != null) {
-            onInputListener.sendInput(item.PK);
-        } else {
-            onInputListener.sendInput(0);
+            onInputListener.sendInput(item.Id);
         }
         dismiss();
     }

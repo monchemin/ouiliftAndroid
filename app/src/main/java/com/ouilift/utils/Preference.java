@@ -32,14 +32,14 @@ public class Preference {
     public static boolean IsActive(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(ACTIVE, false);
+        return sharedPref.getInt(ACTIVE, 0) == 1;
     }
 
     public static void setActive(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(ACTIVE, true);
+        editor.putInt(ACTIVE, 1);
         editor.apply();
     }
 
@@ -48,6 +48,14 @@ public class Preference {
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(EMAIL, mail);
+        editor.apply();
+    }
+
+    public static void setNumber(Context context, String number) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.key_file), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(DRIVING_NUMBER, number);
         editor.apply();
     }
 
@@ -70,7 +78,7 @@ public class Preference {
         editor.putString(EMAIL, customer.eMail);
         editor.putString(PHONE, customer.phone);
         editor.putString(DRIVING_NUMBER, customer.drivingNumber);
-        editor.putBoolean(ACTIVE, customer.active);
+        editor.putInt(ACTIVE, customer.active);
         editor.apply();
     }
 
@@ -84,7 +92,7 @@ public class Preference {
         customer.eMail = sharedPref.getString(EMAIL, customer.eMail);
         customer.phone = sharedPref.getString(PHONE, customer.phone);
         customer.drivingNumber = sharedPref.getString(DRIVING_NUMBER, customer.drivingNumber);
-        customer.active = sharedPref.getBoolean(ACTIVE, customer.active);
+        customer.active = sharedPref.getInt(ACTIVE, customer.active);
 
         return customer;
     }

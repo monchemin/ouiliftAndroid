@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 public class RouteStation {
-    @SerializedName("PK")
-    public int PK;
+    @SerializedName("stationId")
+    public int stationId;
     @SerializedName("stationName")
     public String stationName;
     @SerializedName("stationAddress")

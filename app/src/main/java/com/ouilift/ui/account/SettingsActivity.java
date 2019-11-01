@@ -47,6 +47,7 @@ public class SettingsActivity extends BaseActivity {
             oldPasswordText, eMail, rNumber, activationCode, mailPassword, activatePassword;
     private CustomerViewModel viewModel;
     private CustomerPresenter customer;
+    private MaterialButton changePassBtn, driverBtn, activateBtn, mailBtn, changeInfoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,32 +73,33 @@ public class SettingsActivity extends BaseActivity {
         activationCode = findViewById(R.id.input_activate);
         mailPassword = findViewById(R.id.input_mail_password);
         activatePassword = findViewById(R.id.input_activate_password);
-        MaterialButton changeButton = findViewById(R.id.btn_change_settings);
-        changeButton.setOnClickListener(v -> {
+
+       changeInfoBtn = findViewById(R.id.btn_change_settings);
+        changeInfoBtn.setOnClickListener(v -> {
             if (validate(false)) {
                 performChange();
             }
         });
 
-        MaterialButton changePass = findViewById(R.id.btn_change_pass);
-        changePass.setOnClickListener(v -> {
+        changePassBtn = findViewById(R.id.btn_change_pass);
+        changePassBtn.setOnClickListener(v -> {
             if (validate(true)) {
                 performChangePass();
             }
         });
 
-        MaterialButton driver = findViewById(R.id.btn_diver);
-        driver.setOnClickListener(v -> {
+       driverBtn = findViewById(R.id.btn_diver);
+        driverBtn.setOnClickListener(v -> {
                 driverChange();
         });
 
-        MaterialButton activate = findViewById(R.id.btn_activate);
-        activate.setOnClickListener(v -> {
+        activateBtn = findViewById(R.id.btn_activate);
+        activateBtn.setOnClickListener(v -> {
             activateAccount();
         });
 
-        MaterialButton btnMail = findViewById(R.id.btn_change_mail);
-        btnMail.setOnClickListener(v -> {
+        mailBtn = findViewById(R.id.btn_change_mail);
+        mailBtn.setOnClickListener(v -> {
             mailChange();
         });
 
@@ -118,9 +120,7 @@ public class SettingsActivity extends BaseActivity {
         eMail.setText(customer.eMail);
         rNumber.setText(customer.drivingNumber);
 
-        if(!Preference.IsDriver(this) || !customer.active) {
-            findViewById(R.id.navigation_route).setEnabled(false);
-        }
+        updateMenu();
 
     }
 
@@ -188,6 +188,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void performChange() {
+        changeInfoBtn.setText(R.string.in_progress);
         viewModel.change(makeJson(Action.INFO))
                 .observe(this, result -> {
                     if (result.status == 200) {
@@ -196,6 +197,7 @@ public class SettingsActivity extends BaseActivity {
                     } else {
                         displayMessage(result.errorMessage);
                     }
+                    changeInfoBtn.setText(R.string.btn_change_settings);
                 });
     }
 
@@ -212,7 +214,7 @@ public class SettingsActivity extends BaseActivity {
             mailPassword.requestFocus();
             return;
         }
-
+        mailBtn.setText(R.string.in_progress);
         viewModel.changeMail(makeJson(Action.MAIL))
                 .observe(this, result -> {
                     if (result.status == 200) {
@@ -223,6 +225,7 @@ public class SettingsActivity extends BaseActivity {
                     } else {
                         displayMessage(result.errorMessage);
                     }
+                    mailBtn.setText(R.string.change_mail);
                 });
     }
 
@@ -239,17 +242,18 @@ public class SettingsActivity extends BaseActivity {
             activatePassword.requestFocus();
             return;
         }
-
+        activateBtn.setText(R.string.in_progress);
         viewModel.activateAccount(makeJson(Action.ACTIVATE))
                 .observe(this, result -> {
                     if (result.status == 200) {
-                        customer.active = true;
+                        customer.active = 1;
                         Preference.setActive(this);
                         displayMessage(getString(R.string.btn_change_settings));
 
                     } else {
                         displayMessage(result.errorMessage);
                     }
+                    activateBtn.setText(R.string.activate_account);
                 });
     }
 
@@ -265,18 +269,30 @@ public class SettingsActivity extends BaseActivity {
             rNumber.requestFocus();
             return;
         }
+        driverBtn.setText(R.string.in_progress);
         viewModel.driver(makeJson(Action.DRIVE))
                 .observe(this, result -> {
                     if (result.status == 200) {
+                        Preference.setNumber(this, rNumber.getText().toString());
+                        customer.drivingNumber = rNumber.getText().toString();
+                        updateMenu();
                         displayMessage(getString(R.string.btn_change_settings));
 
                     } else {
                         displayMessage(result.errorMessage);
                     }
+                    driverBtn.setText(R.string.set_registration);
                 });
     }
 
+    private void updateMenu() {
+        if(!Preference.IsDriver(this) || customer.active != 1) {
+            findViewById(R.id.navigation_route).setEnabled(false);
+        }
+    }
+
     private void performChangePass() {
+
         viewModel.changePassword(makeJson(Action.PASSWORD))
                 .observe(this, result -> {
                     if (result.status == 200) {
@@ -300,24 +316,25 @@ public class SettingsActivity extends BaseActivity {
                 data.addProperty("password", mailPassword.getText().toString());
                 break;
             case ACTIVATE:
-                data.addProperty("email", customer.eMail);
+                data.addProperty("eMail", customer.eMail);
                 data.addProperty("password", activatePassword.getText().toString());
                 data.addProperty("code", activationCode.getText().toString());
                 break;
             case DRIVE:
                 data.addProperty("drivingNumber", rNumber.getText().toString());
-                data.addProperty("email", customer.eMail);
+                data.addProperty("eMail", customer.eMail);
                 data.addProperty("password", passwordText.getText().toString());
                 break;
             case INFO:
                 data.addProperty("firstName", firstName.getText().toString());
                 data.addProperty("lastName", lastName.getText().toString());
                 data.addProperty("phoneNumber", phoneNumber.getText().toString());
+                data.addProperty("eMail", customer.eMail);
                 break;
             case PASSWORD:
                 data.addProperty("newPassword", newPasswordText.getText().toString());
                 data.addProperty("oldPassword", oldPasswordText.getText().toString());
-                data.addProperty("email", customer.eMail);
+                data.addProperty("eMail", customer.eMail);
         }
 
 

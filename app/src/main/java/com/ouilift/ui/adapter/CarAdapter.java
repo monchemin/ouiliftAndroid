@@ -45,7 +45,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     }
 
     private void onItemSelected(CarPresenter presenter) {
-      selectCallBack.onCarSelect(presenter.PK, false);
+      selectCallBack.onCarSelect(presenter.Id, false);
     }
 
 

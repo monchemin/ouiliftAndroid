@@ -223,7 +223,7 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
     public void sendInput(int input) {
 
         for (RouteStation station : stations) {
-            if (station.PK == input) {
+            if (station.stationId == input) {
                 if (from) {
                     fromFocusDisable = true;
                     searchFrom.setText(station.stationName);
