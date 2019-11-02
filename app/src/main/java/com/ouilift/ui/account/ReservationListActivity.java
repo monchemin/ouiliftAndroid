@@ -1,6 +1,5 @@
 package com.ouilift.ui.account;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -11,38 +10,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ouilift.R;
 import com.ouilift.model.ReservationViewModel;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.adapter.ReservationAdapter;
-import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
 
 public class ReservationListActivity extends BaseActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-
-                switch (item.getItemId()) {
-
-                    case R.id.navigation_setting:
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        break;
-                    case R.id.navigation_search:
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        break;
-                    case R.id.navigation_route:
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), DriverActivity.class));
-                        break;
-                }
-                return true;
-            };
     private ReservationViewModel viewModel;
     RelativeLayout noReservation;
     ReservationAdapter adapter;
@@ -51,7 +28,7 @@ public class ReservationListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_list);
-        BottomNavigationView navView = findViewById(R.id.dashboard_nav_view);
+        navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         noReservation = findViewById(R.id.no_reservation);
         loadingIndicator = findViewById(R.id.loading_indicator);

@@ -1,14 +1,10 @@
 package com.ouilift.ui.search;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
@@ -25,12 +20,8 @@ import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.RouteStation;
 import com.ouilift.ui.ActionChoosListener;
 import com.ouilift.ui.BaseActivity;
-import com.ouilift.ui.account.DriverActivity;
-import com.ouilift.ui.account.ReservationListActivity;
-import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
 import com.ouilift.utils.DateUtils;
-import com.ouilift.utils.Preference;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,38 +29,6 @@ import java.util.Date;
 import java.util.List;
 
 public class SearchActivity extends BaseActivity implements ActionChoosListener {
-
-    BottomNavigationView navView;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            setMenuEnable();
-            switch (item.getItemId()) {
-
-                case R.id.navigation_reservation:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                    break;
-                case R.id.navigation_search:
-                    container.setVisibility(View.VISIBLE);
-                    break;
-                case R.id.navigation_setting:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    break;
-                case R.id.navigation_route:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), DriverActivity.class));
-                    break;
-
-            }
-            return true;
-        }
-
-
-    };
 
     private SearchViewModel viewModel;
     private RouteDetailAdapter adapter;
@@ -151,17 +110,6 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
        setMenuEnable();
         setData();
 
-    }
-
-    private void setMenuEnable() {
-        if (!Preference.IsConnected(this)) {
-            findViewById(R.id.navigation_setting).setEnabled(false);
-            findViewById(R.id.navigation_reservation).setEnabled(false);
-
-        }
-        if(!Preference.IsDriver(this) || !Preference.IsActive(this)) {
-            findViewById(R.id.navigation_route).setEnabled(false);
-        }
     }
 
     private void setData() {

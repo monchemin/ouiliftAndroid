@@ -104,10 +104,10 @@ public class ReservationResultActivity extends BaseActivity {
         String to = presenter.toStation + "\n" + presenter.toZone + "\n" + presenter.toStationDetail ;
         String from = presenter.fromStation + "\n" + presenter.fromromZone + "\n" + presenter.fromStationDetail;
         String timer = DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format)) + "\n" + presenter.hour;
-        String driver = presenter.customerLastName + " " + presenter.customerFistName;
+        String driver = presenter.driverLastName + " " + presenter.driverFistName;
         String car = presenter.brandName + " " + presenter.modelName + "\n"
-                + presenter.carYear +  " " + presenter.colorName  + "\n" +
-                presenter.carRegistrationNumber;
+                + presenter.year +  " " + presenter.colorName  + "\n" +
+                presenter.registrationNumber;
         routeTo.setText(to);
         routeFrom.setText(from);
         routeHour.setText(timer);

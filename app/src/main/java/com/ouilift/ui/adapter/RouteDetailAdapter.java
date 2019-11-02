@@ -53,7 +53,7 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
 
     private void onItemSelected(RouteDetailPresenter presenter) {
         Intent intent = new Intent(context, ReservationActivity.class);
-        intent.putExtra("routeId", presenter.PK);
+        intent.putExtra("routeId", presenter.routeId);
         context.startActivity(intent);
     }
 

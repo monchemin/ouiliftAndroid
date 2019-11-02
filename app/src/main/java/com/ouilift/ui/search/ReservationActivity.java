@@ -4,16 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
@@ -24,43 +21,11 @@ import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
-import com.ouilift.ui.account.DriverActivity;
-import com.ouilift.ui.account.ReservationListActivity;
-import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
 public class ReservationActivity extends BaseActivity {
-    BottomNavigationView navView;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            setMenuEnable();
-            switch (item.getItemId()) {
-
-                case R.id.navigation_setting:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    break;
-                case R.id.navigation_search:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    break;
-                case R.id.navigation_reservation:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                    break;
-                case R.id.navigation_route:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), DriverActivity.class));
-                    break;
-            }
-            return true;
-        }
-
-    };
     private MaterialButton reservationBtn;
     private TextInputEditText reservationPlace;
     private TextView fromHour, routeHour, routeFrom, routeTo, routePrice, routePlace, routeFromDetail, routeToDetail;
@@ -96,15 +61,7 @@ public class ReservationActivity extends BaseActivity {
         });
     }
 
-    private void setMenuEnable() {
-        if (!Preference.IsConnected(this)) {
-            findViewById(R.id.navigation_setting).setEnabled(false);
-            findViewById(R.id.navigation_reservation).setEnabled(false);
-        }
-        if(!Preference.IsDriver(this) || !Preference.IsActive(this)) {
-            findViewById(R.id.navigation_route).setEnabled(false);
-        }
-    }
+
 
     private void updateFields() {
         reservationPlace.setText("1");
@@ -122,9 +79,9 @@ public class ReservationActivity extends BaseActivity {
     }
 
     private void viewBind() {
-        loadingIndicator = findViewById(R.id.loading_indicator);
         navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        loadingIndicator = findViewById(R.id.loading_indicator);
         reservationPlace = findViewById(R.id.input_reservation);
         fromHour = findViewById(R.id.from_hour);
         routeFrom = findViewById(R.id.route_from);
@@ -186,8 +143,8 @@ public class ReservationActivity extends BaseActivity {
 
     private void performReservation() {
         JsonObject data = new JsonObject();
-        data.addProperty("FK_Customer", Preference.getConnection(this).Id);
-        data.addProperty("FK_Route", routeId);
+        data.addProperty("customer", Preference.getConnection(this).Id);
+        data.addProperty("route", routeId);
         data.addProperty("place", place);
         loadingIndicator.show();
         viewModel.makeReservation(data).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
@@ -195,15 +152,15 @@ public class ReservationActivity extends BaseActivity {
             public void onChanged(PresenterFactory<ReservationPresenter> result) {
                 loadingIndicator.hide();
                 if (result.status == 200 && !result.response.isEmpty()) {
-                   DisplayReservation(result.response.get(0).reservation);
+                   DisplayReservation(result.response.get(0).reservationId);
                 }
             }
         });
     }
 
-    private void DisplayReservation(int pk) {
+    private void DisplayReservation(int reservationId) {
         Intent intent = new Intent(this, ReservationResultActivity.class);
-        intent.putExtra("reservationId", pk);
+        intent.putExtra("reservationId", reservationId);
         startActivity(intent);
     }
 }

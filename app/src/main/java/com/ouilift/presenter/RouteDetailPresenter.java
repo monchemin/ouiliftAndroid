@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class RouteDetailPresenter {
-    @SerializedName("PK")
-    public int PK;
+    @SerializedName("routeId")
+    public int routeId;
     @SerializedName("fStation")
     public String fromStation;
     @SerializedName("fStationDetail")

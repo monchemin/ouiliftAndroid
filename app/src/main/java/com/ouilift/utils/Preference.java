@@ -9,7 +9,7 @@ import com.ouilift.presenter.CustomerPresenter;
 public class Preference {
 
     static String IS_CONNECTED = "IS_CONNECTED";
-    static String DRIVING_NUMBER = "DRIVING_NUMBER";
+    static String DRIVING_LICENCE = "DRIVING_LICENCE";
     static String FIRST_NAME = "FIRST_NAME";
     static String LAST_NAME = "LAST_NAME";
     static String ID = "ID";
@@ -26,7 +26,7 @@ public class Preference {
     public static boolean IsDriver(Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
-        return !sharedPref.getString(DRIVING_NUMBER, "").isEmpty();
+        return !sharedPref.getString(DRIVING_LICENCE, "").isEmpty();
     }
 
     public static boolean IsActive(Context context) {
@@ -55,7 +55,7 @@ public class Preference {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.key_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(DRIVING_NUMBER, number);
+        editor.putString(DRIVING_LICENCE, number);
         editor.apply();
     }
 
@@ -77,7 +77,7 @@ public class Preference {
         editor.putInt(ID, customer.Id);
         editor.putString(EMAIL, customer.eMail);
         editor.putString(PHONE, customer.phone);
-        editor.putString(DRIVING_NUMBER, customer.drivingNumber);
+        editor.putString(DRIVING_LICENCE, customer.drivingNumber);
         editor.putInt(ACTIVE, customer.active);
         editor.apply();
     }
@@ -91,7 +91,7 @@ public class Preference {
         customer.Id = sharedPref.getInt(ID, customer.Id);
         customer.eMail = sharedPref.getString(EMAIL, customer.eMail);
         customer.phone = sharedPref.getString(PHONE, customer.phone);
-        customer.drivingNumber = sharedPref.getString(DRIVING_NUMBER, customer.drivingNumber);
+        customer.drivingNumber = sharedPref.getString(DRIVING_LICENCE, customer.drivingNumber);
         customer.active = sharedPref.getInt(ACTIVE, customer.active);
 
         return customer;

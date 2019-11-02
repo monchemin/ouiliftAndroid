@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
     private void onItemSelected(ReservationPresenter presenter) {
         Intent intent = new Intent(context, ReservationResultActivity.class);
-        intent.putExtra("reservationId", presenter.reservation);
+        intent.putExtra("reservationId", presenter.reservationId);
         context.startActivity(intent);
     }
 
@@ -58,6 +59,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         TextView routeDate, hour, price, from, to, place;
         String date_format;
         ReservationPresenter presenter;
+        RatingBar ratingBar;
 
         RouteDetailViewHolder(@NonNull View itemView, String date_format) {
             super(itemView);
@@ -68,6 +70,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             to = itemView.findViewById(R.id.route_to);
             place = itemView.findViewById(R.id.route_place);
             this.date_format = date_format;
+            ratingBar = itemView.findViewById(R.id.route_rating_bar);
             LinearLayout container = itemView.findViewById(R.id.route_item_container);
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,6 +88,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             to.setText(presenter.toStation);
             from.setText(presenter.fromStation);
            place.setText(String.valueOf(presenter.remainingPlace));
+           ratingBar.setNumStars(presenter.place);
+           ratingBar.setRating(presenter.place);
         }
     }
 }
+
+

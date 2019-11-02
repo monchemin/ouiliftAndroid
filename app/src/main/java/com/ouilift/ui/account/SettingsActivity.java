@@ -17,31 +17,10 @@ import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.LoginActivity;
 import com.ouilift.ui.MainActivity;
-import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
 
 public class SettingsActivity extends BaseActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-
-        switch (item.getItemId()) {
-
-            case R.id.navigation_reservation:
-                finish();
-                startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                break;
-            case R.id.navigation_search:
-                finish();
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                break;
-            case R.id.navigation_route:
-                finish();
-                startActivity(new Intent(getApplicationContext(), DriverActivity.class));
-                break;
-        }
-        return true;
-    };
 
     TextInputEditText firstName, lastName, passwordText, newPasswordText, confirmationText, phoneNumber,
             oldPasswordText, eMail, rNumber, activationCode, mailPassword, activatePassword;
@@ -53,7 +32,7 @@ public class SettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        BottomNavigationView navView = findViewById(R.id.dashboard_nav_view);
+        navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bindView();
         viewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
@@ -121,6 +100,10 @@ public class SettingsActivity extends BaseActivity {
         rNumber.setText(customer.drivingNumber);
 
         updateMenu();
+
+        if(Preference.IsActive(this)) {
+            activateBtn.setEnabled(false);
+        }
 
     }
 

@@ -71,7 +71,7 @@
     <string name="create_route">Ready to announce route ?</string>
     <string name="change_password">Change Password</string>
     <string name="change_mail">Change Email</string>
-    <string name="set_registration">Set Registration N°</string>
+    <string name="set_registration">Set Driving Licence </string>
     <string name="activate_account">Activate Account</string>
     <string name="activation_code">Activation Code</string>
     <string name="account_in_progress">Creation in progress &#8230;</string>

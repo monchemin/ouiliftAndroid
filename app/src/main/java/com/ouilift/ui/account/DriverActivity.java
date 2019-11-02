@@ -42,26 +42,7 @@ import java.util.List;
 
 public class DriverActivity extends BaseActivity implements ActionChoosListener {
     private ReservationViewModel viewModel;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
 
-        switch (item.getItemId()) {
-
-            case R.id.navigation_reservation:
-                finish();
-                startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                break;
-            case R.id.navigation_search:
-                finish();
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                break;
-            case R.id.navigation_setting:
-                finish();
-                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                break;
-        }
-        return true;
-    };
     MaterialButton btnAddCar, btnValidCar, btnRouteAdd;
     LinearLayout addCarContainer, addRouteContainer;
     RouteDetailAdapter adapter = new RouteDetailAdapter();
@@ -90,7 +71,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void bindView() {
-        BottomNavigationView navView = findViewById(R.id.dashboard_nav_view);
+        navView = findViewById(R.id.dashboard_nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         btnAddCar = findViewById(R.id.btn_add_car);
         btnValidCar = findViewById(R.id.btn_valid_car);
