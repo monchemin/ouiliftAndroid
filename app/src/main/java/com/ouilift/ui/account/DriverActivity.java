@@ -1,7 +1,6 @@
 package com.ouilift.ui.account;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
@@ -31,7 +29,6 @@ import com.ouilift.ui.ActionEnum;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.adapter.RouteDetailAdapter;
 import com.ouilift.ui.search.RouteSearchDialog;
-import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
@@ -45,7 +42,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
 
     MaterialButton btnAddCar, btnValidCar, btnRouteAdd;
     LinearLayout addCarContainer, addRouteContainer;
-    RouteDetailAdapter adapter = new RouteDetailAdapter();
+    RouteDetailAdapter adapter = new RouteDetailAdapter(RouteDetailAdapter.RouteDetailEnum.ROUTE);
     int color, model, fromPK, toPK, hourPK, carPK;
     boolean colorFocusDisable, modelFocusDisable, fromFocusDisable, toFocusDisable,
             addCarOn, hourFocusDisable, carFocusDisable;

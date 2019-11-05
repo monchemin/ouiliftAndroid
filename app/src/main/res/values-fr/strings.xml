@@ -59,4 +59,5 @@
     <string name="activation_code">Code d\'activation</string>
     <string name="account_in_progress">Creation en cours&#8230;</string>
     <string name="in_progress">En cours &#8230;</string>
+    <string name="no_reservation">Pas de Réservation</string>
 </resources>

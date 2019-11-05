@@ -5,18 +5,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ouilift.R;
 import com.ouilift.presenter.RouteDetailPresenter;
+import com.ouilift.ui.account.RouteReservationsActivity;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.utils.DateUtils;
 
@@ -26,6 +24,11 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
 
     private List<RouteDetailPresenter> dataSet;
     private Context context;
+    private RouteDetailEnum action;
+
+    public RouteDetailAdapter(RouteDetailEnum action) {
+        this.action = action;
+    }
 
     @NonNull
     @Override
@@ -53,6 +56,9 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
 
     private void onItemSelected(RouteDetailPresenter presenter) {
         Intent intent = new Intent(context, ReservationActivity.class);
+       if(action == RouteDetailEnum.ROUTE) {
+           intent = new Intent(context, RouteReservationsActivity.class);
+       }
         intent.putExtra("routeId", presenter.routeId);
         context.startActivity(intent);
     }
@@ -98,5 +104,10 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RouteDetailAdapter.
             int rating = presenter.routePlace - presenter.remainingPlace;
             ratingBar.setRating(rating);
         }
+    }
+
+    public enum RouteDetailEnum {
+        ROUTE,
+        RESERVATION
     }
 }

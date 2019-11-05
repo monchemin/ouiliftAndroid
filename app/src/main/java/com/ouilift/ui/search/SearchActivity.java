@@ -47,7 +47,7 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
         navView = findViewById(R.id.dashboard_nav_view);
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.route_detail_recycler_view);
-        adapter = new RouteDetailAdapter();
+        adapter = new RouteDetailAdapter(RouteDetailAdapter.RouteDetailEnum.RESERVATION);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
