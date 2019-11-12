@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
-import com.ouilift.model.ReservationViewModel;
+import com.ouilift.model.RouteViewModel;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.CarColorModelPresenter;
 import com.ouilift.presenter.CarPresenter;
@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DriverActivity extends BaseActivity implements ActionChoosListener {
-    private ReservationViewModel viewModel;
+    private RouteViewModel viewModel;
 
     MaterialButton btnAddCar, btnValidCar, btnRouteAdd;
     LinearLayout addCarContainer, addRouteContainer;
@@ -61,7 +61,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
 
-        viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(RouteViewModel.class);
         searchViewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
 
         bindView();
@@ -368,7 +368,6 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
     }
 
     private void onColorSelect(int input) {
-        System.out.println("nyemo color " + input);
         colorFocusDisable = true;
         for (CarColorModelPresenter presenter : colorPresenters) {
             if (presenter.Id == input) {

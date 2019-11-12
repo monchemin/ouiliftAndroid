@@ -4,8 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.JsonObject;
-import com.ouilift.presenter.CarColorModelPresenter;
-import com.ouilift.presenter.CarPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
@@ -34,32 +32,5 @@ public class ReservationViewModel extends ViewModel {
         return repository.deleteReservation(pk);
     }
 
-    public MutableLiveData<PresenterFactory<CarPresenter>> registeredCar(JsonObject data) {
-        return repository.registeredCar(data);
-    }
-
-    public MutableLiveData<PresenterFactory<CarPresenter>> carCreate(JsonObject data) {
-        return repository.carCreate(data);
-    }
-
-    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> getCarColor() {
-        return repository.carColor();
-    }
-
-    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> getCarModel() {
-        return repository.carModel();
-    }
-
-    public MutableLiveData<PresenterFactory<CarColorModelPresenter>> gethour() {
-        return repository.hours();
-    }
-
-    public MutableLiveData<PresenterFactory<RouteDetailPresenter>> createRoute(JsonObject data) {
-        return repository.createRoute(data);
-    }
-
-    public MutableLiveData<PresenterFactory<RouteDetailPresenter>> getOwnerRoutes(JsonObject data) {
-        return repository.ownerRoutes(data);
-    }
 
 }

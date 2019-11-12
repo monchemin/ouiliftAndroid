@@ -77,4 +77,5 @@
     <string name="account_in_progress">Creation in progress &#8230;</string>
     <string name="in_progress">In progress &#8230;</string>
     <string name="no_reservation">No Reservation</string>
+    <string name="cancel_route">Cancel Route</string>
 </resources>

@@ -87,9 +87,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             price.setText(String.valueOf(presenter.routePrice));
             to.setText(presenter.toStation);
             from.setText(presenter.fromStation);
-           place.setText(String.valueOf(presenter.remainingPlace));
-           ratingBar.setNumStars(presenter.place);
-           ratingBar.setRating(presenter.place);
+            place.setText(String.valueOf(presenter.remainingPlace));
+            ratingBar.setNumStars(presenter.place);
+            ratingBar.setRating(presenter.place);
         }
     }
 }

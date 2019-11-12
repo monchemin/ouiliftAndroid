@@ -7,6 +7,7 @@ import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.presenter.RouteDetailPresenter;
+import com.ouilift.presenter.RouteReservationPresenter;
 import com.ouilift.presenter.RouteStation;
 
 import java.util.concurrent.TimeUnit;
@@ -101,6 +102,9 @@ public class ApiService {
 
         @POST("/published-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> ownerRoutes(@Body JsonObject data);
+
+        @POST("/route-reservations.php")
+        Call<PresenterFactory<RouteReservationPresenter>> routeReservations(@Body JsonObject data);
 
 // reservation
         @POST("/reservations.php")

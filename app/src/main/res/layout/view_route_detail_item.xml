@@ -16,7 +16,6 @@
         <TextView
             android:id="@+id/route_date"
             style="@style/route_item_view_style"
-            android:text="2019/01/01"
             android:layout_alignParentStart="true"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -24,7 +23,6 @@
         <TextView
             android:id="@+id/route_hour"
             style="@style/route_item_view_style"
-            android:text="00h00"
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -41,7 +39,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -54,13 +53,11 @@
                     android:id="@+id/route_from"
                     style="@style/route_item_view_style"
                     android:layout_gravity="start"
-                    android:text="De rond point"
                     android:layout_alignParentStart="true"/>
 
                 <TextView
                     android:id="@+id/route_price"
                     style="@style/route_item_view_style"
-                    android:text="150"
                     android:layout_alignParentEnd="true"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"/>
@@ -77,15 +74,11 @@
                 <TextView
                     android:id="@+id/route_to"
                     style="@style/route_item_view_style"
-                    android:text="To Nombakele"
-                    android:layout_alignParentStart="true"
-
-                     />
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/route_place"
                     style="@style/route_item_view_style"
-                    android:text="3 places"
                     android:layout_alignParentEnd="true"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"

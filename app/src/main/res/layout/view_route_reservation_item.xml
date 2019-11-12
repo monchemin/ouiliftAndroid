@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/route_item_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCC"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/route_date"
+            style="@style/route_item_view_style"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/route_from"
+                    style="@style/route_item_view_style"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="start" />
+
+                <TextView
+                    android:id="@+id/route_to"
+                    style="@style/route_item_view_style"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/route_from"
+                    android:layout_gravity="start"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/route_rating_bar"
+            style="@style/GlassRating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.3"
+            android:isIndicator="true"
+            android:stepSize="0">
+
+
+        </RatingBar>
+
+
+    </LinearLayout>
+</LinearLayout>
