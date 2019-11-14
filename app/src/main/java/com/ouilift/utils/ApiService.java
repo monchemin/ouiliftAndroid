@@ -121,8 +121,8 @@ public class ApiService {
         @GET("/reservation-list.php/{PK}")
         Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
 
-        @DELETE("/reservations.php/{PK}")
-        Call<PresenterFactory<Void>> deleteReservation(@Path("PK") int pk);
+        @HTTP(method = "DELETE", path = "/reservations.php", hasBody = true)
+        Call<PresenterFactory<Void>> deleteReservation(@Body JsonObject data);
 
     }
 }

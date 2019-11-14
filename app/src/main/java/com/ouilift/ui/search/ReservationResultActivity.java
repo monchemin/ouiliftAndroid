@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.ReservationViewModel;
 import com.ouilift.presenter.PresenterFactory;
@@ -116,13 +117,13 @@ public class ReservationResultActivity extends BaseActivity {
     }
     private void cancelAction() {
         loadingIndicator.show();
-        viewModel.deleteReservation(reservationId).observe(this, new Observer<PresenterFactory<Void>>() {
-            @Override
-            public void onChanged(PresenterFactory<Void> result) {
-                loadingIndicator.hide();
-                if (result.status == 200 ){
-                    onDeletedReservation();
-                }
+        JsonObject data = new JsonObject();
+        data.addProperty("customerId", Preference.getConnection(this).Id);
+        data.addProperty("reservationId", reservationId);
+        viewModel.deleteReservation(data).observe(this, result -> {
+            loadingIndicator.hide();
+            if (result.status == 200 ){
+                onDeletedReservation();
             }
         });
     }

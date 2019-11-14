@@ -31,8 +31,8 @@ public class ReservationRepository extends Repository {
         return getData(call);
     }
 
-    public MutableLiveData<PresenterFactory<Void>> deleteReservation(int pk) {
-        Call<PresenterFactory<Void>> call = api.deleteReservation(pk);
+    public MutableLiveData<PresenterFactory<Void>> deleteReservation(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.deleteReservation(data);
         return getData(call);
     }
 
