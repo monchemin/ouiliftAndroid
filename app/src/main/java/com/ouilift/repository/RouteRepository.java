@@ -55,6 +55,10 @@ public class RouteRepository extends Repository {
         return getData(call);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> cancelRoute(JsonObject data) {
+        Call<PresenterFactory<Void>> call = api.cancelRoute(data);
+        return getData(call);
+    }
 
 }
 

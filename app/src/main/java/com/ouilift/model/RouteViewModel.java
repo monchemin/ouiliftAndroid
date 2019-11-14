@@ -48,4 +48,8 @@ public class RouteViewModel extends ViewModel {
         return repository.routeReservations(data);
     }
 
+    public MutableLiveData<PresenterFactory<Void>> cancelRoute(JsonObject data) {
+        return repository.cancelRoute(data);
+    }
+
 }

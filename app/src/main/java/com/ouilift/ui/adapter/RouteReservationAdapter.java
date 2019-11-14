@@ -64,7 +64,6 @@ public class RouteReservationAdapter extends RecyclerView.Adapter<RouteReservati
             from.setText(presenter.mail);
             ratingBar.setNumStars(presenter.place);
             ratingBar.setRating(presenter.place);
-
         }
     }
 

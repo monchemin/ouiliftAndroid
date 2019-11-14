@@ -1,14 +1,17 @@
 package com.ouilift.ui.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.RouteViewModel;
@@ -24,6 +27,7 @@ public class RouteReservationsActivity extends BaseActivity {
     ContentLoadingProgressBar loadingIndicator;
     private RouteViewModel viewModel;
     private int routeId;
+    private MaterialButton cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,11 @@ public class RouteReservationsActivity extends BaseActivity {
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        cancelButton = findViewById(R.id.btn_cancel_route);
+        cancelButton.setOnClickListener(v -> cancelRoute());
+
     }
+
 
     @Override
     protected void onResume() {
@@ -64,5 +72,17 @@ public class RouteReservationsActivity extends BaseActivity {
         data.addProperty("routeId", routeId);
 
         return data;
+    }
+
+    private void cancelRoute() {
+        loadingIndicator.show();
+        viewModel.cancelRoute(makeJson()).observe(this, result -> {
+            loadingIndicator.hide();
+            if (result.status == 200) {
+                Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, DriverActivity.class));
+                finish();
+            }
+        });
     }
 }

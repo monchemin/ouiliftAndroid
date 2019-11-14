@@ -19,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -106,7 +107,11 @@ public class ApiService {
         @POST("/route-reservations.php")
         Call<PresenterFactory<RouteReservationPresenter>> routeReservations(@Body JsonObject data);
 
-// reservation
+        @HTTP(method = "DELETE", path = "routes.php", hasBody = true)
+        Call<PresenterFactory<Void>> cancelRoute(@Body JsonObject data);
+
+
+        // reservation
         @POST("/reservations.php")
         Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
 
