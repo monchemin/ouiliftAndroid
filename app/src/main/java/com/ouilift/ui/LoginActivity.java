@@ -99,8 +99,8 @@ public class LoginActivity extends BaseActivity {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 3 || password.length() > 10) {
-            _passwordText.setError(getString(R.string.last_name_error));
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            _passwordText.setError(getString(R.string.password_error));
             _passwordText.requestFocus();
             valid = false;
         } else {

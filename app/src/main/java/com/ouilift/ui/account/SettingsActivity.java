@@ -3,11 +3,9 @@ package com.ouilift.ui.account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
@@ -175,10 +173,10 @@ public class SettingsActivity extends BaseActivity {
         viewModel.change(makeJson(Action.INFO))
                 .observe(this, result -> {
                     if (result.status == 200) {
-                        displayMessage(getString(R.string.btn_change_settings));
+                        success(getString(R.string.success_message));
 
                     } else {
-                        displayMessage(result.errorMessage);
+                        error(getString(R.string.error_message));
                     }
                     changeInfoBtn.setText(R.string.btn_change_settings);
                 });
@@ -203,10 +201,10 @@ public class SettingsActivity extends BaseActivity {
                     if (result.status == 200) {
                         customer.eMail = eMail.getText().toString();
                         Preference.setMail(this, eMail.getText().toString());
-                        displayMessage(getString(R.string.btn_change_settings));
+                        success(getString(R.string.success_message));
 
                     } else {
-                        displayMessage(result.errorMessage);
+                        error(getString(R.string.error_message));
                     }
                     mailBtn.setText(R.string.change_mail);
                 });
@@ -231,10 +229,10 @@ public class SettingsActivity extends BaseActivity {
                     if (result.status == 200) {
                         customer.active = 1;
                         Preference.setActive(this);
-                        displayMessage(getString(R.string.btn_change_settings));
+                        success(getString(R.string.success_message));
 
                     } else {
-                        displayMessage(result.errorMessage);
+                        error(getString(R.string.error_message));
                     }
                     activateBtn.setText(R.string.activate_account);
                 });
@@ -259,10 +257,10 @@ public class SettingsActivity extends BaseActivity {
                         Preference.setNumber(this, rNumber.getText().toString());
                         customer.drivingNumber = rNumber.getText().toString();
                         updateMenu();
-                        displayMessage(getString(R.string.btn_change_settings));
+                        success(getString(R.string.success_message));
 
                     } else {
-                        displayMessage(result.errorMessage);
+                        error(getString(R.string.error_message));
                     }
                     driverBtn.setText(R.string.set_registration);
                 });
@@ -279,12 +277,12 @@ public class SettingsActivity extends BaseActivity {
         viewModel.changePassword(makeJson(Action.PASSWORD))
                 .observe(this, result -> {
                     if (result.status == 200) {
-                        displayMessage("Modification OK");
+                        success(getString(R.string.success_message));
                         Preference.disConnected(this);
                         finish();
                         startActivity(new Intent(this, LoginActivity.class));
                     } else {
-                        displayMessage(result.errorMessage);
+                        error(getString(R.string.error_message));
                     }
                 });
     }
@@ -325,9 +323,6 @@ public class SettingsActivity extends BaseActivity {
         return data;
     }
 
-    private void displayMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
 
     private enum Action {
         PASSWORD,

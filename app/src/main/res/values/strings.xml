@@ -78,4 +78,7 @@
     <string name="in_progress">In progress &#8230;</string>
     <string name="no_reservation">No Reservation</string>
     <string name="cancel_route">Cancel Route</string>
+    <string name="error_message">An error has occurred during operation. Try it later</string>
+    <string name="register_done_message">Successful registration </string>
+    <string name="success_message">Successful Operation</string>
 </resources>

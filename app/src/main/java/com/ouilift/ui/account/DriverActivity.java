@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
@@ -327,7 +326,11 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
                     makeCarPresenter(result.response);
                     addCarContainer.setVisibility(View.GONE);
                     addRouteContainer.setVisibility(View.VISIBLE);
+                    success(getString(R.string.success_message));
+                } else {
+                    error(getString(R.string.error_message));
                 }
+
             });
         }
     }
@@ -499,8 +502,9 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
             loadingIndicator.hide();
             if (result.status == 200 && result.response != null) {
                 adapter.setData(result.response);
+                error(getString(R.string.success_message));
             } else {
-                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+                error(getString(R.string.error_message));
             }
         });
 

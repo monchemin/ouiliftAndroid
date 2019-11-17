@@ -49,17 +49,14 @@ public class ReservationListActivity extends BaseActivity {
         }
         int userId = Preference.getConnection(this).Id;
         loadingIndicator.show();
-        viewModel.getReservationList(userId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
-            @Override
-            public void onChanged(PresenterFactory<ReservationPresenter> result) {
-                loadingIndicator.hide();
-                if (result != null & result.status == 200 && !result.response.isEmpty()) {
-                    adapter.setData(result.response);
-                    noReservation.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    noReservation.setVisibility(View.VISIBLE);
-                }
+        viewModel.getReservationList(userId).observe(this, result -> {
+            loadingIndicator.hide();
+            if (result != null & result.status == 200 && !result.response.isEmpty()) {
+                adapter.setData(result.response);
+                noReservation.setVisibility(View.INVISIBLE);
+            }
+            else {
+                noReservation.setVisibility(View.VISIBLE);
             }
         });
     }

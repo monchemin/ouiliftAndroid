@@ -35,25 +35,21 @@ public class ReservationResultActivity extends BaseActivity {
     private MaterialButton cancelReservation;
     BottomNavigationView navView;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-
-                case R.id.navigation_setting:
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    break;
-                case R.id.navigation_search:
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    break;
-                case R.id.navigation_reservation:
-                    startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
-                    break;
-            }
-            return true;
-        }
-    };
+                    case R.id.navigation_setting:
+                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                        break;
+                    case R.id.navigation_search:
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                        break;
+                    case R.id.navigation_reservation:
+                        startActivity(new Intent(getApplicationContext(), ReservationListActivity.class));
+                        break;
+                }
+                return true;
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,14 +85,11 @@ public class ReservationResultActivity extends BaseActivity {
 
         if (reservationId == 0 ) return;
         loadingIndicator.show();
-        viewModel.getReservation(reservationId).observe(this, new Observer<PresenterFactory<ReservationPresenter>>() {
-            @Override
-            public void onChanged(PresenterFactory<ReservationPresenter> result) {
-                loadingIndicator.hide();
-                if (result.status == 200 && !result.response.isEmpty()) {
-                    presenter = result.response.get(0);
-                    updateFields();
-                }
+        viewModel.getReservation(reservationId).observe(this, result -> {
+            loadingIndicator.hide();
+            if (result.status == 200 && !result.response.isEmpty()) {
+                presenter = result.response.get(0);
+                updateFields();
             }
         });
     }
@@ -124,12 +117,14 @@ public class ReservationResultActivity extends BaseActivity {
             loadingIndicator.hide();
             if (result.status == 200 ){
                 onDeletedReservation();
+            } else {
+                error(getString(R.string.error_message));
             }
         });
     }
 
     private void onDeletedReservation() {
-        Toast.makeText(this, "Cancel", Toast.LENGTH_LONG).show();
+        success(getString(R.string.success_message));
         startActivity(new Intent(this, ReservationListActivity.class));
     }
 }

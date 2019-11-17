@@ -3,7 +3,6 @@ package com.ouilift.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -102,21 +101,24 @@ public class RegisterActivity extends BaseActivity {
         viewModel.register(makeJson())
                 .observe(this, result -> {
                     if (result.status == 200 && result.lastIndex != 0) {
-                        displayMessage(true, "Register OK");
+                        displayMessage(true, getString(R.string.register_done_message));
 
                     } else {
-                        displayMessage(false, "Register error");
+                        displayMessage(false, getString(R.string.error_message));
                     }
                 });
     }
 
     private void displayMessage(boolean ok, String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
         if(ok) {
+            success(message);
             Intent intent = new Intent(this, LoginActivity.class);
             intent.putExtra("afterRegistration", true);
             startActivity(intent);
             finish();
+        } else {
+            error(message);
         }
     }
 

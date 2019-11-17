@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.ViewModelProviders;
@@ -79,9 +78,11 @@ public class RouteReservationsActivity extends BaseActivity {
         viewModel.cancelRoute(makeJson()).observe(this, result -> {
             loadingIndicator.hide();
             if (result.status == 200) {
-                Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
+                success(getString(R.string.success_message));
                 startActivity(new Intent(this, DriverActivity.class));
                 finish();
+            } else {
+                error(getString(R.string.error_message));
             }
         });
     }

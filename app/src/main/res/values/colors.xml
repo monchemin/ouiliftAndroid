@@ -10,4 +10,6 @@
     <color name="colorTextHint">@android:color/background_dark</color>
     <color name="yellow">#FFFF9800</color>
     <color name="red">@android:color/holo_red_light</color>
+    <color name="success">#4C9F67</color>
+    <color name="error">#CE5937</color>
 </resources>

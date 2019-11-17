@@ -3,7 +3,6 @@ package com.ouilift.ui.search;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
@@ -118,7 +117,7 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
             if (result != null && result.status == 200 && !result.response.isEmpty()) {
                 adapter.setData(result.response);
             } else {
-                Toast.makeText(getApplicationContext(), R.string.no_route, Toast.LENGTH_LONG).show();
+                info(getString(R.string.no_route));
             }
 
         });
