@@ -17,6 +17,8 @@ import com.ouilift.ui.LoginActivity;
 import com.ouilift.ui.MainActivity;
 import com.ouilift.utils.Preference;
 
+import java.util.Locale;
+
 public class SettingsActivity extends BaseActivity {
 
 
@@ -290,6 +292,7 @@ public class SettingsActivity extends BaseActivity {
     private JsonObject makeJson(Action action) {
         JsonObject data = new JsonObject();
         data.addProperty("Id", customer.Id);
+        data.addProperty("language", Locale.getDefault().getLanguage());
         switch (action) {
             case MAIL:
                 data.addProperty("oldMail", customer.eMail);

@@ -20,6 +20,8 @@ import com.ouilift.ui.LoginActivity;
 import com.ouilift.utils.DateUtils;
 import com.ouilift.utils.Preference;
 
+import java.util.Locale;
+
 public class ReservationActivity extends BaseActivity {
 
     private MaterialButton reservationBtn;
@@ -134,6 +136,7 @@ public class ReservationActivity extends BaseActivity {
         data.addProperty("customer", Preference.getConnection(this).Id);
         data.addProperty("route", routeId);
         data.addProperty("place", place);
+        data.addProperty("language", Locale.getDefault().getLanguage());
         loadingIndicator.show();
         viewModel.makeReservation(data).observe(this, result -> {
             loadingIndicator.hide();

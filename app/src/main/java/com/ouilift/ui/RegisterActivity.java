@@ -12,6 +12,8 @@ import com.google.gson.JsonObject;
 import com.ouilift.R;
 import com.ouilift.model.CustomerViewModel;
 
+import java.util.Locale;
+
 public class RegisterActivity extends BaseActivity {
 
     TextInputEditText firstName, lastName, eMail, passwordText, confirmationText, phoneNumber;
@@ -129,6 +131,7 @@ public class RegisterActivity extends BaseActivity {
         data.addProperty("eMail", eMail.getText().toString());
         data.addProperty("phoneNumber", phoneNumber.getText().toString());
         data.addProperty("password", passwordText.getText().toString());
+        data.addProperty("language", Locale.getDefault().getLanguage());
         return data;
     }
 }

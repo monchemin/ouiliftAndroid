@@ -18,6 +18,8 @@ import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.adapter.RouteReservationAdapter;
 import com.ouilift.utils.Preference;
 
+import java.util.Locale;
+
 
 public class RouteReservationsActivity extends BaseActivity {
 
@@ -69,6 +71,7 @@ public class RouteReservationsActivity extends BaseActivity {
         JsonObject data = new JsonObject();
         data.addProperty("customerId", Preference.getConnection(this).Id);
         data.addProperty("routeId", routeId);
+        data.addProperty("language", Locale.getDefault().getLanguage());
 
         return data;
     }
