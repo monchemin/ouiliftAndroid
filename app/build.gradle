@@ -7,8 +7,8 @@ android {
         applicationId "com.ouilift"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 22101
-        versionName "02.20.01"
+        versionCode 22105
+        versionName "02.20.05"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

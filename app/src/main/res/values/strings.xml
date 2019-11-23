@@ -81,4 +81,5 @@
     <string name="error_message">An error has occurred during operation. Try it later</string>
     <string name="register_done_message">Successful registration </string>
     <string name="success_message">Successful Operation</string>
+    <string name="error_route_place">Place must be between 1 and 3 </string>
 </resources>

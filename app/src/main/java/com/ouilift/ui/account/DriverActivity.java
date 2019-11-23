@@ -476,8 +476,8 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
             hour.setError(error);
         }
 
-        if (!DateUtils.isNumeric(placeInput.getText().toString()) && Integer.parseInt(placeInput.getText().toString()) > 3) {
-            placeInput.setError(error);
+        if (!DateUtils.isNumeric(placeInput.getText().toString()) || Integer.parseInt(placeInput.getText().toString()) > 3) {
+            placeInput.setError(getString(R.string.error_route_place));
             placeInput.requestFocus();
             return;
         }
@@ -502,7 +502,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
             loadingIndicator.hide();
             if (result.status == 200 && result.response != null) {
                 adapter.setData(result.response);
-                error(getString(R.string.success_message));
+                success(getString(R.string.success_message));
             } else {
                 error(getString(R.string.error_message));
             }

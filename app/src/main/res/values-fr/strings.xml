@@ -64,4 +64,5 @@
     <string name="error_message">Une erreur est survenue. Ressayez plus tard</string>
     <string name="register_done_message">Enregistrement effectué avec succès</string>
     <string name="success_message">Opération effectuée avec succès</string>
+    <string name="error_route_place">Place doit être entre 1 et 3</string>
 </resources>
