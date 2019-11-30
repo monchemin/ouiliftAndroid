@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
 import com.ouilift.model.SearchViewModel;
 import com.ouilift.presenter.RouteStation;
 import com.ouilift.ui.ActionChoosListener;
@@ -137,9 +138,9 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
 
     private JsonObject makeJson(String rDate, int from, int to) {
         JsonObject data = new JsonObject();
-        data.addProperty("startDate", rDate);
-        data.addProperty("fromStation", from);
-        data.addProperty("toStation", to);
+        data.addProperty(DataConstant.START_DATE, rDate);
+        data.addProperty(DataConstant.FROM_STATION, from);
+        data.addProperty(DataConstant.TO_STATION, to);
         return data;
     }
 

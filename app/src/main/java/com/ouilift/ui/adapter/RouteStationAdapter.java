@@ -53,8 +53,12 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
     public void filter(String text) {
         dataSet  = unMutableDataSet
                 .stream()
-                .filter(c -> c.stationName.toLowerCase().contains(text.toLowerCase())
-                        || c.StationAddress.toLowerCase().contains(text.toLowerCase()))
+                .filter(c -> {
+                    String stationName = c.stationName != null ? c.stationName : "";
+                    String stationAddress = c.stationAddress != null ? c.stationAddress : "";
+                   return  stationName.toLowerCase().contains(text.toLowerCase())
+                        || stationAddress.toLowerCase().contains(text.toLowerCase());
+                })
                 .collect(Collectors.toList());
         notifyDataSetChanged();
 
@@ -91,7 +95,7 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
         void displayItem(RouteStation presenter) {
             this.presenter = presenter;
             routeStation.setText(presenter.stationName);
-            stationAddress.setText(presenter.StationAddress);
+            stationAddress.setText(presenter.stationAddress);
         }
     }
 }

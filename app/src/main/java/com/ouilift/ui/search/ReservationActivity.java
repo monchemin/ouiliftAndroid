@@ -13,6 +13,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
+import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.ReservationViewModel;
 import com.ouilift.presenter.RouteDetailPresenter;
 import com.ouilift.ui.BaseActivity;
@@ -32,12 +34,14 @@ public class ReservationActivity extends BaseActivity {
     private RouteDetailPresenter presenter;
     private int place;
     private ContentLoadingProgressBar loadingIndicator;
+    private boolean isFirstReservation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         viewBind();
-        routeId = getIntent().getIntExtra("routeId", 0);
+        routeId = getIntent().getIntExtra(IntentConstant.ROUTE_ID, 0);
+        isFirstReservation = getIntent().getBooleanExtra(IntentConstant.IS_FIRST_REGISTRATION, false);
         viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
     }
 
@@ -124,19 +128,20 @@ public class ReservationActivity extends BaseActivity {
             performReservation();
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.putExtra("routeId", routeId);
-            intent.putExtra("place", place);
-            intent.putExtra("forRoute", true);
+            intent.putExtra(IntentConstant.ROUTE_ID, routeId);
+            intent.putExtra(IntentConstant.ROUTE_PLACE, place);
+            intent.putExtra(IntentConstant.FOR_ROUTE, true);
            startActivity(intent);
         }
     }
 
     private void performReservation() {
         JsonObject data = new JsonObject();
-        data.addProperty("customer", Preference.getConnection(this).Id);
-        data.addProperty("route", routeId);
-        data.addProperty("place", place);
-        data.addProperty("language", Locale.getDefault().getLanguage());
+        data.addProperty(DataConstant.CUSTOMER, Preference.getConnection(this).Id);
+        data.addProperty(DataConstant.ROUTE, routeId);
+        data.addProperty(DataConstant.PLACE, place);
+        data.addProperty(DataConstant.LANGUAGE, Locale.getDefault().getLanguage());
+        data.addProperty(DataConstant.IS_FIRST_REGISTRATION, isFirstReservation);
         loadingIndicator.show();
         viewModel.makeReservation(data).observe(this, result -> {
             loadingIndicator.hide();
@@ -151,7 +156,7 @@ public class ReservationActivity extends BaseActivity {
     private void DisplayReservation(int reservationId) {
         success(getString(R.string.success_message));
         Intent intent = new Intent(this, ReservationResultActivity.class);
-        intent.putExtra("reservationId", reservationId);
+        intent.putExtra(IntentConstant.RESERVATION_ID, reservationId);
         startActivity(intent);
     }
 }

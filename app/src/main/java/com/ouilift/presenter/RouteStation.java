@@ -10,7 +10,7 @@ public class RouteStation {
     @SerializedName("stationName")
     public String stationName;
     @SerializedName("stationAddress")
-    public String StationAddress;
+    public String stationAddress;
 
 
 

@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
 import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.ui.BaseActivity;
@@ -292,33 +293,33 @@ public class SettingsActivity extends BaseActivity {
     private JsonObject makeJson(Action action) {
         JsonObject data = new JsonObject();
         data.addProperty("Id", customer.Id);
-        data.addProperty("language", Locale.getDefault().getLanguage());
+        data.addProperty(DataConstant.LANGUAGE, Locale.getDefault().getLanguage());
         switch (action) {
             case MAIL:
                 data.addProperty("oldMail", customer.eMail);
                 data.addProperty("newMail", eMail.getText().toString());
-                data.addProperty("password", mailPassword.getText().toString());
+                data.addProperty(DataConstant.PASSWORD, mailPassword.getText().toString());
                 break;
             case ACTIVATE:
-                data.addProperty("eMail", customer.eMail);
-                data.addProperty("password", activatePassword.getText().toString());
+                data.addProperty(DataConstant.E_MAIL, customer.eMail);
+                data.addProperty(DataConstant.PASSWORD, activatePassword.getText().toString());
                 data.addProperty("code", activationCode.getText().toString());
                 break;
             case DRIVE:
                 data.addProperty("drivingNumber", rNumber.getText().toString());
-                data.addProperty("eMail", customer.eMail);
-                data.addProperty("password", passwordText.getText().toString());
+                data.addProperty(DataConstant.E_MAIL, customer.eMail);
+                data.addProperty(DataConstant.PASSWORD, passwordText.getText().toString());
                 break;
             case INFO:
-                data.addProperty("firstName", firstName.getText().toString());
-                data.addProperty("lastName", lastName.getText().toString());
-                data.addProperty("phoneNumber", phoneNumber.getText().toString());
-                data.addProperty("eMail", customer.eMail);
+                data.addProperty(DataConstant.FIRST_NAME, firstName.getText().toString());
+                data.addProperty(DataConstant.LAST_NAME, lastName.getText().toString());
+                data.addProperty(DataConstant.PHONE_NUMBER, phoneNumber.getText().toString());
+                data.addProperty(DataConstant.E_MAIL, customer.eMail);
                 break;
             case PASSWORD:
                 data.addProperty("newPassword", newPasswordText.getText().toString());
                 data.addProperty("oldPassword", oldPasswordText.getText().toString());
-                data.addProperty("eMail", customer.eMail);
+                data.addProperty(DataConstant.E_MAIL, customer.eMail);
         }
 
 

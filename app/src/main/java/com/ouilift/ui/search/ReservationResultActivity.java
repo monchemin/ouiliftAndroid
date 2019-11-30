@@ -2,22 +2,18 @@ package com.ouilift.ui.search;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
+import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.ReservationViewModel;
-import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.presenter.ReservationPresenter;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.account.ReservationListActivity;
@@ -56,7 +52,7 @@ public class ReservationResultActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_result);
         viewBind();
-        reservationId = getIntent().getIntExtra("reservationId", 0);
+        reservationId = getIntent().getIntExtra(IntentConstant.RESERVATION_ID, 0);
         viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
     }
 
@@ -111,8 +107,8 @@ public class ReservationResultActivity extends BaseActivity {
     private void cancelAction() {
         loadingIndicator.show();
         JsonObject data = new JsonObject();
-        data.addProperty("customerId", Preference.getConnection(this).Id);
-        data.addProperty("reservationId", reservationId);
+        data.addProperty(DataConstant.CUSTOMER_ID, Preference.getConnection(this).Id);
+        data.addProperty(DataConstant.RESERVATION_ID, reservationId);
         viewModel.deleteReservation(data).observe(this, result -> {
             loadingIndicator.hide();
             if (result.status == 200 ){

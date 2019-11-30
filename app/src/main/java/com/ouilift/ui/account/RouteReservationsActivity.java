@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
 import com.ouilift.model.RouteViewModel;
 import com.ouilift.ui.BaseActivity;
 import com.ouilift.ui.adapter.RouteReservationAdapter;
@@ -69,9 +70,9 @@ public class RouteReservationsActivity extends BaseActivity {
 
     private JsonObject makeJson() {
         JsonObject data = new JsonObject();
-        data.addProperty("customerId", Preference.getConnection(this).Id);
-        data.addProperty("routeId", routeId);
-        data.addProperty("language", Locale.getDefault().getLanguage());
+        data.addProperty(DataConstant.CUSTOMER_ID, Preference.getConnection(this).Id);
+        data.addProperty(DataConstant.ROUTE_ID, routeId);
+        data.addProperty(DataConstant.LANGUAGE, Locale.getDefault().getLanguage());
 
         return data;
     }

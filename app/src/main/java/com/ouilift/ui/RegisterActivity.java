@@ -10,6 +10,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
+import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.CustomerViewModel;
 
 import java.util.Locale;
@@ -116,7 +118,7 @@ public class RegisterActivity extends BaseActivity {
         if(ok) {
             success(message);
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.putExtra("afterRegistration", true);
+            intent.putExtra(IntentConstant.AFTER_REGISTRATION, true);
             startActivity(intent);
             finish();
         } else {
@@ -126,12 +128,12 @@ public class RegisterActivity extends BaseActivity {
 
     private JsonObject makeJson() {
         JsonObject data = new JsonObject();
-        data.addProperty("firstName", firstName.getText().toString());
-        data.addProperty("lastName", lastName.getText().toString());
-        data.addProperty("eMail", eMail.getText().toString());
-        data.addProperty("phoneNumber", phoneNumber.getText().toString());
-        data.addProperty("password", passwordText.getText().toString());
-        data.addProperty("language", Locale.getDefault().getLanguage());
+        data.addProperty(DataConstant.FIRST_NAME, firstName.getText().toString());
+        data.addProperty(DataConstant.LAST_NAME, lastName.getText().toString());
+        data.addProperty(DataConstant.E_MAIL, eMail.getText().toString());
+        data.addProperty(DataConstant.PHONE_NUMBER, phoneNumber.getText().toString());
+        data.addProperty(DataConstant.PASSWORD, passwordText.getText().toString());
+        data.addProperty(DataConstant.LANGUAGE, Locale.getDefault().getLanguage());
         return data;
     }
 }

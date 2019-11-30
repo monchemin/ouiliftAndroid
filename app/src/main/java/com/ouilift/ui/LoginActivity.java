@@ -11,6 +11,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 import com.ouilift.R;
+import com.ouilift.constant.DataConstant;
+import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
 import com.ouilift.ui.search.ReservationActivity;
@@ -23,7 +25,7 @@ public class LoginActivity extends BaseActivity {
     MaterialButton loginButton;
     TextView signUp, afterRegistration;
     private CustomerViewModel viewModel;
-    private boolean forRoute;
+    private boolean forRoute, registration;
     private int routeId, place;
 
     @Override
@@ -44,10 +46,11 @@ public class LoginActivity extends BaseActivity {
         });
         signUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
         viewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
-        routeId = getIntent().getIntExtra("routeId", 0);
-        place = getIntent().getIntExtra("routePlace", 0);
-        forRoute = getIntent().getBooleanExtra("forRoute", false);
-        if(getIntent().getBooleanExtra("afterRegistration", false)) {
+        routeId = getIntent().getIntExtra(IntentConstant.ROUTE_ID, 0);
+        place = getIntent().getIntExtra(IntentConstant.ROUTE_PLACE, 0);
+        forRoute = getIntent().getBooleanExtra(IntentConstant.FOR_ROUTE, false);
+        registration =  getIntent().getBooleanExtra(IntentConstant.AFTER_REGISTRATION, false);
+        if(registration) {
             afterRegistration.setVisibility(View.VISIBLE);
         }
 
@@ -56,8 +59,8 @@ public class LoginActivity extends BaseActivity {
 
     private void performLogin() {
         JsonObject data = new JsonObject();
-        data.addProperty("login", _emailText.getText().toString());
-        data.addProperty("password", _passwordText.getText().toString());
+        data.addProperty(DataConstant.LOGIN, _emailText.getText().toString());
+        data.addProperty(DataConstant.PASSWORD, _passwordText.getText().toString());
         loginButton.setEnabled(false);
         loginButton.setText(R.string.in_connexion);
         viewModel.login(data).observe(this, result -> {
@@ -77,8 +80,9 @@ public class LoginActivity extends BaseActivity {
         Preference.makeConnect(this, customer);
         if(forRoute) {
             Intent intent = new Intent(this, ReservationActivity.class);
-            intent.putExtra("routeId", routeId);
-            intent.putExtra("place", place);
+            intent.putExtra(IntentConstant.ROUTE_ID, routeId);
+            intent.putExtra(IntentConstant.ROUTE_PLACE, place);
+            intent.putExtra(IntentConstant.IS_FIRST_REGISTRATION, registration);
             startActivity(intent);
         } else {
             startActivity(new Intent(this, SearchActivity.class));

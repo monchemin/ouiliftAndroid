@@ -19,11 +19,6 @@ import com.ouilift.ui.account.SettingsActivity;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
 
-import static com.ouilift.R.color.colorAccentLight;
-import static com.ouilift.R.color.error;
-import static com.ouilift.R.color.success;
-import static com.ouilift.R.color.yellow;
-
 public class BaseActivity extends AppCompatActivity {
     protected BottomNavigationView navView;
     protected BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
