@@ -1,15 +1,32 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties");
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.ouilift"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 22105
-        versionName "02.20.05"
+        versionCode 22110
+        versionName "02.20.10"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        qa {
+            storeFile file(keystoreProperties['storeFileQa'])
+            storePassword keystoreProperties['storePasswordQa']
+            keyAlias keystoreProperties['keyAliasQa']
+            keyPassword keystoreProperties['keyPasswordQa']
+        }
+        staging {
+            storeFile file(keystoreProperties['storeFileStaging'])
+            storePassword keystoreProperties['storePasswordStaging']
+            keyAlias keystoreProperties['keyAliasStaging']
+            keyPassword keystoreProperties['keyPasswordStaging']
+        }
     }
     buildTypes {
         release {
@@ -21,13 +38,15 @@ android {
     productFlavors {
         qa {
             dimension "stack"
-            applicationId "com.ouilift.test"
+            applicationId "com.ouilift.qa"
+            applicationIdSuffix ".test"
             versionNameSuffix "-test"
         }
-        beta {
+        staging {
             dimension "stack"
-            applicationId "com.ouilift.beta"
-            versionNameSuffix "-beta"
+            applicationId "com.ouilift.staging"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
         }
 
     }

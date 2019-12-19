@@ -9,7 +9,7 @@ public final class Config {
         switch (BuildConfig.FLAVOR) {
             case "qa":
                 return "http://api-test.toncopilote.com";
-            case "beta":
+            case "staging":
                 return "http://api-staging.toncopilote.com";
             default:
                 return "http://api.toncopilote.com";
