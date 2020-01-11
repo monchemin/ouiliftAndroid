@@ -8,11 +8,11 @@ public final class Config {
 
         switch (BuildConfig.FLAVOR) {
             case "qa":
-                return "http://api-test.toncopilote.com";
+                return "http://mercure.ouilift.com";
             case "staging":
-                return "http://api-staging.toncopilote.com";
+                return "http://jupiter.ouilift.com";
             default:
-                return "http://api.toncopilote.com";
+                return "http://neptune.ouilift.com";
         }
 
     }
