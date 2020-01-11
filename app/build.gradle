@@ -41,7 +41,6 @@ android {
             applicationId "com.ouilift.qa"
             applicationIdSuffix ".test"
             versionNameSuffix "-test"
-            signingConfig signingConfigs.qa
         }
         staging {
             dimension "stack"
