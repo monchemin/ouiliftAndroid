@@ -38,4 +38,8 @@ public class CustomerViewModel extends ViewModel {
     public MutableLiveData<PresenterFactory<Void>> changeMail(JsonObject data) {
         return repository.changeMail(data);
     }
+
+    public MutableLiveData<PresenterFactory<Void>> passwordRecovery(JsonObject data) {
+        return repository.passwordRecovery(data);
+    }
 }

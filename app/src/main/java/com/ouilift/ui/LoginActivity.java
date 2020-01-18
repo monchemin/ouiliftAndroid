@@ -1,10 +1,13 @@
 package com.ouilift.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
@@ -15,15 +18,18 @@ import com.ouilift.constant.DataConstant;
 import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
+import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;
+
+import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
     TextInputEditText _emailText, _passwordText;
     MaterialButton loginButton;
-    TextView signUp, afterRegistration;
+    TextView signUp, afterRegistration, recovery;
     private CustomerViewModel viewModel;
     private boolean forRoute, registration;
     private int routeId, place;
@@ -54,6 +60,8 @@ public class LoginActivity extends BaseActivity {
             afterRegistration.setVisibility(View.VISIBLE);
         }
 
+        recovery = findViewById(R.id.password_recovery_link);
+        recovery.setOnClickListener(v -> recoveryPassword());
     }
 
 
@@ -113,4 +121,32 @@ public class LoginActivity extends BaseActivity {
 
         return valid;
     }
+
+    private void recoveryPassword() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.view_password_recovery);
+
+        TextView text = dialog.findViewById(R.id.input_recovery_email);
+
+        Button dialogButton = dialog.findViewById(R.id.btn_recovery);
+
+        dialogButton.setOnClickListener(v -> {
+            String mailText = text.getText().toString();
+            if (mailText.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mailText).matches()) {
+                text.setError(getString(R.string.email_error));
+                text.requestFocus();
+            } else {
+                JsonObject data = new JsonObject();
+                data.addProperty(DataConstant.E_MAIL, mailText);
+                data.addProperty(DataConstant.LANGUAGE, Locale.getDefault().getLanguage());
+                viewModel.passwordRecovery(data);
+                dialog.dismiss();
+            }
+
+        });
+
+        dialog.show();
+    }
+
+
 }

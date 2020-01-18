@@ -17,7 +17,6 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
@@ -52,59 +51,62 @@ public class ApiService {
     public interface EndPoint {
 
         //customer
-        @POST("/login.php")
+        @POST("login.php")
         Call<PresenterFactory<CustomerPresenter>> performLogin(@Body JsonObject data);
 
-        @POST("/customer.php")
+        @POST("customer.php")
         Call<PresenterFactory<Void>> performRegister(@Body JsonObject data);
 
-        @PUT("/customer.php")
+        @PUT("customer.php")
         Call<PresenterFactory<Void>> performChange(@Body JsonObject data);
 
-        @POST("/driver.php")
+        @POST("driver.php")
         Call<PresenterFactory<Void>> performDriver(@Body JsonObject data);
 
-        @POST("/change-password.php")
+        @POST("change-password.php")
         Call<PresenterFactory<Void>> changePassword(@Body JsonObject data);
 
-        @POST("/change-mail.php")
+        @POST("change-mail.php")
         Call<PresenterFactory<Void>> changeMail(@Body JsonObject data);
 
-        @POST("/activate-account.php")
+        @POST("activate-account.php")
         Call<PresenterFactory<Void>> activateAccount(@Body JsonObject data);
 
+        @POST("recovery-password.php")
+        Call<PresenterFactory<Void>> passwordRecovery(@Body JsonObject data);
+
 //route
-        @POST("/internal-routes.php")
+        @POST("internal-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> getInternalRoute(@Body JsonObject data);
 
-        @GET("/route-station.php")
+        @GET("route-station.php")
         Call<PresenterFactory<RouteStation>> getRouteStation();
 
-        @GET("/route-details.php/{PK}")
+        @GET("route-details.php/{PK}")
         Call<PresenterFactory<RouteDetailPresenter>> routeDetail(@Path("PK") int pk);
 
-        @POST("/car.php")
+        @POST("car.php")
         Call<PresenterFactory<CarPresenter>> registeredCar(@Body JsonObject data);
 
-        @POST("/car-create.php")
+        @POST("car-create.php")
         Call<PresenterFactory<CarPresenter>> carCreate(@Body JsonObject data);
 
-        @GET("/car-colors.php")
+        @GET("car-colors.php")
         Call<PresenterFactory<CarColorModelPresenter>> carColor();
 
-        @GET("/car-brand-model.php")
+        @GET("car-brand-model.php")
         Call<PresenterFactory<CarColorModelPresenter>> carModel();
 
-        @GET("/pickup-hour.php")
+        @GET("pickup-hour.php")
         Call<PresenterFactory<CarColorModelPresenter>> hours();
 
-        @POST("/routes.php")
+        @POST("routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> createRoute(@Body JsonObject data);
 
-        @POST("/published-routes.php")
+        @POST("published-routes.php")
         Call<PresenterFactory<RouteDetailPresenter>> ownerRoutes(@Body JsonObject data);
 
-        @POST("/route-reservations.php")
+        @POST("route-reservations.php")
         Call<PresenterFactory<RouteReservationPresenter>> routeReservations(@Body JsonObject data);
 
         @HTTP(method = "DELETE", path = "routes.php", hasBody = true)
@@ -112,16 +114,16 @@ public class ApiService {
 
 
         // reservation
-        @POST("/reservations.php")
+        @POST("reservations.php")
         Call<PresenterFactory<ReservationPresenter>> performReservation(@Body JsonObject data);
 
-        @GET("/reservations.php/{PK}")
+        @GET("reservations.php/{PK}")
         Call<PresenterFactory<ReservationPresenter>> getReservation(@Path("PK") int pk);
 
-        @GET("/reservation-list.php/{PK}")
+        @GET("reservation-list.php/{PK}")
         Call<PresenterFactory<ReservationPresenter>> getReservationList(@Path("PK") int pk);
 
-        @HTTP(method = "DELETE", path = "/reservations.php", hasBody = true)
+        @HTTP(method = "DELETE", path = "reservations.php", hasBody = true)
         Call<PresenterFactory<Void>> deleteReservation(@Body JsonObject data);
 
     }

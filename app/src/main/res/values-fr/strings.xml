@@ -65,4 +65,8 @@
     <string name="register_done_message">Enregistrement effectué avec succès</string>
     <string name="success_message">Opération effectuée avec succès</string>
     <string name="error_route_place">Place doit être entre 1 et 3</string>
+    <string name="password_forget_hint">Mot de passe oublié</string>
+    <string name="btn_sent_hint">Envoyé</string>
+    <string name="password_recovery_hint">Inscrivez l\'adresse Mail utilisée lors de la creation de votre compte. Un mot de passe temporaire vous sera envoyé à cette adresse</string>
+
 </resources>

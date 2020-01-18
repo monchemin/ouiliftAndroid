@@ -99,10 +99,20 @@
         android:text="@string/link_sign_up_text"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/password_recovery_link"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="@string/password_forget_hint"
+        android:textSize="16sp"
+        android:layout_below="@id/link_sign_up"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/link_sign_up"
+        android:layout_below="@id/password_recovery_link"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
