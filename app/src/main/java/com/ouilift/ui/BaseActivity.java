@@ -52,9 +52,9 @@ public class BaseActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
-                        | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+       // getWindow().setSoftInputMode(
+        //        WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
+        //                | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
     }
 

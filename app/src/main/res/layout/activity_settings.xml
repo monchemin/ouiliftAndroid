@@ -309,9 +309,11 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_below="@id/top_container"
         />
+
         </RelativeLayout>
+
     </ScrollView>
 
-    <include layout="@layout/navigation_layout"/>
 
+    <include layout="@layout/navigation_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

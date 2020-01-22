@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
@@ -18,7 +17,6 @@ import com.ouilift.constant.DataConstant;
 import com.ouilift.constant.IntentConstant;
 import com.ouilift.model.CustomerViewModel;
 import com.ouilift.presenter.CustomerPresenter;
-import com.ouilift.presenter.PresenterFactory;
 import com.ouilift.ui.search.ReservationActivity;
 import com.ouilift.ui.search.SearchActivity;
 import com.ouilift.utils.Preference;

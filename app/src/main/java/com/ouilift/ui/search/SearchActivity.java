@@ -30,15 +30,15 @@ import java.util.List;
 
 public class SearchActivity extends BaseActivity implements ActionChoosListener {
 
+    String searchDate;
+    boolean from, fromFocusDisable, toFocusDisable;
+    int fromPK, toPK;
     private SearchViewModel viewModel;
     private RouteDetailAdapter adapter;
     private ContentLoadingProgressBar loadingIndicator;
     private LinearLayout container;
     private TextInputEditText searchDateView, searchFrom, searchTo;
-    String searchDate;
     private List<RouteStation> stations = new ArrayList<>();
-    boolean from, fromFocusDisable, toFocusDisable;
-    int fromPK, toPK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
     @Override
     protected void onResume() {
         super.onResume();
-       setMenuEnable();
+        setMenuEnable();
         setData();
 
     }
@@ -173,17 +173,16 @@ public class SearchActivity extends BaseActivity implements ActionChoosListener 
         for (RouteStation station : stations) {
             if (station.stationId == input) {
                 if (from) {
-                    fromFocusDisable = true;
                     searchFrom.setText(station.stationName);
                     fromPK = input;
                 } else {
-                    toFocusDisable = true;
                     searchTo.setText(station.stationName);
                     toPK = input;
                 }
-
                 break;
             }
         }
+        fromFocusDisable = true;
+        toFocusDisable = true;
     }
 }

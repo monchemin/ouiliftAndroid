@@ -84,5 +84,6 @@
     <string name="error_route_place">Place must be between 1 and 3 </string>
     <string name="password_forget_hint">Forget password</string>
     <string name="btn_sent_hint">Sent</string>
+    <string name="route_search_hint">Town or area</string>
     <string name="password_recovery_hint">Enter the Mail address used when creating your account. A temporary password will be sent to you at this address</string>
 </resources>

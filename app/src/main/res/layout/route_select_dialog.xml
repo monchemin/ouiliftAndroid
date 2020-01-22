@@ -33,7 +33,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:theme="@style/SearchViewStyle"
-                android:queryHint="@string/menu_search"
+                android:queryHint="@string/route_search_hint"
                 android:iconifiedByDefault="false"
                 android:searchIcon="@null"
                 android:searchHintIcon="@null"

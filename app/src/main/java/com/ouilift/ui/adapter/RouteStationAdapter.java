@@ -3,7 +3,6 @@ package com.ouilift.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,27 +38,25 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
     }
 
     public void setData(List<RouteStation> presenters) {
-        dataSet = presenters;
-        unMutableDataSet = presenters;
-      notifyDataSetChanged();
-    }
 
-    private void onItemSelected(RouteStation presenter) {
-       // Intent intent = new Intent(context, ReservationActivity.class);
-        //intent.putExtra("routeId", presenter.PK);
-        //context.startActivity(intent);
+        unMutableDataSet = presenters;
+        notifyDataSetChanged();
     }
 
     public void filter(String text) {
-        dataSet  = unMutableDataSet
-                .stream()
-                .filter(c -> {
-                    String stationName = c.stationName != null ? c.stationName : "";
-                    String stationAddress = c.stationAddress != null ? c.stationAddress : "";
-                   return  stationName.toLowerCase().contains(text.toLowerCase())
-                        || stationAddress.toLowerCase().contains(text.toLowerCase());
-                })
-                .collect(Collectors.toList());
+        if (text == null || text.equals("")) {
+            dataSet = null;
+        } else {
+            dataSet = unMutableDataSet
+                    .stream()
+                    .filter(c -> {
+                        String stationName = c.stationName != null ? c.stationName : "";
+                        String stationAddress = c.stationAddress != null ? c.stationAddress : "";
+                        return stationName.toLowerCase().contains(text.toLowerCase())
+                                || stationAddress.toLowerCase().contains(text.toLowerCase());
+                    })
+                    .collect(Collectors.toList());
+        }
         notifyDataSetChanged();
 
     }
@@ -85,9 +82,6 @@ public class RouteStationAdapter extends RecyclerView.Adapter<RouteStationAdapte
 
             routeStation = itemView.findViewById(R.id.route_station);
             stationAddress = itemView.findViewById(R.id.route_station_address);
-
-            LinearLayout container = itemView.findViewById(R.id.route_item_container);
-            container.setOnClickListener(v -> onItemSelected(presenter));
             itemView.setTag(this);
             itemView.setOnClickListener(mOnItemClickListener);
         }
