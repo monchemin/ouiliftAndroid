@@ -68,6 +68,6 @@
     <string name="password_forget_hint">Mot de passe oublié</string>
     <string name="btn_sent_hint">Envoyé</string>
     <string name="route_search_hint">Ville ou quartier</string>
-    <string name="password_recovery_hint">Inscrivez l\'adresse Mail utilisée lors de la creation de votre compte. Un mot de passe temporaire vous sera envoyé à cette adresse</string>
+    <string name="password_recovery_hint">Inscrivez l\'adresse électronique utilisée lors de la creation de votre compte. Un mot de passe temporaire vous sera envoyé à cette adresse</string>
 
 </resources>
