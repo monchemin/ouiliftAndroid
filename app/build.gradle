@@ -39,12 +39,14 @@ android {
         qa {
             dimension "stack"
             applicationId "com.ouilift.qa"
+            resValue "string", "app_name", "OuiliftTest"
             applicationIdSuffix ".test"
             versionNameSuffix "-test"
         }
         staging {
             dimension "stack"
             applicationId "com.ouilift.staging"
+            resValue "string", "app_name", "OuiliftStaging"
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
         }

@@ -64,7 +64,7 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
                         case MODEL:
                             return c.model.toLowerCase().contains(text.toLowerCase());
                         case COLOR:
-                            return c.colorName.toLowerCase().contains(text.toLowerCase());
+                            return c.colorName().toLowerCase().contains(text.toLowerCase());
                         case HOUR:
                             return c.hour.toLowerCase().contains(text.toLowerCase());
                         default:
@@ -113,7 +113,7 @@ public class CarColorModelAdapter extends RecyclerView.Adapter<CarColorModelAdap
                     strStation = presenter.model;
                     break;
                 case COLOR:
-                    strStation = presenter.colorName;
+                    strStation = presenter.colorName();
                     break;
                 case HOUR:
                     strStation = presenter.hour;

@@ -91,12 +91,12 @@ public class ReservationResultActivity extends BaseActivity {
     }
 
     private void updateFields() {
-        String to = presenter.toStation + "\n" + presenter.toZone + "\n" + presenter.toStationDetail ;
-        String from = presenter.fromStation + "\n" + presenter.fromromZone + "\n" + presenter.fromStationDetail;
+        String to = presenter.toStation + "\n" + presenter.toZone + "\n" + (presenter.toStationDetail == null ? "" : presenter.toStationDetail) ;
+        String from = presenter.fromStation + "\n" + presenter.fromromZone + "\n" + (presenter.fromStationDetail == null ? "" : presenter.fromStationDetail);
         String timer = DateUtils.dateToString(presenter.routeDate, getString(R.string.date_format)) + "\n" + presenter.hour;
-        String driver = presenter.driverLastName + " " + presenter.driverFistName;
+        String driver = (presenter.driverLastName == null ? "" : presenter.driverLastName) + " " + (presenter.driverFistName == null ? "" : presenter.driverFistName);
         String car = presenter.brandName + " " + presenter.modelName + "\n"
-                + presenter.year +  " " + presenter.colorName  + "\n" +
+                + presenter.year +  " " + presenter.colorName()  + "\n" +
                 presenter.registrationNumber;
         routeTo.setText(to);
         routeFrom.setText(from);

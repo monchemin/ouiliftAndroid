@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">OuiLift</string>
     <string name="btn_profile_member">I am member</string>
     <string name="btn_profile_non_member">I am not member</string>
     <string name="email_hint" translatable="false">E-mail</string>

@@ -217,9 +217,11 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         viewModel.getCarColor().observe(this, result -> {
             if (result.status == 200 && result.response != null) {
                 colorPresenters = result.response;
-
+            } else {
+                System.out.println("nyemo " + result);
             }
         });
+
         viewModel.getCarModel().observe(this, result -> {
             if (result.status == 200 && result.response != null) {
                 modelPresenters = result.response;
@@ -375,7 +377,7 @@ public class DriverActivity extends BaseActivity implements ActionChoosListener 
         for (CarColorModelPresenter presenter : colorPresenters) {
             if (presenter.Id == input) {
                 color = input;
-                colorInput.setText(presenter.colorName);
+                colorInput.setText(presenter.colorName());
                 break;
             }
 
